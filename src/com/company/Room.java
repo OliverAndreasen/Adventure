@@ -7,6 +7,10 @@ public class Room {
     private boolean east;
     private boolean south;
     private boolean west;
+    private final String northRoom = "north";
+    private final String eastRoom = "east";
+    private final String southRoom = "south";
+    private final String westRoom = "west";
 
 
     public Room(int id, boolean north, boolean east, boolean south, boolean west) {
@@ -15,10 +19,11 @@ public class Room {
         this.east = east;
         this.south = south;
         this.west = west;
-
     }
 
     public int whichRoom() {
+
+        currentRoom = currentRoom;
         return currentRoom;
     }
 
@@ -28,6 +33,7 @@ public class Room {
         if (direction.equals("north")) {
 
             blDirection = north;
+
         }
         if (direction.equals("east")) {
 
@@ -43,4 +49,34 @@ public class Room {
         }
         return blDirection;
     }
+
+
+    public int nextRoom(String nextRoom){
+
+        if (northRoom == nextRoom) {
+            currentRoom -= 3;
+            System.out.println(currentRoom);
+        }
+        if (eastRoom == nextRoom) {
+            currentRoom += 1;
+            System.out.println(currentRoom);
+
+        }
+        if (southRoom.equals("south")) {
+            currentRoom = currentRoom + 3;
+            System.out.println(currentRoom);
+
+        }
+        if (westRoom == nextRoom) {
+            currentRoom = currentRoom + 1;
+            System.out.println(currentRoom);
+
+        }
+
+        return currentRoom;
+
+    }
+
+
+
 }

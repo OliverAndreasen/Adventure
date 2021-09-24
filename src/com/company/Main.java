@@ -22,7 +22,7 @@ public class Main {
          */
 
         Room[] rooms = new Room[9];
-        rooms[0] = new Room(0,false,true,true,false);
+        rooms[0] = new Room(0, false,true,true,false);
         rooms[1] = new Room(1, false, true, false, true);
         rooms[2] = new Room(2, false, false, true, true);
         rooms[3] = new Room(3, true, false, true, false);
@@ -32,9 +32,9 @@ public class Main {
         rooms[7] = new Room(7, true, true, false, true);
         rooms[8] = new Room(8, true, false, false, true);
 
-        int currentRoom = rooms[0].whichRoom();
+        int currentRoom = (rooms[0].whichRoom());
 
-
+        System.out.println("DEBUG MODE RUM NUMMER = " + currentRoom);
 
         Scanner sc = new Scanner(System.in);  // Create a Scanner object
         System.out.println("Velkommen til Adventure-Spillet!");
@@ -44,21 +44,22 @@ public class Main {
         System.out.println("Hvilken vej vil du gå");
         //String direction = sc.nextLine();  // Read user input
 
+    for (int i = 0; i < rooms.length; i++) {
+        if ((currentRoom) == i) {
+            System.out.println("DU ER I RUM " + (rooms[i].whichRoom()));
+            System.out.println("Hvilken vej vil du gå");
+            String direction = sc.nextLine();  // Read user input
 
-            for (int i = 0; i < rooms.length; i++) {
-                if (currentRoom == i) {
-                    System.out.println("DU ER I RUM " + (rooms[i].whichRoom() + 1));
-                    System.out.println("Hvilken vej vil du gå");
-                    String direction = sc.nextLine();  // Read user input
-
-                   if(rooms[i].direction(direction)) {
-
-
-                   }
-
-
-                }
+            if (rooms[i].direction(direction)) {
+                i = rooms[i].nextRoom(direction);
+                System.out.println(i);
+                System.out.println("Du er gået ind i rum " + rooms[i].whichRoom());
             }
+
+
+        }
+    }
+
 
     }
 }
