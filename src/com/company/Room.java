@@ -22,35 +22,25 @@ public class Room {
         return currentRoom;
     }
 
-    public boolean direction() {
+    public boolean direction(String direction) {
 
-        boolean result = false;
+        boolean blDirection = false;
+        if (direction.equals("north")) {
 
-        if (north == true) {
-            result = true;
+            blDirection = north;
         }
-        else if (north != true) {
-            result = false;
-        }
-        if (east == true) {
-            result = true;
-        }
-        else if (east != true) {
-            result = false;
-        }
-        if (south == true) {
-            result = true;
-        }
-        else if (south != true) {
-            result = false;
-        }
-        if (west == true) {
-            result = true;
-        }
-        else if (west != true) {
-            result = false;
-        }
+        if (direction.equals("east")) {
 
-        return result;
+            blDirection = east;
+        }
+        if (direction.equals("south")) {
+
+            blDirection = south;
+        }
+        if (direction.equals("west")) {
+
+            blDirection = west;
+        }
+        return blDirection;
     }
 }

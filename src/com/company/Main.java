@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         //     public void Room(int id, boolean north, boolean east, boolean south, boolean west)
+        /*
         Room room1 = new Room(1,false,true,true,false);
         Room room2 = new Room(2, false, true, false, true);
         Room room3 = new Room(3, false, false, true, true);
@@ -17,14 +18,15 @@ public class Main {
         Room room8 = new Room(8, true, true, false, true);
         Room room9 = new Room(9, true, false, false, true);
 
+         */
 
-
+        Room[] rooms = new Room[9];
+        rooms[0] = new Room(1,false,true,true,false);
 
 
 
 
         int currentRoom = room1.whichRoom();
-
         Scanner sc = new Scanner(System.in);  // Create a Scanner object
         System.out.println("Velkommen til Adventure-Spillet!");
         System.out.println("Du skal vælge en vej at gå");
@@ -33,13 +35,7 @@ public class Main {
         System.out.println("Hvilken vej vil du gå");
         String direction = sc.nextLine();  // Read user input
 
-        if ( &&  == 1)
-        {
-            room = 2;
-            System.out.println("Going east");
-            System.out.println("You are now in room " + room);
-        }
-
+        System.out.println(room1.direction(direction));
 
 
 
