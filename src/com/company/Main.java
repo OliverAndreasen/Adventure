@@ -1,28 +1,19 @@
 package com.company;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        int id = 1;
+        System.out.println("test med hest " + id);
+        id = id + 4;
+        System.out.println(id);
+
         //     public void Room(int id, boolean north, boolean east, boolean south, boolean west)
-        /*
-        Room room1 = new Room(1,false,true,true,false);
-        Room room2 = new Room(2, false, true, false, true);
-        Room room3 = new Room(3, false, false, true, true);
-        Room room4 = new Room(4, true, false, true, false);
-        Room room5 = new Room(5, false, false, true, false);
-        Room room6 = new Room(6, true, false, true, false);
-        Room room7 = new Room(7, true, true, false, false);
-        Room room8 = new Room(8, true, true, false, true);
-        Room room9 = new Room(9, true, false, false, true);
-
-         */
-
         Room[] rooms = new Room[9];
-        rooms[0] = new Room(0, false,true,true,false);
+        rooms[0] = new Room(0, false, true, true, false);
         rooms[1] = new Room(1, false, true, false, true);
         rooms[2] = new Room(2, false, false, true, true);
         rooms[3] = new Room(3, true, false, true, false);
@@ -32,35 +23,29 @@ public class Main {
         rooms[7] = new Room(7, true, true, false, true);
         rooms[8] = new Room(8, true, false, false, true);
 
-        int currentRoom = (rooms[0].whichRoom());
-
-        System.out.println("DEBUG MODE RUM NUMMER = " + currentRoom);
+        int currentRoom = (rooms[0].getId());
 
         Scanner sc = new Scanner(System.in);  // Create a Scanner object
         System.out.println("Velkommen til Adventure-Spillet!");
         System.out.println("Du skal vælge en vej at gå");
         System.out.println("Du kan vælge ");
         System.out.println("Du kan skrive 'go north', 'go east', 'go south' eller 'go west");
-        System.out.println("Hvilken vej vil du gå");
+        //System.out.println("Hvilken vej vil du gå");
         //String direction = sc.nextLine();  // Read user input
+        while (true) {
+            for (int i = 0; i < rooms.length; i++) {
+                if ((currentRoom) == i) {
+                    System.out.println("DU ER I RUM " + (currentRoom + 1));
+                    System.out.println("Hvilken vej vil du gå");
+                    String input = sc.nextLine();  // Read user input
 
-    for (int i = 0; i < rooms.length; i++) {
-        if ((currentRoom) == i) {
-            System.out.println("DU ER I RUM " + (rooms[i].whichRoom()));
-            System.out.println("Hvilken vej vil du gå");
-            String direction = sc.nextLine();  // Read user input
-
-            if (rooms[i].direction(direction)) {
-                i = rooms[i].nextRoom(direction);
-                System.out.println(i);
-                System.out.println("Du er gået ind i rum " + rooms[i].whichRoom());
+                    if (rooms[i].direction(input)) {
+                        currentRoom += rooms[i].nextRoom(input);
+                        System.out.println("Du er gået ind i rum " + (currentRoom + 1));
+                    }
+                }
             }
-
-
         }
-    }
-
-
     }
 }
 

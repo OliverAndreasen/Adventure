@@ -1,8 +1,10 @@
 package com.company;
 
+import java.util.Locale;
+
 public class Room {
 
-    private int currentRoom;
+    private int id;
     private boolean north;
     private boolean east;
     private boolean south;
@@ -14,26 +16,25 @@ public class Room {
 
 
     public Room(int id, boolean north, boolean east, boolean south, boolean west) {
-        this.currentRoom = id;
+        this.id = id;
         this.north = north;
         this.east = east;
         this.south = south;
         this.west = west;
     }
 
-    public int whichRoom() {
-
-        currentRoom = currentRoom;
-        return currentRoom;
+    public int getId() {
+        return id;
     }
 
     public boolean direction(String direction) {
+
+        direction.toLowerCase(Locale.ROOT);
 
         boolean blDirection = false;
         if (direction.equals("north")) {
 
             blDirection = north;
-
         }
         if (direction.equals("east")) {
 
@@ -53,28 +54,21 @@ public class Room {
 
     public int nextRoom(String nextRoom){
 
-        if (northRoom == nextRoom) {
-            currentRoom -= 3;
-            System.out.println(currentRoom);
+        if (northRoom.equals(nextRoom)) {
+            return -3;
         }
-        if (eastRoom == nextRoom) {
-            currentRoom += 1;
-            System.out.println(currentRoom);
+        if (eastRoom.equals(nextRoom)) {
+            return +1;
 
         }
-        if (southRoom.equals("south")) {
-            currentRoom = currentRoom + 3;
-            System.out.println(currentRoom);
+        if (southRoom.equals(nextRoom)) {
+            return +3;
+        }
+        if (westRoom.equals(nextRoom)) {
+            return -1;
 
         }
-        if (westRoom == nextRoom) {
-            currentRoom = currentRoom + 1;
-            System.out.println(currentRoom);
-
-        }
-
-        return currentRoom;
-
+        return 0;
     }
 
 
