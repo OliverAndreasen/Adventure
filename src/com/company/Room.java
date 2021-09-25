@@ -1,20 +1,16 @@
 package com.company;
 
-import java.util.Locale;
-
 public class Room {
 
     private int id;
+
+    //true if the direction is available in a room
     private boolean north;
     private boolean east;
     private boolean south;
     private boolean west;
-    private final String northRoom = "north";
-    private final String eastRoom = "east";
-    private final String southRoom = "south";
-    private final String westRoom = "west";
 
-
+    // Constructor
     public Room(int id, boolean north, boolean east, boolean south, boolean west) {
         this.id = id;
         this.north = north;
@@ -27,50 +23,40 @@ public class Room {
         return id;
     }
 
+    // Checks if you can go in a specific direction from the room you are in
     public boolean direction(String direction) {
 
-        direction.toLowerCase(Locale.ROOT);
-
         boolean blDirection = false;
-        if (direction.equals("north")) {
 
+        if (direction.equals("north")) {
             blDirection = north;
         }
         if (direction.equals("east")) {
-
             blDirection = east;
         }
         if (direction.equals("south")) {
-
             blDirection = south;
         }
         if (direction.equals("west")) {
-
             blDirection = west;
         }
         return blDirection;
     }
 
+    public int nextRoom(String nextRoom) {
 
-    public int nextRoom(String nextRoom){
-
-        if (northRoom.equals(nextRoom)) {
+        if (nextRoom.equals("north")) {
             return -3;
         }
-        if (eastRoom.equals(nextRoom)) {
+        if (nextRoom.equals("east")) {
             return +1;
-
         }
-        if (southRoom.equals(nextRoom)) {
+        if (nextRoom.equals("south")) {
             return +3;
         }
-        if (westRoom.equals(nextRoom)) {
+        if (nextRoom.equals("west")) {
             return -1;
-
         }
         return 0;
     }
-
-
-
 }
