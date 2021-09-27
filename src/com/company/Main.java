@@ -1,23 +1,20 @@
 package com.company;
-
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
         //Room (String name, String description)
-        Room room1 = new Room("room 1", null);
-        Room room2 = new Room("room 2", null);
-        Room room3 = new Room("room 3", null);
+        Room room1 = new Room("room 1", "Du er gået ind i klædeskabet");
+        Room room2 = new Room("room 2", "Du er gået ind i klædeskabet");
+        Room room3 = new Room("room 3", "Du er gået ind i klædeskabet");
         Room room4 = new Room("room 4", "Du er gået ind i klædeskabet");
-        Room room5 = new Room("room 5", null);
-        Room room6 = new Room("room 6", null);
-        Room room7 = new Room("room 7", null);
-        Room room8 = new Room("room 8", null);
-        Room room9 = new Room("room 9", null);
+        Room room5 = new Room("room 5", "Du er gået ind i klædeskabet");
+        Room room6 = new Room("room 6", "Du er gået ind i klædeskabet");
+        Room room7 = new Room("room 7", "Du er gået ind i klædeskabet");
+        Room room8 = new Room("room 8", "Du er gået ind i klædeskabet");
+        Room room9 = new Room("room 9", "Du er gået ind i klædeskabet");
 
 
         // Room1
@@ -60,68 +57,42 @@ public class Main {
         Player player = new Player();
         Parser parser = new Parser();
         player.playerLocation(currentRoom);
-        /*
-        // Start room is room 1
-
-        Room previousRoom = currentRoom;
-        if (currentRoom.getNorth() != null) {
-            currentRoom = previousRoom.nextRoom("north");
-            currentRoom.setSouth(previousRoom);
-            System.out.println("Du kom fra " + previousRoom.getName() + " Du står nu i " + currentRoom.getName());
-        }
-        if (currentRoom.getEast() != null) {
-            currentRoom = previousRoom.nextRoom("east");
-            currentRoom.setWest(previousRoom);
-            System.out.println("Du kom fra " + previousRoom.getName() + " Du står nu i " + currentRoom.getName());
-        }
-
-        if (currentRoom.getSouth() != null) {
-            currentRoom = previousRoom.nextRoom("south");
-            currentRoom.setNorth(previousRoom);
-            System.out.println("Du kom fra " + previousRoom.getName() + " Du står nu i " + currentRoom.getName());
-        }
-
-        currentRoom = room1;
-        if (currentRoom.getWest() != null) {
-            currentRoom = previousRoom.nextRoom("west");
-            currentRoom.setEast(previousRoom);
-            System.out.println("Du kom fra " + previousRoom.getName() + "Du står nu i " + currentRoom.getName());
-        }
-
-         */
         System.out.println(parser.welcome(currentRoom));
 
         Scanner sc = new Scanner(System.in);
 
 
         while (true) {
-
             String input = sc.nextLine();
             input = input.toLowerCase(Locale.ROOT);
-
+            input = parser.move(input);
 
             //TODO: fix direction uden at man skal skrive 'd'
+            /*
             if (input.equals("d")) {
 
                 System.out.println("Type which direction you want to go in");
                 input = sc.nextLine();
                 parser.move(input);
             }
+             */
 
             // checks if the direction input is available
             if (player.direction(input)) {
                 // changes current room to the new room
                 currentRoom = player.movePlayer(input);
                 System.out.println(currentRoom.getDescription());
-
-            } else if (input.equals("exit")) {
+            }
+            else if (input.equals("exit")) {
                 parser.exit();
-
-            } else if (input.equals("help")) {
+            }
+            else if (input.equals("help")) {
                 System.out.println(parser.help(player));
-            } else if (input.equals("look")) {
+            }
+            else if (input.equals("look")) {
                 System.out.println(parser.look(currentRoom));
-            } else {
+            }
+            else {
                 System.out.println("You cant go that way, try again!");
             }
         }
