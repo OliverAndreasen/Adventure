@@ -32,6 +32,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         int length = rooms.length;
+        System.out.println("test alex");
 
         while (true) {
             for (int i = 0; i < length; i++) {
