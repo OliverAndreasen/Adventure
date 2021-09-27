@@ -39,16 +39,29 @@ public class Main {
                     System.out.println("Which direction do you want to go ?");
                     String input = sc.nextLine();
                     input = input.toLowerCase(Locale.ROOT);
+                    if (input.equals("go north") || input.equals("n")){
+                        input = "north";
+                    }
+                    if (input.equals("go east") || input.equals("e")){
+                        input = "east";
+                    }
+                    if (input.equals("go south") || input.equals("s")){
+                        input = "south";
+                    }
+                    if (input.equals("go west") || input.equals("w")){
+                        input = "west";
+                    }
 
                     // checks if the direction input is available
                     if (rooms[i].direction(input)) {
                         // changes current room to the new room
                         currentRoom += rooms[i].nextRoom(input);
                         System.out.println("You walked into room " + (currentRoom + 1));
+
                     } else if (input.equals("exit")){
                         System.exit(0);
-                    } else if (input.equals("help")){
 
+                    } else if (input.equals("help")){
                         String help = "";
 
                         if (rooms[i].direction("north")){
@@ -66,6 +79,7 @@ public class Main {
                         help += "if you want to exit the program type 'exit'\n";
                         help += "to get a room description you can type 'look'\n";
                         System.out.println(help);
+
                     } else if (input.equals("look")){
                         System.out.println("You are in room " + (currentRoom + 1));
                     }
