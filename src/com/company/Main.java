@@ -72,16 +72,20 @@ public class Main {
         Parser parser = new Parser();
 
 
-
         Room currentRoom = room1;
-        System.out.println(parser.welcome(room1));
+        System.out.println(parser.welcome());
         Scanner sc = new Scanner(System.in);
 
 
         boolean con = true;
+        int count = 0;
 
         while (con) {
 
+            if (count == 0) {
+                System.out.println("You are in : " + currentRoom.getName());
+                count = count+1;
+            }
             currentRoom = player.playerLocation(currentRoom);
             String input = sc.nextLine();
             input = input.toLowerCase(Locale.ROOT);

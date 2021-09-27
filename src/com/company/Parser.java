@@ -51,14 +51,16 @@ public class Parser {
         return currentRoom.getDescription();
     }
 
-    public String welcome(Room currentRoom){
+    public String welcome(){
 
         String result = "";
         result += "Welcome to the Adventure game!\n";
         result += "You have to choose a direction, you want to walk in\n";
         result += "To go a direction type 'direction'\n";
         result += "You can type 'north', 'east', 'south' or 'west'\n";
-        result += "Other functions: 'exit', 'look', 'help'\n";
+        result += "Other functions: 'exit', 'look', 'help'";
         return result;
     }
+
+
 }
