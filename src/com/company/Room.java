@@ -4,6 +4,8 @@ public class Room {
 
     private int id;
     private int id2;
+    private int id3;
+
 
 
     //true if the direction is available in a room
