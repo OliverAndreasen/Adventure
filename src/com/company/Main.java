@@ -9,12 +9,6 @@ public class Main {
         // creates array to all the rooms.
         Room[] rooms = new Room[9];
 
-        System.out.println("alex");
-
-        System.out.println("Test");
-        System.out.println("lol2");
-        System.out.println("tesz");
-
         //Room (int id, boolean north, boolean east, boolean south, boolean west)
         // TODO: Change room ids to 1,2,3,4,5,6,7,8,9
         rooms[0] = new Room(0, false, true, true, false);
@@ -37,7 +31,6 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         int length = rooms.length;
-        System.out.println("test alex");
 
         while (true) {
             for (int i = 0; i < length; i++) {
