@@ -53,43 +53,4 @@ public class Room {
     public String getDescription() {
         return description;
     }
-    
-    // Checks if you can go in a specific direction from the room you are in
-
-    public boolean direction(String direction) {
-
-        boolean blDirection = false;
-
-        if (direction.equals("north") && north != null) {
-            blDirection = true;
-        }
-        if (direction.equals("east") && east != null) {
-            blDirection = true;
-        }
-        if (direction.equals("south") && south != null) {
-            blDirection = true;
-        }
-        if (direction.equals("west") && west != null) {
-            blDirection = true;
-        }
-        return blDirection;
-    }
-
-    public Room nextRoom(String nextRoom) {
-
-        if (nextRoom.equals("north")) {
-            return north;
-        }
-        if (nextRoom.equals("east")) {
-            return east;
-        }
-        if (nextRoom.equals("south")) {
-            return south;
-        }
-        if (nextRoom.equals("west")) {
-            return west;
-        }
-        return null;
-    }
-
 }
