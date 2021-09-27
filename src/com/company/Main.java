@@ -1,4 +1,6 @@
 package com.company;
+
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -53,46 +55,37 @@ public class Main {
         room9.setNorth(room6);
         room9.setWest(room8);
 
-        Room currentRoom = room1;
+
         Player player = new Player();
         Parser parser = new Parser();
-        player.playerLocation(currentRoom);
-        System.out.println(parser.welcome(currentRoom));
 
+
+
+        Room currentRoom = room1;
+        System.out.println(parser.welcome(room1));
         Scanner sc = new Scanner(System.in);
 
 
-        while (true) {
+        boolean con = true;
+
+        while (con) {
+
+            currentRoom = player.playerLocation(currentRoom);
             String input = sc.nextLine();
             input = input.toLowerCase(Locale.ROOT);
-            input = parser.move(input);
-
-            //TODO: fix direction uden at man skal skrive 'd'
-            /*
-            if (input.equals("d")) {
-
-                System.out.println("Type which direction you want to go in");
-                input = sc.nextLine();
-                parser.move(input);
-            }
-             */
-
+            String validation = parser.validation(input);
             // checks if the direction input is available
-            if (player.direction(input)) {
+            if (player.direction(validation)) {
                 // changes current room to the new room
-                currentRoom = player.movePlayer(input);
+                currentRoom = player.movePlayer(validation);
                 System.out.println(currentRoom.getDescription());
-            }
-            else if (input.equals("exit")) {
+            } else if (input.equals("exit")) {
                 parser.exit();
-            }
-            else if (input.equals("help")) {
+            } else if (input.equals("help")) {
                 System.out.println(parser.help(player));
-            }
-            else if (input.equals("look")) {
+            } else if (input.equals("look")) {
                 System.out.println(parser.look(currentRoom));
-            }
-            else {
+            } else {
                 System.out.println("You cant go that way, try again!");
             }
         }

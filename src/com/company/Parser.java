@@ -3,20 +3,20 @@ package com.company;
 public class Parser {
 
 
-    public String move(String direction){
-        String result = "";
+    public String validation(String direction){
+        String result = direction;
 
-        if (direction.equals("go north") || direction.equals("n")) {
-            result = "north";
+        if (direction.equals("go north") || direction.equals("north")) {
+            result = "n";
         }
-        if (direction.equals("go east") || direction.equals("e")) {
-            result = "east";
+        if (direction.equals("go east") || direction.equals("east")) {
+            result = "e";
         }
-        if (direction.equals("go south") || direction.equals("s")) {
-            result = "south";
+        if (direction.equals("go south") || direction.equals("south")) {
+            result = "s";
         }
-        if (direction.equals("go west") || direction.equals("w")) {
-            result = "west";
+        if (direction.equals("go west") || direction.equals("west")) {
+            result = "w";
         }
         return result;
     }
