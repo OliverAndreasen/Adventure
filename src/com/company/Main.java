@@ -45,6 +45,29 @@ public class Main {
                         // changes current room to the new room
                         currentRoom += rooms[i].nextRoom(input);
                         System.out.println("You walked into room " + (currentRoom + 1));
+                    } else if (input.equals("exit")){
+                        System.exit(0);
+                    } else if (input.equals("help")){
+
+                        String help = "";
+
+                        if (rooms[i].direction("north")){
+                            help += "you can go 'north'\n";
+                        }
+                        if (rooms[i].direction("east")){
+                            help += "you can go 'east'\n";
+                        }
+                        if (rooms[i].direction("south")){
+                            help += "you can go 'south'\n";
+                        }
+                        if (rooms[i].direction("west")){
+                            help += "you can go 'west'\n";
+                        }
+                        help += "if you want to exit the program type 'exit'\n";
+                        help += "to get a room description you can type 'look'\n";
+                        System.out.println(help);
+                    } else if (input.equals("look")){
+                        System.out.println("You are in room " + (currentRoom + 1));
                     }
                     else {
                         System.out.println("You cant go that way, try again!");

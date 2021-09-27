@@ -3,7 +3,6 @@ package com.company;
 public class Room {
 
     private int id;
-    private int id2;
     
     //true if the direction is available in a room
     private boolean north;
