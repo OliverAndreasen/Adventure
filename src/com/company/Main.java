@@ -59,6 +59,8 @@ public class Main {
         Room currentRoom = room1;
         Player player = new Player();
         Parser parser = new Parser();
+        player.playerLocation(currentRoom);
+        System.out.println(parser.help(player));
         /*
         // Start room is room 1
 
@@ -90,30 +92,26 @@ public class Main {
          */
         System.out.println("Welcome to the Adventure game!");
         System.out.println("You have to choose a direction, you want to walk in");
-        System.out.println("You can type 'north', 'east', 'south' or 'west");
+        System.out.println("To go a direction type 'direction'");
+        System.out.println("You can type 'north', 'east', 'south' or 'west'");
+        System.out.println("Other functions: 'exit', 'look', 'help'");
         System.out.println("You are in room " + player.playerLocation(currentRoom));
 
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Which direction do you want to go ?");
+
             String input = sc.nextLine();
             input = input.toLowerCase(Locale.ROOT);
-            if (input.equals("direction")){
-                input = parser.move(input);
+
+
+            if (input.equals("direction")) {
+
+                System.out.println("Type which direction you want to go in");
+                input = sc.nextLine();
+                parser.move(input);
             }
-            /*if (input.equals("go north") || input.equals("n")) {
-                input = "north";
-            }
-            if (input.equals("go east") || input.equals("e")) {
-                input = "east";
-            }
-            if (input.equals("go south") || input.equals("s")) {
-                input = "south";
-            }
-            if (input.equals("go west") || input.equals("w")) {
-                input = "west";
-            }*/
+            System.out.println(parser.help(player));
 
             // checks if the direction input is available
             if (player.direction(input)) {
@@ -127,7 +125,7 @@ public class Main {
             } else if (input.equals("exit")) {
                 parser.exit();
 
-            } else if (true) {
+            } else if (input.equals("help")) {
                 System.out.println(parser.help(player));
                 /*String help = "";
 
