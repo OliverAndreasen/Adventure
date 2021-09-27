@@ -51,6 +51,7 @@ public class Room {
     }
 
     public String getDescription() {
-        return description;
+        String result = "you are in " + name + "\ndescription: " + description;
+        return result;
     }
 }

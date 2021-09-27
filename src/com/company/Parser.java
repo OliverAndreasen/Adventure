@@ -47,7 +47,19 @@ public class Parser {
         return help;
     }
 
-    public String look(){
-        return null;
+    public String look(Room currentRoom){
+        return "You are in room " + currentRoom.getName() + "\n" + "description " + currentRoom.getDescription();
+    }
+
+    public String welcome(Room currentRoom){
+
+        String result = "";
+        result += "Welcome to the Adventure game!\n";
+        result += "You have to choose a direction, you want to walk in\n";
+        result += "To go a direction type 'direction'\n";
+        result += "You can type 'north', 'east', 'south' or 'west'\n";
+        result += "Other functions: 'exit', 'look', 'help'\n";
+        result += "You are in room " + currentRoom.getName();
+        return result;
     }
 }
