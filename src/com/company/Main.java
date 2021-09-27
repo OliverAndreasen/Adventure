@@ -1,41 +1,69 @@
 package com.company;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.SortedMap;
 
 public class Main {
 
     public static void main(String[] args) {
+        //Room (String name, String description)
+        Room room1 = new Room("room 1", null);
+        Room room2 = new Room("room 2", null);
+        Room room3 = new Room("room 3", null);
+        Room room4 = new Room("room 4", "Du er gået ind i klædeskabet");
+        Room room5 = new Room("room 5", null);
+        Room room6 = new Room("room 6", null);
+        Room room7 = new Room("room 7", null);
+        Room room8 = new Room("room 8", null);
+        Room room9 = new Room("room 9", null);
 
-        // creates array to all the rooms.
-        Room[] rooms = new Room[9];
+        // Room1
+        room1.setEast(room2);
+        room1.setSouth(room4);
 
-        //Room (int id, boolean north, boolean east, boolean south, boolean west)
-        // TODO: Change room ids to 1,2,3,4,5,6,7,8,9
-        rooms[0] = new Room(0, false, true, true, false);
-        rooms[1] = new Room(1, false, true, false, true);
-        rooms[2] = new Room(2, false, false, true, true);
-        rooms[3] = new Room(3, true, false, true, false);
-        rooms[4] = new Room(4, false, false, true, false);
-        rooms[5] = new Room(5, true, false, true, false);
-        rooms[6] = new Room(6, true, true, false, false);
-        rooms[7] = new Room(7, true, true, false, true);
-        rooms[8] = new Room(8, true, false, false, true);
+        // Room 2
+        room2.setEast(room3);
+        room2.setWest(room1);
 
-        // Start room is room 1 (array[0])
-        int currentRoom = (rooms[0].getId());
+        // Room 3
+        room3.setWest(room2);
+        room3.setSouth(room6);
+
+        // Room 4
+        room4.setNorth(room1);
+        room4.setSouth(room7);
+
+        // Room 5
+        room5.setSouth(room8);
+
+        // Room 6
+        room6.setNorth(room3);
+        room6.setSouth(room9);
+
+        // Room 7
+        room7.setNorth(room4);
+        room7.setEast(room8);
+
+        // Room 8
+        room8.setNorth(room5);
+        room8.setEast(room9);
+        room8.setWest(room7);
+
+        // Room 9
+        room9.setNorth(room6);
+        room9.setWest(room8);
+
+        // Start room is room 1
+        Room currentRoom = room1;
 
         System.out.println("Welcome to the Adventure game!");
         System.out.println("You have to choose a direction, you want to walk in");
         System.out.println("You can type 'north', 'east', 'south' or 'west");
-        System.out.println("You are in room " + (currentRoom + 1));
+        System.out.println("You are in room " + currentRoom.getName());
 
         Scanner sc = new Scanner(System.in);
-        int length = rooms.length;
 
         while (true) {
-            for (int i = 0; i < length; i++) {
-
-                if ((currentRoom) == i) {
                     System.out.println("Which direction do you want to go ?");
                     String input = sc.nextLine();
                     input = input.toLowerCase(Locale.ROOT);
@@ -53,10 +81,13 @@ public class Main {
                     }
 
                     // checks if the direction input is available
-                    if (rooms[i].direction(input)) {
+                    if (currentRoom.direction(input)) {
+                        String description = "You are in ";
                         // changes current room to the new room
-                        currentRoom += rooms[i].nextRoom(input);
-                        System.out.println("You walked into room " + (currentRoom + 1));
+                        currentRoom = currentRoom.nextRoom(input);
+
+                        description += currentRoom.getName() + "\n" + currentRoom.getDescription();
+                        System.out.println(description);
 
                     } else if (input.equals("exit")){
                         System.exit(0);
@@ -64,16 +95,16 @@ public class Main {
                     } else if (input.equals("help")){
                         String help = "";
 
-                        if (rooms[i].direction("north")){
+                        if (currentRoom.direction("north")){
                             help += "you can go 'north'\n";
                         }
-                        if (rooms[i].direction("east")){
+                        if (currentRoom.direction("east")){
                             help += "you can go 'east'\n";
                         }
-                        if (rooms[i].direction("south")){
+                        if (currentRoom.direction("south")){
                             help += "you can go 'south'\n";
                         }
-                        if (rooms[i].direction("west")){
+                        if (currentRoom.direction("west")){
                             help += "you can go 'west'\n";
                         }
                         help += "if you want to exit the program type 'exit'\n";
@@ -81,14 +112,12 @@ public class Main {
                         System.out.println(help);
 
                     } else if (input.equals("look")){
-                        System.out.println("You are in room " + (currentRoom + 1));
+                        System.out.println("You are in room " + currentRoom.getName());
                     }
                     else {
                         System.out.println("You cant go that way, try again!");
                     }
                 }
             }
-        }
-    }
 }
 

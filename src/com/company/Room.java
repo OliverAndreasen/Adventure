@@ -2,61 +2,93 @@ package com.company;
 
 public class Room {
 
-    private int id;
+    private String name;
+    private String description;
     
-    //true if the direction is available in a room
-    private boolean north;
-    private boolean east;
-    private boolean south;
-    private boolean west;
+    private Room north;
+    private Room east;
+    private Room south;
+    private Room west;
 
     // Constructor
-    public Room(int id, boolean north, boolean east, boolean south, boolean west) {
-        this.id = id;
-        this.north = north;
-        this.east = east;
-        this.south = south;
-        this.west = west;
+    public Room(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.north = null;
+        this.east = null;
+        this.south = null;
+        this.west = null;
     }
 
-    public int getId() {
-        return id;
+    public void setNorth(Room north) {
+        this.north = north;
+    }
+    public void setEast(Room east) {
+        this.east = east;
+    }
+    public void setSouth(Room south) {
+        this.south = south;
+    }
+    public void setWest(Room west) {
+        this.west = west;
+    }
+    public Room getNorth () {
+        return north;
+    }
+    public Room getEast () {
+        return east;
+    }
+    public Room getSouth () {
+        return south;
+    }
+    public Room getWest () {
+        return west;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
     
     // Checks if you can go in a specific direction from the room you are in
+
     public boolean direction(String direction) {
 
         boolean blDirection = false;
 
-        if (direction.equals("north")) {
-            blDirection = north;
+        if (direction.equals("north") && north != null) {
+            blDirection = true;
         }
-        if (direction.equals("east")) {
-            blDirection = east;
+        if (direction.equals("east") && east != null) {
+            blDirection = true;
         }
-        if (direction.equals("south")) {
-            blDirection = south;
+        if (direction.equals("south") && south != null) {
+            blDirection = true;
         }
-        if (direction.equals("west")) {
-            blDirection = west;
+        if (direction.equals("west") && west != null) {
+            blDirection = true;
         }
         return blDirection;
     }
 
-    public int nextRoom(String nextRoom) {
+    public Room nextRoom(String nextRoom) {
 
         if (nextRoom.equals("north")) {
-            return -3;
+            return north;
         }
         if (nextRoom.equals("east")) {
-            return +1;
+            return east;
         }
         if (nextRoom.equals("south")) {
-            return +3;
+            return south;
         }
         if (nextRoom.equals("west")) {
-            return -1;
+            return west;
         }
-        return 0;
+        return null;
     }
+
 }
