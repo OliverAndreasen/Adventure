@@ -21,7 +21,10 @@ public class Room {
 
     public int getId() {
         return id;
+        System.out.println();
     }
+
+
 
     // Checks if you can go in a specific direction from the room you are in
     public boolean direction(String direction) {
