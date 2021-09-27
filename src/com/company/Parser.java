@@ -29,16 +29,16 @@ public class Parser {
 
         String help = "";
 
-        if (player.direction("north")) {
+        if (player.direction("n")) {
             help += "you can go 'north'\n";
         }
-        if (player.direction("east")) {
+        if (player.direction("e")) {
             help += "you can go 'east'\n";
         }
-        if (player.direction("south")) {
+        if (player.direction("s")) {
             help += "you can go 'south'\n";
         }
-        if (player.direction("west")) {
+        if (player.direction("w")) {
             help += "you can go 'west'\n";
         }
         help += "if you want to exit the program type 'exit'\n";
@@ -48,7 +48,7 @@ public class Parser {
     }
 
     public String look(Room currentRoom){
-        return "You are in room " + currentRoom.getName() + "\n" + "description " + currentRoom.getDescription();
+        return currentRoom.getDescription();
     }
 
     public String welcome(Room currentRoom){
@@ -59,7 +59,6 @@ public class Parser {
         result += "To go a direction type 'direction'\n";
         result += "You can type 'north', 'east', 'south' or 'west'\n";
         result += "Other functions: 'exit', 'look', 'help'\n";
-        result += "You are in room " + currentRoom.getName();
         return result;
     }
 }
