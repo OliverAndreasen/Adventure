@@ -1,8 +1,6 @@
 package com.company;
 
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -59,7 +57,6 @@ public class Main {
         Room currentRoom = room1;
         Player player = new Player();
         Parser parser = new Parser();
-        player.playerLocation(currentRoom);
         /*
         // Start room is room 1
 
@@ -89,38 +86,64 @@ public class Main {
         }
 
          */
-        System.out.println(parser.welcome(currentRoom));
+        System.out.println("Welcome to the Adventure game!");
+        System.out.println("You have to choose a direction, you want to walk in");
+        System.out.println("You can type 'north', 'east', 'south' or 'west");
+        System.out.println("You are in room " + player.playerLocation(currentRoom));
 
         Scanner sc = new Scanner(System.in);
 
-
         while (true) {
-
+            System.out.println("Which direction do you want to go ?");
             String input = sc.nextLine();
             input = input.toLowerCase(Locale.ROOT);
-
-
-            //TODO: fix direction uden at man skal skrive 'd'
-            if (input.equals("d")) {
-
-                System.out.println("Type which direction you want to go in");
-                input = sc.nextLine();
-                parser.move(input);
+            input = parser.move(input);
+            /*if (input.equals("go north") || input.equals("n")) {
+                input = "north";
             }
+            if (input.equals("go east") || input.equals("e")) {
+                input = "east";
+            }
+            if (input.equals("go south") || input.equals("s")) {
+                input = "south";
+            }
+            if (input.equals("go west") || input.equals("w")) {
+                input = "west";
+            }*/
 
             // checks if the direction input is available
             if (player.direction(input)) {
+                String description = "You are in ";
                 // changes current room to the new room
                 currentRoom = player.movePlayer(input);
-                System.out.println(currentRoom.getDescription());
+
+                description += player.playerLocation(currentRoom) + "\n" + currentRoom.getDescription();
+                System.out.println(description);
 
             } else if (input.equals("exit")) {
                 parser.exit();
 
             } else if (input.equals("help")) {
-                System.out.println(parser.help(player));
+                String help = "";
+
+                if (player.direction("north")) {
+                    help += "you can go 'north'\n";
+                }
+                if (player.direction("east")) {
+                    help += "you can go 'east'\n";
+                }
+                if (player.direction("south")) {
+                    help += "you can go 'south'\n";
+                }
+                if (player.direction("west")) {
+                    help += "you can go 'west'\n";
+                }
+                help += "if you want to exit the program type 'exit'\n";
+                help += "to get a room description you can type 'look'\n";
+                System.out.println(help);
+
             } else if (input.equals("look")) {
-                System.out.println(parser.look(currentRoom));
+                System.out.println("You are in room " + currentRoom.getName());
             } else {
                 System.out.println("You cant go that way, try again!");
             }

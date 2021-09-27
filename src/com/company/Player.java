@@ -10,7 +10,6 @@ public class Player {
 
     // Checks if you can go in a specific direction from the room you are in
     public boolean direction(String direction) {
-
         boolean blDirection = false;
 
         if (direction.equals("north") && playerLocation.getNorth() != null) {
