@@ -5,25 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
-        // creates array to all the rooms.
-        Room[] rooms = new Room[9];
-
-        //Room (int id, boolean north, boolean east, boolean south, boolean west)
-        // TODO: Change room ids to 1,2,3,4,5,6,7,8,9
-        /*
-        rooms[0] = new Room(0, false, true, true, false);
-        rooms[1] = new Room(1, false, true, false, true);
-        rooms[2] = new Room(2, false, false, true, true);
-        rooms[3] = new Room(3, true, false, true, false);
-        rooms[4] = new Room(4, false, false, true, false);
-        rooms[5] = new Room(5, true, false, true, false);
-        rooms[6] = new Room(6, true, true, false, false);
-        rooms[7] = new Room(7, true, true, false, true);
-        rooms[8] = new Room(8, true, false, false, true);
-
-         */
-
+        //Room (String name, String description)
         Room room1 = new Room("room1", null);
         Room room2 = new Room("room2", null);
         Room room3 = new Room("room3", null);
@@ -35,7 +17,7 @@ public class Main {
         Room room9 = new Room("room9", null);
 
         // Room1
-        room1.setEast(room1);
+        room1.setEast(room2);
         room1.setSouth(room4);
 
         // Room 2
