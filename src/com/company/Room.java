@@ -3,6 +3,7 @@ package com.company;
 public class Room {
 
     private int id;
+    private int kage;
 
     //true if the direction is available in a room
     private boolean north;
@@ -20,7 +21,6 @@ public class Room {
     }
 
     public int getId() {
-        System.out.println("alex");
         return id;
     }
     
