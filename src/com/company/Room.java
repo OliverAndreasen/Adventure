@@ -20,6 +20,7 @@ public class Room {
     }
 
     public int getId() {
+        System.out.println("alex");
         return id;
     }
     

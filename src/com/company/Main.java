@@ -8,6 +8,9 @@ public class Main {
 
         // creates array to all the rooms.
         Room[] rooms = new Room[9];
+
+        System.out.println("alex");
+
         System.out.println("Test");
         System.out.println("lol2");
         System.out.println("tesz");
