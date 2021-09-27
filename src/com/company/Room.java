@@ -3,7 +3,7 @@ package com.company;
 public class Room {
 
     private String name;
-    String description;
+    private String description;
     
     private Room north;
     private Room east;
@@ -47,6 +47,10 @@ public class Room {
 
     public String getName() {
         return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
     
     // Checks if you can go in a specific direction from the room you are in

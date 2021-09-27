@@ -1,20 +1,21 @@
 package com.company;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.SortedMap;
 
 public class Main {
 
     public static void main(String[] args) {
         //Room (String name, String description)
-        Room room1 = new Room("room1", null);
-        Room room2 = new Room("room2", null);
-        Room room3 = new Room("room3", null);
-        Room room4 = new Room("room4", null);
-        Room room5 = new Room("room5", null);
-        Room room6 = new Room("room6", null);
-        Room room7 = new Room("room7", null);
-        Room room8 = new Room("room8", null);
-        Room room9 = new Room("room9", null);
+        Room room1 = new Room("room 1", null);
+        Room room2 = new Room("room 2", null);
+        Room room3 = new Room("room 3", null);
+        Room room4 = new Room("room 4", "Du er gået ind i klædeskabet");
+        Room room5 = new Room("room 5", null);
+        Room room6 = new Room("room 6", null);
+        Room room7 = new Room("room 7", null);
+        Room room8 = new Room("room 8", null);
+        Room room9 = new Room("room 9", null);
 
         // Room1
         room1.setEast(room2);
@@ -52,21 +53,6 @@ public class Main {
         room9.setNorth(room6);
         room9.setWest(room8);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // Start room is room 1
         Room currentRoom = room1;
 
@@ -96,9 +82,12 @@ public class Main {
 
                     // checks if the direction input is available
                     if (currentRoom.direction(input)) {
+                        String description = "You are in ";
                         // changes current room to the new room
                         currentRoom = currentRoom.nextRoom(input);
-                        System.out.println("You walked into room " + currentRoom.getName());
+
+                        description += currentRoom.getName() + "\n" + currentRoom.getDescription();
+                        System.out.println(description);
 
                     } else if (input.equals("exit")){
                         System.exit(0);
