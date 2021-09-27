@@ -3,7 +3,7 @@ package com.company;
 public class Parser {
 
 
-    public String validation(String direction){
+    public String validation(String direction) {
         String result = direction;
 
         if (direction.equals("go north") || direction.equals("north")) {
@@ -21,11 +21,11 @@ public class Parser {
         return result;
     }
 
-    public void exit(){
+    public void exit() {
         System.exit(0);
     }
 
-    public String help(Player player){
+    public String help(Player player) {
 
         String help = "";
 
@@ -47,20 +47,17 @@ public class Parser {
         return help;
     }
 
-    public String look(Room currentRoom){
+    public String look(Room currentRoom) {
         return currentRoom.getDescription();
     }
 
-    public String welcome(){
+    public String welcome() {
 
         String result = "";
         result += "Welcome to the Adventure game!\n";
         result += "You have to choose a direction, you want to walk in\n";
-        result += "To go a direction type 'direction'\n";
         result += "You can type 'north', 'east', 'south' or 'west'\n";
         result += "Other functions: 'exit', 'look', 'help'";
         return result;
     }
-
-
 }

@@ -83,8 +83,8 @@ public class Main {
         while (con) {
 
             if (count == 0) {
-                System.out.println("You are in : " + currentRoom.getName());
-                count = count+1;
+                System.out.println(currentRoom.getDescription());
+                count = count + 1;
             }
             currentRoom = player.playerLocation(currentRoom);
             String input = sc.nextLine();

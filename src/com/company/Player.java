@@ -3,7 +3,7 @@ package com.company;
 public class Player {
     private Room playerLocation;
 
-    public Room playerLocation(Room currentLocation){
+    public Room playerLocation(Room currentLocation) {
         return this.playerLocation = currentLocation;
     }
 
