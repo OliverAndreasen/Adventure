@@ -8,15 +8,27 @@ public class Main {
 
     public static void main(String[] args) {
         //Room (String name, String description)
-        Room room1 = new Room("room 1", "Du er gået ind i klædeskabet");
-        Room room2 = new Room("room 2", "Du er gået ind i klædeskabet");
-        Room room3 = new Room("room 3", "Du er gået ind i klædeskabet");
-        Room room4 = new Room("room 4", "Du er gået ind i klædeskabet");
-        Room room5 = new Room("room 5", "Du er gået ind i klædeskabet");
-        Room room6 = new Room("room 6", "Du er gået ind i klædeskabet");
-        Room room7 = new Room("room 7", "Du er gået ind i klædeskabet");
-        Room room8 = new Room("room 8", "Du er gået ind i klædeskabet");
-        Room room9 = new Room("room 9", "Du er gået ind i klædeskabet");
+        Room room1 = new Room("room 1", "You are very tired and cold in a big dark forest, you need to find a place to rest for the night.\n" +
+                "Even though it is very dark and horrible weather, you catch a glimpse of what looks like a cave.\n" +
+                "which way do you choose?");
+        Room room2 = new Room("room 2", "You are in the entrance of a dark cave, the floor of the entrance is full of jagged rocks, you can not sleep here. \n" +
+                "You need to move on to find a place to rest.\n" +
+                "which way do you choose?");
+        Room room3 = new Room("room 3", "You arrive in a curved corridor, as you move through the corridor \n" +
+                "you step into knee-deep puddles of water. \n" +
+                "which way do you choose?");
+        Room room4 = new Room("room 4", "You found an entrance to a cave, dare to go deeper?\n" +
+                "Which way do you choose?");
+        Room room5 = new Room("room 5", "You found a nice place to sleep with a bed, firewood and a ladder to exit the cave.\n" +
+                "Sleep tight.");
+        Room room6 = new Room("room 6", "You are at a mossy rockformation, it is very slippery, be careful.\n" +
+                "which way do you choose?");
+        Room room7 = new Room("room 7", "You are in a curved corridor.\n" +
+                "Which way do you choose?");
+        Room room8 = new Room("room 8", "You can sense the comfort of a safe place nearby.\n" +
+                "Which way do you choose?");
+        Room room9 = new Room("room 9", "You are in a curved corridor.\n" +
+                "Which way do you choose?. ");
 
 
         // Room1

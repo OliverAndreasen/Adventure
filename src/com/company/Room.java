@@ -51,7 +51,7 @@ public class Room {
     }
 
     public String getDescription() {
-        String result = "you are in " + name + " \n description: " + description;
+        String result = "You are in " + name + " \nDescription: " + description;
         return result;
     }
 }
