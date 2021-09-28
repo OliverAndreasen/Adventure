@@ -3,26 +3,39 @@ package com.company;
 public class Player {
     private Room playerLocation;
 
+    String letters[];
+    Room locations[];
+
+
+
+
+    public Player() {
+        letters = new String[4];
+        locations = new Room[4];
+        letters[0] = "n";
+        letters[1] = "e";
+        letters[2] = "s";
+        letters[3] = "w";
+
+    }
+
     public Room playerLocation(Room currentLocation) {
         return this.playerLocation = currentLocation;
     }
 
     // Checks if you can go in a specific direction from the room you are in
     public boolean direction(String direction) {
-
+        locations[0] = playerLocation.getNorth();
+        locations[1] = playerLocation.getEast();
+        locations[2] = playerLocation.getSouth();
+        locations[3] = playerLocation.getWest();
+        
         boolean blDirection = false;
 
-        if (direction.equals("n") && playerLocation.getNorth() != null) {
-            blDirection = true;
-        }
-        if (direction.equals("e") && playerLocation.getEast() != null) {
-            blDirection = true;
-        }
-        if (direction.equals("s") && playerLocation.getSouth() != null) {
-            blDirection = true;
-        }
-        if (direction.equals("w") && playerLocation.getWest() != null) {
-            blDirection = true;
+        for (int i = 0; i < letters.length; i++) {
+            if (direction.equals(letters[i]) && locations[i] != null) {
+                blDirection = true;
+            }
         }
         return blDirection;
     }
@@ -30,18 +43,15 @@ public class Player {
 
     //moves the player to a new room
     public Room movePlayer(String nextRoom) {
+        locations[0] = playerLocation.getNorth();
+        locations[1] = playerLocation.getEast();
+        locations[2] = playerLocation.getSouth();
+        locations[3] = playerLocation.getWest();
 
-        if (nextRoom.equals("n")) {
-            return playerLocation.getNorth();
-        }
-        if (nextRoom.equals("e")) {
-            return playerLocation.getEast();
-        }
-        if (nextRoom.equals("s")) {
-            return playerLocation.getSouth();
-        }
-        if (nextRoom.equals("w")) {
-            return playerLocation.getWest();
+        for (int i = 0; i < letters.length; i++) {
+            if (nextRoom.equals(letters[i])) {
+                return locations[i];
+            }
         }
         return null;
     }
