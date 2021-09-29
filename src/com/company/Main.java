@@ -75,10 +75,17 @@ public class Main {
 
         //ITEMS
         ArrayList<String> roomItems = new ArrayList<>();
+
         Item key = new Item("key", "this is a tiny key");
-        String name = key.getName();
-        key.itemToList(name);
+        room1.setRoomItems(key);
+
+        System.out.println(room1.getAllItems());
+
         Item sword = new Item("sword", "this is a large sword");
+
+        room1.setRoomItems(sword);
+        System.out.println(room1.getAllItems());
+
         Item lamp = new Item("lamp", "this is a shiny lamp");
 
 
@@ -87,16 +94,16 @@ public class Main {
 
 
         Room currentRoom = room1;
+        //test
+        currentRoom = player.playerLocation(currentRoom);
+        //test
         System.out.println(parser.welcome());
         Scanner sc = new Scanner(System.in);
 
-        room1.setRoomItems("key");
-        room1.roomItemStatus();
-        room4.setRoomItems("sword");
-        room4.roomItemStatus();
-        room2.setRoomItems("lamp");
-        room2.roomItemStatus();
-
+        player.takeItems("sword");
+        System.out.println(player.getAllPlayerItems() + " ligger i inventory");
+        player.takeItems("sword");
+        System.out.println(player.getAllPlayerItems() + " ligger i inventory");
 
         boolean con = true;
         int count = 0;

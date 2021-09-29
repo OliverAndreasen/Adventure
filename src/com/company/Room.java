@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Room {
 
@@ -12,7 +13,7 @@ public class Room {
     private Room south;
     private Room west;
 
-    private ArrayList<String> roomItems = new ArrayList<>();
+    private ArrayList<Item> roomItems = new ArrayList<>();
     
     // Constructor
     public Room(String name, String description) {
@@ -67,7 +68,7 @@ public class Room {
         return result;
     }
 
-    public void setRoomItems(String itemName) {
+    public void setRoomItems(Item itemName) {
         roomItems.add(itemName);
         System.out.println(itemName + " has been added");
     }
@@ -77,5 +78,25 @@ public class Room {
         }
         
     }
+    public String getAllItems(){
+        String result = "Items in this room: ";
+        for (int i = 0; i < roomItems.size(); i++) {
+            if (roomItems.size() != (roomItems.size()-1)){
+                result += roomItems.get(i) + ", ";
+            } else {
+                result += roomItems.get(i);
+            }
+        }
+        return result;
+    }
+    public Item findItem(String itemName, Room playerLocation) {
+        for (int i = 0; i < playerLocation.roomItems.size(); i++) {
+            if (playerLocation.roomItems.get(i).getName().equals(itemName)) {
+                return playerLocation.roomItems.get(i);
+            }
+        }
+        return null;
+    }
+
 
 }

@@ -17,10 +17,18 @@ public class Item {
 
     }
 
-    public void itemToList(Item itemName){
+    /*public void itemToList(Item itemName){
         allItems.add(itemName);
         System.out.println(itemName + " added to the list");
-    }
+    }*/
+
+    /*public String getAllItems(){
+        String result = "";
+        for (int i = 0; i < allItems.size(); i++) {
+            result += allItems.get(i);
+        }
+        return result;
+    }*/
 
     public String getDescription() {
         return description;
@@ -38,16 +46,20 @@ public class Item {
                 roomItems.remove(i);
             }*/
 
-    public Item findItem(String itemName) {
+    /*public Item findItem(String itemName) {
         for (int i = 0; i < allItems.size(); i++) {
             if (allItems.get(i).getName().equals(itemName)) {
                 return allItems.get(i);
             }
         }
         return null;
-    }
+    }*/
 
+    @Override
+    public String toString() {
+        return itemName;
     }
+}
 
 
 

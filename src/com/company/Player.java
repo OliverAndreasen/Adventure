@@ -1,11 +1,13 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Player {
     private Room playerLocation;
 
     String letters[];
     Room locations[];
-
+    private ArrayList<Item> plyerItems = new ArrayList<>();
 
 
 
@@ -54,5 +56,27 @@ public class Player {
             }
         }
         return null;
+    }
+
+    public boolean checkItemInventory(String itemName){
+        Item item = playerLocation.findItem(itemName, playerLocation);
+        if (item != null){
+            return true;
+        }
+
+    }
+
+    public void takeItems(String itemName){
+        playerLocation.findItem(itemName, playerLocation);
+        Item item = playerLocation.findItem(itemName, playerLocation);
+        plyerItems.add(item);
+    }
+
+    public String getAllPlayerItems(){
+        String result = "";
+        for (int i = 0; i < plyerItems.size(); i++) {
+            result += plyerItems.get(i);
+        }
+        return result;
     }
 }
