@@ -29,6 +29,7 @@ public class Main {
                 "Which way do you choose?");
         Room room9 = new Room("room 9", "You are in a curved corridor.\n" +
                 "Which way do you choose?. ");
+        System.out.println("HEJHEJHEJ");
 
 
         // Room1
