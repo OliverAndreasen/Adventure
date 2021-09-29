@@ -7,7 +7,6 @@ public class Room {
 
     private String name;
     private String description;
-
     private Room north;
     private Room east;
     private Room south;
@@ -24,7 +23,6 @@ public class Room {
         this.south = null;
         this.west = null;
     }
-    
 
     public Room getNorth() {
         return north;
@@ -71,6 +69,7 @@ public class Room {
     public void setRoomItem(Item itemName) {
         roomItems.add(itemName);
     }
+
     public void roomItemStatus(){
         for (int i = 0; i < roomItems.size(); i++) {
             System.out.println(roomItems.get(i));
@@ -81,6 +80,10 @@ public class Room {
     public void removeRoomItem (Item itemName) {
         roomItems.remove(itemName);
         }
+
+        public ArrayList getRoomItems() {
+        return roomItems;
+    }
 
 
     public String getAllItems(){

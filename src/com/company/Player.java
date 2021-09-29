@@ -70,7 +70,6 @@ public class Player {
     }
 
     public void takeItem(String itemName){
-
         if (!checkItemInventory(itemName)) {
             playerLocation.findItem(itemName, playerLocation);
             Item item = playerLocation.findItem(itemName, playerLocation);
@@ -99,8 +98,7 @@ public class Player {
 
     public void removeItem(String itemName)
     {
-            Item item = playerLocation.findItem(itemName, playerLocation);
-            playerLocation.setRoomItem(item);
-            playerItems.remove(item);
+        Item item = playerLocation.findItem(itemName, this.playerLocation);
+        playerItems.remove(item);
     }
  }
