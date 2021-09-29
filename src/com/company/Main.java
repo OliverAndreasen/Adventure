@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
@@ -29,7 +30,7 @@ public class Main {
                 "Which way do you choose?");
         Room room9 = new Room("room 9", "You are in a curved corridor.\n" +
                 "Which way do you choose?. ");
-        System.out.println("HEJHEJHEJ");
+
 
 
         // Room1
@@ -72,10 +73,29 @@ public class Main {
         Player player = new Player();
         Parser parser = new Parser();
 
+        //ITEMS
+        ArrayList<String> roomItems = new ArrayList<>();
+        Item key = new Item("key", "this is a tiny key");
+        String name = key.getName();
+        key.itemToList(name);
+        Item sword = new Item("sword", "this is a large sword");
+        Item lamp = new Item("lamp", "this is a shiny lamp");
+
+
+
+
+
 
         Room currentRoom = room1;
         System.out.println(parser.welcome());
         Scanner sc = new Scanner(System.in);
+
+        room1.setRoomItems("key");
+        room1.roomItemStatus();
+        room4.setRoomItems("sword");
+        room4.roomItemStatus();
+        room2.setRoomItems("lamp");
+        room2.roomItemStatus();
 
 
         boolean con = true;

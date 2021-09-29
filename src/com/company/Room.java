@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Room {
 
     private String name;
@@ -10,6 +12,8 @@ public class Room {
     private Room south;
     private Room west;
 
+    private ArrayList<String> roomItems = new ArrayList<>();
+    
     // Constructor
     public Room(String name, String description) {
         this.name = name;
@@ -19,6 +23,7 @@ public class Room {
         this.south = null;
         this.west = null;
     }
+    
 
     public Room getNorth() {
         return north;
@@ -60,6 +65,17 @@ public class Room {
     public String getDescription() {
         String result = "You are in " + getName() + " \nDescription: " + description;
         return result;
+    }
+
+    public void setRoomItems(String itemName) {
+        roomItems.add(itemName);
+        System.out.println(itemName + " has been added");
+    }
+    public void roomItemStatus(){
+        for (int i = 0; i < roomItems.size(); i++) {
+            System.out.println(roomItems.get(i));
+        }
+        
     }
 
 }
