@@ -68,9 +68,8 @@ public class Room {
         return result;
     }
 
-    public void setRoomItems(Item itemName) {
+    public void setRoomItem(Item itemName) {
         roomItems.add(itemName);
-        System.out.println(itemName + " has been added");
     }
     public void roomItemStatus(){
         for (int i = 0; i < roomItems.size(); i++) {
@@ -78,17 +77,34 @@ public class Room {
         }
         
     }
+
+    public void removeRoomItem (Item itemName) {
+        roomItems.remove(itemName);
+        }
+
+
     public String getAllItems(){
-        String result = "Items in this room: ";
+        int count = 0;
+        String result = "";
         for (int i = 0; i < roomItems.size(); i++) {
-            if (roomItems.size() != (roomItems.size()-1)){
-                result += roomItems.get(i) + ", ";
-            } else {
-                result += roomItems.get(i);
+            if (roomItems.get(i) != null) {
+                if (count == 0) {
+                    result = "Items in this room: ";
+                    count ++;
+                }
+                if (i != (roomItems.size()-1)){
+                    result += roomItems.get(i) + ", ";
+                } else {
+                    result += roomItems.get(i);
+                }
             }
+        }
+        if (roomItems.size() == 0) {
+            result = "The room has no items";
         }
         return result;
     }
+
     public Item findItem(String itemName, Room playerLocation) {
         for (int i = 0; i < playerLocation.roomItems.size(); i++) {
             if (playerLocation.roomItems.get(i).getName().equals(itemName)) {

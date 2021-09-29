@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -72,38 +71,32 @@ public class Main {
 
         Player player = new Player();
         Parser parser = new Parser();
-
-        //ITEMS
-        ArrayList<String> roomItems = new ArrayList<>();
-
-        Item key = new Item("key", "this is a tiny key");
-        room1.setRoomItems(key);
-
-        System.out.println(room1.getAllItems());
-
-        Item sword = new Item("sword", "this is a large sword");
-
-        room1.setRoomItems(sword);
-        System.out.println(room1.getAllItems());
-
-        Item lamp = new Item("lamp", "this is a shiny lamp");
-
-
-
-
-
-
         Room currentRoom = room1;
         //test
         currentRoom = player.playerLocation(currentRoom);
         //test
+
+
+        //ITEMS
+        // init items
+        Item key = new Item("key", "this is a tiny key");
+        Item sword = new Item("sword", "this is a large sword");
+        // put itemn into room 1
+        room1.setRoomItem(key);
+        room1.setRoomItem(sword);
+        // takes items from room 1
+        player.takeItem("sword");
+        player.takeItem("key");
+        System.out.println(room1.getAllItems());
+        System.out.println(player.getAllPlayerItems());
+
+        // removes from inventory
+        player.removeItem("lol");
+        System.out.println(player.getAllPlayerItems());
+
+
         System.out.println(parser.welcome());
         Scanner sc = new Scanner(System.in);
-
-        player.takeItems("sword");
-        System.out.println(player.getAllPlayerItems() + " ligger i inventory");
-        player.takeItems("sword");
-        System.out.println(player.getAllPlayerItems() + " ligger i inventory");
 
         boolean con = true;
         int count = 0;

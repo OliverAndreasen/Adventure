@@ -7,7 +7,7 @@ public class Player {
 
     String letters[];
     Room locations[];
-    private ArrayList<Item> plyerItems = new ArrayList<>();
+    private ArrayList<Item> playerItems = new ArrayList<>();
 
 
 
@@ -59,24 +59,48 @@ public class Player {
     }
 
     public boolean checkItemInventory(String itemName){
+        boolean result;
         Item item = playerLocation.findItem(itemName, playerLocation);
-        if (item != null){
+        if (playerItems.contains(item)){
             return true;
-        }
-
-    }
-
-    public void takeItems(String itemName){
-        playerLocation.findItem(itemName, playerLocation);
-        Item item = playerLocation.findItem(itemName, playerLocation);
-        plyerItems.add(item);
-    }
-
-    public String getAllPlayerItems(){
-        String result = "";
-        for (int i = 0; i < plyerItems.size(); i++) {
-            result += plyerItems.get(i);
+        }else {
+            result = false;
         }
         return result;
     }
-}
+
+    public void takeItem(String itemName){
+
+        if (!checkItemInventory(itemName)) {
+            playerLocation.findItem(itemName, playerLocation);
+            Item item = playerLocation.findItem(itemName, playerLocation);
+            playerItems.add(item);
+            System.out.println("Du har taget " + itemName);
+            playerLocation.removeRoomItem(item);
+        }else {
+            System.out.println(itemName + " are in your inventory");
+        }
+    }
+
+    public String getAllPlayerItems(){
+        String result = "In your inventory you have:\n";
+
+        int length = playerItems.size();
+        for (int i = 0; i < length; i++) {
+            if (i != length-1) {
+                result += playerItems.get(i) + "\n";
+            }
+            else {
+                result += playerItems.get(i);
+            }
+        }
+        return result;
+    }
+
+    public void removeItem(String itemName)
+    {
+            Item item = playerLocation.findItem(itemName, playerLocation);
+            playerLocation.setRoomItem(item);
+            playerItems.remove(item);
+    }
+ }
