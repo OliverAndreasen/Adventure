@@ -8,7 +8,6 @@ public class Main {
         Player player = new Player();
         Parser parser = new Parser();
         Room currentRoom = player.currentRoom(map.getStartRoom());
-
         System.out.println(parser.welcome());
         Scanner sc = new Scanner(System.in);
         boolean con = true;
@@ -43,11 +42,11 @@ public class Main {
                 if (currentRoom.findItem(itemName, currentRoom) != null) {
                     Item item = currentRoom.findItem(itemName, currentRoom);
                     if (item.checkIfBackpack()){
-                        player.takeItem(itemName);
+                        System.out.println(player.takeItem(itemName));
                         player.changeMaxInventoryWeight(5);
                         System.out.println("Your max inventory capacity increased to " + player.getMaxInventoryWeight());
                     }else{
-                        player.takeItem(itemName);
+                        System.out.println(player.takeItem(itemName));
                     }
                 } else {
                     System.out.println("there is no such item");
@@ -58,13 +57,13 @@ public class Main {
                     if (item.checkIfBackpack()) {
                         if (player.getCurrentInventoryWeight() <= 5) {
                             player.changeMaxInventoryWeight(-5);
-                            player.dropItem(itemName);
+                            System.out.println(player.dropItem(itemName));
                             System.out.println("Your max inventory capacity decreased to " + player.getMaxInventoryWeight());
                         }else {
                             System.out.println("You cannot drop the backpack! Drop one or more items before you can remove the backpack");
                         }
                     }else {
-                        player.dropItem(itemName);
+                        System.out.println(player.dropItem(itemName));
                     }
                 } else {
                     System.out.println("you dont have such item");

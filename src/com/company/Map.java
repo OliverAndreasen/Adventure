@@ -82,9 +82,8 @@ public class Map {
         room5.setRoomItem(goldbar);
 
         //Room 9
-        Item backpack = new Item("dusty backpack",0);
+        Item backpack = new Item("dusty backpack", 0);
         room9.setRoomItem(backpack);
-
         startRoom = room1;
     }
 

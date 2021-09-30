@@ -69,28 +69,32 @@ public class Player {
         return null;
     }
 
-    public void takeItem(String itemName) {
+    public String takeItem(String itemName) {
+        String result = "";
         Item item = currentRoom.findItem(itemName, currentRoom);
         int itemWeight = item.getItemWeight();
 
         if (canCarryMore(itemWeight)) {
             playerItems.add(item);
             currentInventoryWeight += itemWeight;
-            System.out.println("You picked up " + itemName);
             currentRoom.removeRoomItem(item);
-            System.out.println(itemName + " are now in your inventory");
+            result += ("You picked up " + itemName + "\n");
+            result += (itemName + " are now in your inventory");
         } else {
-            System.out.println("You are over encumbered.\nYou have to drop something, before you can pick up the " + itemName + "!");
+            result = ("You are over encumbered.\nYou have to drop something, before you can pick up the " + itemName + "!");
         }
+        return result;
     }
 
-    public void dropItem(String itemName) {
+    public String dropItem(String itemName) {
+        String result = "";
         Item item = findItemInventory(itemName);
-        System.out.println("You dropped " + item);
+        result = "You dropped " + item + "\n";
         currentRoom.setRoomItem(item);
         // Adds weight after picking up the item
         currentInventoryWeight = currentInventoryWeight - item.getItemWeight();
         playerItems.remove(item);
+        return result;
     }
 
     public String getInventory() {

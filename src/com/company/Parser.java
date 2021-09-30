@@ -61,7 +61,6 @@ public class Parser {
     }
 
     public String welcome() {
-
         String result = "";
         result += "Welcome to the Adventure game!\n";
         result += "You have to choose a direction, you want to walk in\n";
