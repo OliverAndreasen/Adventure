@@ -69,13 +69,26 @@ public class Player {
             currentRoom.removeRoomItem(item);
             System.out.println(itemName + " are now in your inventory");
 
-            if (itemName.equals("backpack")) {
+            if (checkIfBackpack(itemName)) {
                 this.maxPlayerWeight = maxPlayerWeight + 5;
             }
         } else {
             System.out.println("You are over encumbered.\nYou have to drop something, before you can pick up the " + itemName + "!");
         }
     }
+
+    public void dropItem(String itemName) {
+        Item item = findItemInventory(itemName);
+        System.out.println("you dropped " + item);
+        currentRoom.setRoomItem(item);
+        // Adds weight after picking up the item
+        currentPlayerWeight = currentPlayerWeight - item.getItemWeight();
+        if (checkIfBackpack(itemName)) {
+            this.maxPlayerWeight = maxPlayerWeight - 5;
+        }
+        playerItems.remove(item);
+    }
+
 
 
     public String getInventory() {
@@ -96,18 +109,6 @@ public class Player {
         return result;
     }
 
-    public void dropItem(String itemName) {
-        Item item = findItemInventory(itemName);
-        System.out.println("you dropped " + item);
-        currentRoom.setRoomItem(item);
-        // Adds weight after picking up the item
-        currentPlayerWeight = currentPlayerWeight - item.getItemWeight();
-        if (itemName.equals("backpack")) {
-            this.maxPlayerWeight = maxPlayerWeight - 5;
-        }
-        playerItems.remove(item);
-    }
-
     public Item findItemInventory(String itemName) {
         for (int i = 0; i < playerItems.size(); i++) {
             if (playerItems.get(i).getName().equals(itemName)) {
@@ -119,5 +120,14 @@ public class Player {
 
     public boolean canCarryMore(int itemWeight) {
         return (currentPlayerWeight + itemWeight) <= maxPlayerWeight;
+    }
+
+    public boolean checkIfBackpack(String itemName) {
+        if (itemName.equals("backpack")) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
