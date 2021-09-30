@@ -12,19 +12,6 @@ public class Item {
         this.description = description;
     }
 
-    /*public void itemToList(Item itemName){
-        allItems.add(itemName);
-        System.out.println(itemName + " added to the list");
-    }*/
-
-    /* public String getAllItems(){
-        String result = "";
-        for (int i = 0; i < allItems.size(); i++) {
-            result += allItems.get(i);
-        }
-        return result;
-    }*/
-
     public String getDescription() {
         return description;
     }

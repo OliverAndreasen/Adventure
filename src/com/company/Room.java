@@ -96,9 +96,9 @@ public class Room {
                     count ++;
                 }
                 if (i != (roomItems.size()-1)){
-                    result += roomItems.get(i) + ", ";
+                    result += roomItems.get(i).getDescription() + ", ";
                 } else {
-                    result += roomItems.get(i);
+                    result += roomItems.get(i).getDescription();
                 }
             }
         }

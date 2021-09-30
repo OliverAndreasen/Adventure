@@ -83,7 +83,9 @@ public class Player {
 
 
     public String getAllPlayerItems(){
-        String result = "In your inventory you have:\n";
+        String result = "";
+        result += "Your current inventory weight is: " + currentPlayerWeight + " out of " + maxPlayerWeight + "\n";
+        result += "In your inventory you have:\n";
         int length = playerItems.size();
         for (int i = 0; i < length; i++) {
             if (i != length-1) {
@@ -100,6 +102,7 @@ public class Player {
     {
         Item item = findItemPlayerInventory(itemName);
         System.out.println("you dropped " + item);
+        currentPlayerWeight = currentPlayerWeight -item.getItemWeight();
         playerLocation.setRoomItem(item);
         playerItems.remove(item);
     }
