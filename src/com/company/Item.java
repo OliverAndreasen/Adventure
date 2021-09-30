@@ -8,8 +8,8 @@ public class Item {
     private final int itemWeight;
     private final ArrayList<Item> allItems = new ArrayList<>();
 
-    public Item(String itemName, String description, int itemWeight) {
-        this.itemName = itemName;
+    public Item(String description, int itemWeight) {
+        this.itemName = description.substring(description.lastIndexOf(' ') + 1);
         this.description = description;
         this.itemWeight = itemWeight;
     }

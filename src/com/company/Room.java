@@ -85,7 +85,7 @@ public class Room {
     }
 
 
-    public String getALlRoomItems() {
+    public String getAllItems() {
         int count = 0;
         String result = "";
         for (int i = 0; i < roomItems.size(); i++) {
@@ -109,7 +109,7 @@ public class Room {
         return result;
     }
 
-    public Item findRoomItem(String itemName, Room currentRoom) {
+    public Item findItem(String itemName, Room currentRoom) {
         for (int i = 0; i < currentRoom.roomItems.size(); i++) {
             if (currentRoom.roomItems.get(i).getName().equals(itemName)) {
                 return currentRoom.roomItems.get(i);

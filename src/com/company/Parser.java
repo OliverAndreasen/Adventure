@@ -56,7 +56,7 @@ public class Parser {
     public String look(Room currentRoom) {
         String result = "";
         result += currentRoom.getDescription() + "\n";
-        result += currentRoom.getALlRoomItems();
+        result += currentRoom.getAllItems();
         return result;
     }
 

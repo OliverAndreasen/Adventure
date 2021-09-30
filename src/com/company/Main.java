@@ -28,7 +28,7 @@ public class Main {
             // checks if the direction input is available
             if (player.checkDirection(direction)) {
                 // changes current room to the new room
-                currentRoom = player.movePlayer(direction);
+                currentRoom = player.move(direction);
                 System.out.println(currentRoom.getDescription());
             } else if (command.equals("off")) {
                 parser.exit();
@@ -40,22 +40,22 @@ public class Main {
             } else if (command.equals("look")) {
                 System.out.println(parser.look(currentRoom));
             } else if (command.equals("take")) {
-                if (currentRoom.findRoomItem(itemName, currentRoom) != null) {
-                    player.takeRoomItem(itemName);
+                if (currentRoom.findItem(itemName, currentRoom) != null) {
+                    player.takeItem(itemName);
                 } else {
                     System.out.println("there is no such item");
                 }
             } else if (command.equals("drop")) {
-                if (player.findItemPlayerInventory(itemName) != null) {
-                    player.dropPlayerItem(itemName);
+                if (player.findItemInventory(itemName) != null) {
+                    player.dropItem(itemName);
                 } else {
                     System.out.println("you dont have such item");
                 }
             } else if (command.equals("inv")) {
-                System.out.println(player.getPlayerInventory());
+                System.out.println(player.getInventory());
             } else if (command.equals("u")) {
-                System.out.println(currentRoom.getALlRoomItems());
-                System.out.println(player.getPlayerInventory());
+                System.out.println(currentRoom.getAllItems());
+                System.out.println(player.getInventory());
             } else {
                 System.out.println("You cant go that way, try again!");
             }

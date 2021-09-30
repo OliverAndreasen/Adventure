@@ -44,7 +44,7 @@ public class Player {
 
 
     //moves the player to a new room
-    public Room movePlayer(String nextRoom) {
+    public Room move(String nextRoom) {
         locations[0] = currentRoom.getNorth();
         locations[1] = currentRoom.getEast();
         locations[2] = currentRoom.getSouth();
@@ -58,9 +58,9 @@ public class Player {
         return null;
     }
 
-    public void takeRoomItem(String itemName) {
-        currentRoom.findRoomItem(itemName, currentRoom);
-        Item item = currentRoom.findRoomItem(itemName, currentRoom);
+    public void takeItem(String itemName) {
+        currentRoom.findItem(itemName, currentRoom);
+        Item item = currentRoom.findItem(itemName, currentRoom);
         int itemWeight = item.getItemWeight();
 
         if (checkPlayerWeight(itemWeight)) {
@@ -75,7 +75,7 @@ public class Player {
     }
 
 
-    public String getPlayerInventory() {
+    public String getInventory() {
         String result = "";
         result += "Your current inventory weight is: " + currentPlayerWeight + " out of " + maxPlayerWeight + "\n";
         result += "In your inventory you have:\n";
@@ -92,15 +92,15 @@ public class Player {
         return result;
     }
 
-    public void dropPlayerItem(String itemName) {
-        Item item = findItemPlayerInventory(itemName);
+    public void dropItem(String itemName) {
+        Item item = findItemInventory(itemName);
         System.out.println("you dropped " + item);
         currentPlayerWeight = currentPlayerWeight - item.getItemWeight();
         currentRoom.setRoomItem(item);
         playerItems.remove(item);
     }
 
-    public Item findItemPlayerInventory(String itemName) {
+    public Item findItemInventory(String itemName) {
         for (int i = 0; i < playerItems.size(); i++) {
             if (playerItems.get(i).getName().equals(itemName)) {
                 return playerItems.get(i);
