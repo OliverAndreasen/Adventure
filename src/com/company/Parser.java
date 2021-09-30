@@ -51,7 +51,10 @@ public class Parser {
     }
 
     public String look(Room currentRoom) {
-        return currentRoom.getDescription();
+        String result = "";
+        result += currentRoom.getDescription() + "\n";
+        result += currentRoom.getAllItems();
+        return result;
     }
 
     public String welcome() {
@@ -61,6 +64,7 @@ public class Parser {
         result += "You have to choose a direction, you want to walk in\n";
         result += "You can type 'north', 'east', 'south' or 'west'\n";
         result += "Other functions: 'exit', 'look', 'help'";
+        result += "\n";
         return result;
     }
 }

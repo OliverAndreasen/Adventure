@@ -62,7 +62,7 @@ public class Room {
     }
 
     public String getDescription() {
-        String result = "You are in " + getName() + " \nDescription: " + description;
+        String result = "You are in " + getName() + " \nDescription: " + description + "\n";
         return result;
     }
 

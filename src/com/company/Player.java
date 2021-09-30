@@ -99,11 +99,8 @@ public class Player {
     public void dropItem(String itemName)
     {
         Item item = findItemPlayerInventory(itemName);
+        System.out.println("you dropped " + item);
         playerLocation.setRoomItem(item);
-        playerItems.remove(item);
-    }
-
-    public void test(Item item) {
         playerItems.remove(item);
     }
 
@@ -115,5 +112,4 @@ public class Player {
         }
         return null;
     }
-
  }
