@@ -76,20 +76,6 @@ public class Player {
         }
     }
 
-    public void dropItem(String itemName) {
-        if (checkIfBackpack(itemName)) {
-            if (currentPlayerWeight > 5) {
-                System.out.println("You cannot drop the backpack! Remove other items first");
-            } else {
-                drop(itemName);
-                this.maxPlayerWeight = maxPlayerWeight - 5;
-
-            }
-        }else {
-            drop(itemName);
-        }
-    }
-
     public void drop(String itemName) {
         Item item = findItemInventory(itemName);
         System.out.println("You dropped " + item);
@@ -97,6 +83,19 @@ public class Player {
         // Adds weight after picking up the item
         currentPlayerWeight = currentPlayerWeight - item.getItemWeight();
         playerItems.remove(item);
+    }
+
+    public void dropItem(String itemName) {
+        if (checkIfBackpack(itemName)) {
+            if (currentPlayerWeight > 5) {
+                System.out.println("You cannot drop the backpack! Remove other items first");
+            } else {
+                drop(itemName);
+                this.maxPlayerWeight = maxPlayerWeight - 5;
+            }
+        }else {
+            drop(itemName);
+        }
     }
 
     public String getInventory() {
