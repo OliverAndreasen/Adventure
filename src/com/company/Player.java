@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 public class Player {
-    private final int maxPlayerWeight;
+    private int maxPlayerWeight;
     String[] letters;
     Room[] locations;
     private Room currentRoom;
@@ -59,7 +59,6 @@ public class Player {
     }
 
     public void takeItem(String itemName) {
-        currentRoom.findItem(itemName, currentRoom);
         Item item = currentRoom.findItem(itemName, currentRoom);
         int itemWeight = item.getItemWeight();
 
@@ -69,6 +68,10 @@ public class Player {
             System.out.println("You picked up " + itemName);
             currentRoom.removeRoomItem(item);
             System.out.println(itemName + " are now in your inventory");
+
+            if (itemName.equals("backpack")) {
+                this.maxPlayerWeight = maxPlayerWeight + 5;
+            }
         } else {
             System.out.println("You are over encumbered.\nYou have to drop something, before you can pick up the " + itemName + "!");
         }
@@ -83,6 +86,7 @@ public class Player {
         int length = playerItems.size();
         for (int i = 0; i < length; i++) {
             String itemName = playerItems.get(i).getName();
+            // check if not the last item in Arraylist
             if (i != length - 1) {
                 result += itemName + "\n";
             } else {
@@ -95,8 +99,12 @@ public class Player {
     public void dropItem(String itemName) {
         Item item = findItemInventory(itemName);
         System.out.println("you dropped " + item);
-        currentPlayerWeight = currentPlayerWeight - item.getItemWeight();
         currentRoom.setRoomItem(item);
+        // Adds weight after picking up the item
+        currentPlayerWeight = currentPlayerWeight - item.getItemWeight();
+        if (itemName.equals("backpack")) {
+            this.maxPlayerWeight = maxPlayerWeight - 5;
+        }
         playerItems.remove(item);
     }
 
