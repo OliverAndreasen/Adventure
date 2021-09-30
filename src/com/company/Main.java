@@ -3,13 +3,11 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
         Map map = new Map();
         Player player = new Player();
         Parser parser = new Parser();
-        Room currentRoom = map.getStartRoom();
-        currentRoom = player.playerLocation(currentRoom);
+        Room currentRoom = player.currentRoom(map.getStartRoom());
 
         System.out.println(parser.welcome());
         Scanner sc = new Scanner(System.in);
@@ -20,17 +18,17 @@ public class Main {
                 System.out.println(currentRoom.getDescription());
                 count = count + 1;
             }
-            currentRoom = player.playerLocation(currentRoom);
+            currentRoom = player.currentRoom(currentRoom);
             String input = sc.nextLine();
             input = input.toLowerCase(Locale.ROOT);
 
             String firstWord = parser.getFirstWord(input);
             String itemName = parser.getSecoundWord(input);
-            String validation = parser.validation(input);
+            String direction = parser.validateDirection(input);
             // checks if the direction input is available
-            if (player.direction(validation)) {
+            if (player.checkDirection(direction)) {
                 // changes current room to the new room
-                currentRoom = player.movePlayer(validation);
+                currentRoom = player.movePlayer(direction);
                 System.out.println(currentRoom.getDescription());
             } else if (firstWord.equals("off")) {
                 parser.exit();
@@ -42,22 +40,22 @@ public class Main {
             } else if (firstWord.equals("look")) {
                 System.out.println(parser.look(currentRoom));
             } else if (firstWord.equals("take")) {
-                if (currentRoom.findItemRoom(itemName, currentRoom) != null) {
-                    player.takeItem(itemName);
+                if (currentRoom.findRoomItem(itemName, currentRoom) != null) {
+                    player.takeRoomItem(itemName);
                 } else {
                     System.out.println("there is no such item");
                 }
             } else if (firstWord.equals("drop")) {
                 if (player.findItemPlayerInventory(itemName) != null) {
-                    player.dropItem(itemName);
+                    player.dropPlayerItem(itemName);
                 } else {
                     System.out.println("you dont have such item");
                 }
             } else if (firstWord.equals("inv")) {
-                System.out.println(player.getAllPlayerItems());
+                System.out.println(player.getPlayerInventory());
             } else if (firstWord.equals("u")) {
-                System.out.println(currentRoom.getAllItems());
-                System.out.println(player.getAllPlayerItems());
+                System.out.println(currentRoom.getALlRoomItems());
+                System.out.println(player.getPlayerInventory());
             } else {
                 System.out.println("You cant go that way, try again!");
             }

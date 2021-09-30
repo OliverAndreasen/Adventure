@@ -6,7 +6,7 @@ public class Player {
     private final int maxPlayerWeight;
     String[] letters;
     Room[] locations;
-    private Room playerLocation;
+    private Room currentRoom;
     private int currentPlayerWeight;
     private final ArrayList<Item> playerItems = new ArrayList<>();
 
@@ -22,18 +22,17 @@ public class Player {
         this.currentPlayerWeight = 0;
     }
 
-    public Room playerLocation(Room currentLocation) {
-        return this.playerLocation = currentLocation;
+    public Room currentRoom(Room currentRoom) {
+        return this.currentRoom = currentRoom;
     }
 
     // Checks if you can go in a specific direction from the room you are in
-    public boolean direction(String direction) {
-        locations[0] = playerLocation.getNorth();
-        locations[1] = playerLocation.getEast();
-        locations[2] = playerLocation.getSouth();
-        locations[3] = playerLocation.getWest();
-
+    public boolean checkDirection(String direction) {
         boolean blDirection = false;
+        locations[0] = currentRoom.getNorth();
+        locations[1] = currentRoom.getEast();
+        locations[2] = currentRoom.getSouth();
+        locations[3] = currentRoom.getWest();
 
         for (int i = 0; i < letters.length; i++) {
             if (direction.equals(letters[i]) && locations[i] != null) {
@@ -46,10 +45,10 @@ public class Player {
 
     //moves the player to a new room
     public Room movePlayer(String nextRoom) {
-        locations[0] = playerLocation.getNorth();
-        locations[1] = playerLocation.getEast();
-        locations[2] = playerLocation.getSouth();
-        locations[3] = playerLocation.getWest();
+        locations[0] = currentRoom.getNorth();
+        locations[1] = currentRoom.getEast();
+        locations[2] = currentRoom.getSouth();
+        locations[3] = currentRoom.getWest();
 
         for (int i = 0; i < letters.length; i++) {
             if (nextRoom.equals(letters[i])) {
@@ -59,14 +58,16 @@ public class Player {
         return null;
     }
 
-    public void takeItem(String itemName) {
-        playerLocation.findItemRoom(itemName, playerLocation);
-        Item item = playerLocation.findItemRoom(itemName, playerLocation);
-        if (checkPlayerWeight(item.getItemWeight())) {
+    public void takeRoomItem(String itemName) {
+        currentRoom.findRoomItem(itemName, currentRoom);
+        Item item = currentRoom.findRoomItem(itemName, currentRoom);
+        int itemWeight = item.getItemWeight();
+
+        if (checkPlayerWeight(itemWeight)) {
             playerItems.add(item);
-            currentPlayerWeight += item.getItemWeight();
+            currentPlayerWeight += itemWeight;
             System.out.println("You picked up " + itemName);
-            playerLocation.removeRoomItem(item);
+            currentRoom.removeRoomItem(item);
             System.out.println(itemName + " are now in your inventory");
         } else {
             System.out.println("You are over encumbered.\nYou have to drop something, before you can pick up the " + itemName + "!");
@@ -74,26 +75,28 @@ public class Player {
     }
 
 
-    public String getAllPlayerItems() {
+    public String getPlayerInventory() {
         String result = "";
         result += "Your current inventory weight is: " + currentPlayerWeight + " out of " + maxPlayerWeight + "\n";
         result += "In your inventory you have:\n";
+
         int length = playerItems.size();
         for (int i = 0; i < length; i++) {
+            String itemName = playerItems.get(i).getName();
             if (i != length - 1) {
-                result += playerItems.get(i) + "\n";
+                result += itemName + "\n";
             } else {
-                result += playerItems.get(i);
+                result += itemName;
             }
         }
         return result;
     }
 
-    public void dropItem(String itemName) {
+    public void dropPlayerItem(String itemName) {
         Item item = findItemPlayerInventory(itemName);
         System.out.println("you dropped " + item);
         currentPlayerWeight = currentPlayerWeight - item.getItemWeight();
-        playerLocation.setRoomItem(item);
+        currentRoom.setRoomItem(item);
         playerItems.remove(item);
     }
 

@@ -2,7 +2,7 @@ package com.company;
 
 public class Parser {
 
-    public String validation(String direction) {
+    public String validateDirection(String direction) {
         String result = direction;
 
         if (direction.equals("go north") || direction.equals("north")) {
@@ -38,16 +38,16 @@ public class Parser {
     public String cheat(Player player){
         String result = "";
 
-        if (player.direction("n")) {
+        if (player.checkDirection("n")) {
             result += "you can go 'north'\n";
         }
-        if (player.direction("e")) {
+        if (player.checkDirection("e")) {
             result += "you can go 'east'\n";
         }
-        if (player.direction("s")) {
+        if (player.checkDirection("s")) {
             result += "you can go 'south'\n";
         }
-        if (player.direction("w")) {
+        if (player.checkDirection("w")) {
             result += "you can go 'west'\n";
         }
         return result;
@@ -56,7 +56,7 @@ public class Parser {
     public String look(Room currentRoom) {
         String result = "";
         result += currentRoom.getDescription() + "\n";
-        result += currentRoom.getAllItems();
+        result += currentRoom.getALlRoomItems();
         return result;
     }
 

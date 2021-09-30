@@ -85,19 +85,21 @@ public class Room {
     }
 
 
-    public String getAllItems() {
+    public String getALlRoomItems() {
         int count = 0;
         String result = "";
         for (int i = 0; i < roomItems.size(); i++) {
+            String itemDescription = roomItems.get(i).getDescription();
+
             if (roomItems.get(i) != null) {
                 if (count == 0) {
                     result = "Items in this room: ";
                     count++;
                 }
                 if (i != (roomItems.size() - 1)) {
-                    result += roomItems.get(i).getDescription() + ", ";
+                    result += itemDescription + ", ";
                 } else {
-                    result += roomItems.get(i).getDescription();
+                    result += itemDescription;
                 }
             }
         }
@@ -107,10 +109,10 @@ public class Room {
         return result;
     }
 
-    public Item findItemRoom(String itemName, Room playerLocation) {
-        for (int i = 0; i < playerLocation.roomItems.size(); i++) {
-            if (playerLocation.roomItems.get(i).getName().equals(itemName)) {
-                return playerLocation.roomItems.get(i);
+    public Item findRoomItem(String itemName, Room currentRoom) {
+        for (int i = 0; i < currentRoom.roomItems.size(); i++) {
+            if (currentRoom.roomItems.get(i).getName().equals(itemName)) {
+                return currentRoom.roomItems.get(i);
             }
         }
         return null;
