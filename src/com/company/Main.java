@@ -23,40 +23,44 @@ public class Main {
             currentRoom = player.playerLocation(currentRoom);
             String input = sc.nextLine();
             input = input.toLowerCase(Locale.ROOT);
-            String letter = input.substring(0, 1);
-            int space = input.indexOf(" ");
-            itemName = input.substring(space + 1);
+
+            String firstWord = parser.getFirstWord(input);
+            String itemName = parser.getSecoundWord(input);
+            System.out.println(firstWord);
+            System.out.println(itemName);
+
             String validation = parser.validation(input);
             // checks if the direction input is available
             if (player.direction(validation)) {
                 // changes current room to the new room
                 currentRoom = player.movePlayer(validation);
                 System.out.println(currentRoom.getDescription());
-            } else if (letter.equals("o")) {
+            } else if (firstWord.equals("off")) {
                 parser.exit();
-            } else if (letter.equals("h")) {
+            } else if (firstWord.equals("help")) {
                 System.out.println(parser.help(player));
-            } else if (letter.equals("l")) {
+            } else if (firstWord.equals("cheat")){
+                System.out.println(parser.cheat(player));
+            } else if (firstWord.equals("look")) {
                 System.out.println(parser.look(currentRoom));
-            } else if (letter.equals("t")) {
+            } else if (firstWord.equals("take")) {
                 if (currentRoom.findItemRoom(itemName, currentRoom) != null) {
                     player.takeItem(itemName);
                 } else {
                     System.out.println("there is no such item");
                 }
-            } else if (letter.equals("d")) {
+            } else if (firstWord.equals("drop")) {
                 if (player.findItemPlayerInventory(itemName) != null) {
                     player.dropItem(itemName);
                 } else {
                     System.out.println("you dont have such item");
                 }
-            } else if (letter.equals("i")) {
+            } else if (firstWord.equals("inv")) {
                 System.out.println(player.getAllPlayerItems());
-            } else if (letter.equals("u")) {
+            } else if (firstWord.equals("u")) {
                 System.out.println(currentRoom.getAllItems());
                 System.out.println(player.getAllPlayerItems());
             } else {
-                System.out.println(letter);
                 System.out.println("You cant go that way, try again!");
                 System.out.println("LOL");
                 System.out.println("LOL");
