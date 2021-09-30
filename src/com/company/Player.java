@@ -63,7 +63,7 @@ public class Player {
         Item item = currentRoom.findItem(itemName, currentRoom);
         int itemWeight = item.getItemWeight();
 
-        if (checkPlayerWeight(itemWeight)) {
+        if (canCarryMore(itemWeight)) {
             playerItems.add(item);
             currentPlayerWeight += itemWeight;
             System.out.println("You picked up " + itemName);
@@ -109,7 +109,7 @@ public class Player {
         return null;
     }
 
-    public boolean checkPlayerWeight(int itemWeight) {
+    public boolean canCarryMore(int itemWeight) {
         return (currentPlayerWeight + itemWeight) <= maxPlayerWeight;
     }
 }
