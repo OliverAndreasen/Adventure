@@ -70,6 +70,8 @@ public class Player {
             System.out.println(itemName + " are now in your inventory");
             if (checkIfBackpack(itemName)) {
                 this.maxPlayerWeight = maxPlayerWeight + 5;
+                System.out.println("Your max capacity increased to " + maxPlayerWeight);
+
             }
         } else {
             System.out.println("You are over encumbered.\nYou have to drop something, before you can pick up the " + itemName + "!");
@@ -92,6 +94,7 @@ public class Player {
             } else {
                 drop(itemName);
                 this.maxPlayerWeight = maxPlayerWeight - 5;
+                System.out.println("Your max capacity decreased to " + maxPlayerWeight);
             }
         }else {
             drop(itemName);
