@@ -45,7 +45,7 @@ public class Main {
                     if (item.checkIfBackpack()){
                         player.takeItem(itemName);
                         player.changeMaxInventoryWeight(5);
-                        System.out.println("Your max capacity increased to " + player.getMaxInventoryWeight());
+                        System.out.println("Your max inventory capacity increased to " + player.getMaxInventoryWeight());
                     }else{
                         player.takeItem(itemName);
                     }
@@ -59,7 +59,7 @@ public class Main {
                         if (player.getCurrentInventoryWeight() <= 5) {
                             player.changeMaxInventoryWeight(-5);
                             player.dropItem(itemName);
-                            System.out.println("Your max capacity decreased to " + player.getMaxInventoryWeight());
+                            System.out.println("Your max inventory capacity decreased to " + player.getMaxInventoryWeight());
                         }else {
                             System.out.println("You cannot drop the backpack! Drop one or more items before you can remove the backpack");
                         }
