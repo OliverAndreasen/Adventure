@@ -69,7 +69,7 @@ public class Player {
             playerLocation.removeRoomItem(item);
             System.out.println(itemName + " are now in your inventory");
         } else {
-            System.out.println("you are over encumbered");
+            System.out.println("You are over encumbered.\nYou have to drop something, before you can pick up the " + itemName + "!");
         }
     }
 

@@ -24,13 +24,14 @@ public class Parser {
         System.exit(0);
     }
 
-    public String help(Player player) {
+    public String help() {
 
         String help = "";
         help += "if you want to turn the program off type 'off'\n";
         help += "to get a room description you can type 'look'\n";
-        help += "to pick up an item type 'take' item name\n";
-        help += "to drop an item type 'drop' item name\n";
+        help += "to get help with directions you can type 'cheat'\n";
+        help += "to pick up an item type 'take' followed by the name of the item\n";
+        help += "to drop an item type 'drop' followed by the name of the item\n";
         return help;
     }
 
@@ -66,7 +67,7 @@ public class Parser {
         result += "You have to choose a direction, you want to walk in\n";
         result += "You can type 'north', 'east', 'south' or 'west'\n";
         result += "you can also 'take' and 'drop' items for more instructions type 'help'\n";
-        result += "Other functions: 'off', 'look', 'help', 'inv'";
+        result += "Other functions: 'off', 'look', 'help', 'inv' 'cheat'";
         result += "\n";
         return result;
     }

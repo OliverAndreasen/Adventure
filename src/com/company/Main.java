@@ -36,7 +36,7 @@ public class Main {
                 parser.exit();
                 con = false;
             } else if (firstWord.equals("help")) {
-                System.out.println(parser.help(player));
+                System.out.println(parser.help());
             } else if (firstWord.equals("cheat")){
                 System.out.println(parser.cheat(player));
             } else if (firstWord.equals("look")) {

@@ -63,13 +63,24 @@ public class Map {
         room9.setNorth(room6);
         room9.setWest(room8);
 
+        //Room 1
         Item key = new Item("key", "there is a tiny key", 1);
         Item sword = new Item("sword", "there is a large sword", 3);
         Item shovel = new Item("shovel", "there is a broken shovel", 2);
-        // put itemn into room 1
         room1.setRoomItem(key);
         room1.setRoomItem(sword);
         room1.setRoomItem(shovel);
+
+        // Room 4
+        Item cape = new Item("cape", "a yellow cape",1);
+        Item shoe = new Item("shoe", "an old shoe", 2);
+        room4.setRoomItem(cape);
+        room4.setRoomItem(shoe);
+
+        // Room 5
+        Item goldbar = new Item("goldbar","a huge goldbar", 5);
+        room5.setRoomItem(goldbar);
+
         startRoom = room1;
     }
 
