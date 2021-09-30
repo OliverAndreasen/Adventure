@@ -30,8 +30,8 @@ public class Item {
         return itemWeight;
     }
 
-    public boolean checkIfBackpack(String itemName) {
-        if (itemName.equals("backpack")) {
+    public boolean checkIfBackpack() {
+        if (this.itemName.equals("backpack")) {
             return true;
         }
         else {

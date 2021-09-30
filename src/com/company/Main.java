@@ -42,7 +42,7 @@ public class Main {
             } else if (command.equals("take")) {
                 if (currentRoom.findItem(itemName, currentRoom) != null) {
                     Item item = currentRoom.findItem(itemName, currentRoom);
-                    if (item.checkIfBackpack(itemName)){
+                    if (item.checkIfBackpack()){
                         player.takeItem(itemName);
                         player.changeMaxInventoryWeight(5);
                         System.out.println("Your max capacity increased to " + player.getMaxInventoryWeight());
@@ -55,13 +55,13 @@ public class Main {
             } else if (command.equals("drop")) {
                 if (player.findItemInventory(itemName) != null) {
                     Item item = player.findItemInventory(itemName);
-                    if (item.checkIfBackpack(itemName)) {
-                        if (player.getCurrentInventoryWeight() > 5) {
-                            System.out.println("You cannot drop the backpack! Drop one or more items before you can remove the backpack");
-                        }else {
+                    if (item.checkIfBackpack()) {
+                        if (player.getCurrentInventoryWeight() <= 5) {
                             player.changeMaxInventoryWeight(-5);
                             player.dropItem(itemName);
                             System.out.println("Your max capacity decreased to " + player.getMaxInventoryWeight());
+                        }else {
+                            System.out.println("You cannot drop the backpack! Drop one or more items before you can remove the backpack");
                         }
                     }else {
                         player.dropItem(itemName);
