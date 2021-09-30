@@ -3,13 +3,15 @@ package com.company;
 import java.util.ArrayList;
 
 public class Item {
-    private String itemName;
-    private String description;
-    private ArrayList <Item> allItems = new ArrayList<>();
+    private final String itemName;
+    private final String description;
+    private final int itemWeight;
+    private final ArrayList<Item> allItems = new ArrayList<>();
 
-    public Item(String itemName, String description){
+    public Item(String itemName, String description, int itemWeight) {
         this.itemName = itemName;
         this.description = description;
+        this.itemWeight = itemWeight;
     }
 
     public String getDescription() {
@@ -20,27 +22,13 @@ public class Item {
         return itemName;
     }
 
-    @Override
     public String toString() {
         return itemName;
     }
 
-   /* public void deleteItem(String description) {
-        String currentItem;
-        for (int i = 0; i < roomItems.size(); i++) {
-            currentItem = roomItems.get(i);
-            if (currentItem.equals(description)) {
-                roomItems.remove(i);
-            }*/
-
-    /*public Item findItem(String itemName) {
-        for (int i = 0; i < allItems.size(); i++) {
-            if (allItems.get(i).getName().equals(itemName)) {
-                return allItems.get(i);
-            }
-        }
-        return null;
-    }*/
+    public int getItemWeight() {
+        return itemWeight;
+    }
 }
 
 

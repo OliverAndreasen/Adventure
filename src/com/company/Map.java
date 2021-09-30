@@ -2,10 +2,7 @@ package com.company;
 
 public class Map {
 
-
     private Room startRoom = null;
-
-
 
     public Map() {
         //Room (String name, String description)
@@ -65,7 +62,6 @@ public class Map {
         // Room 9
         room9.setNorth(room6);
         room9.setWest(room8);
-
 
         Item key = new Item("key", "there is a tiny key", 1);
         Item sword = new Item("sword", "there is a large sword", 3);

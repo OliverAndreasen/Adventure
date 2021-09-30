@@ -18,7 +18,8 @@ public class Player {
         letters[1] = "e";
         letters[2] = "s";
         letters[3] = "w";
-
+        this.maxPlayerWeight = 5;
+        this.currentPlayerWeight = 0;
     }
 
     public Room playerLocation(Room currentLocation) {
@@ -58,20 +59,6 @@ public class Player {
         return null;
     }
 
-    /*
-    public boolean checkItemInventory(String itemName){
-        boolean result;
-        Item item = playerLocation.findItem(itemName, playerLocation);
-        if (playerItems.contains(item)){
-            return true;
-        }else {
-            result = false;
-        }
-        return result;
-    }
-
-     */
-
     public void takeItem(String itemName) {
         playerLocation.findItemRoom(itemName, playerLocation);
         Item item = playerLocation.findItemRoom(itemName, playerLocation);
@@ -80,7 +67,7 @@ public class Player {
             currentPlayerWeight += item.getItemWeight();
             System.out.println("You picked up " + itemName);
             playerLocation.removeRoomItem(item);
-            System.out.println(itemName + " are in your inventory");
+            System.out.println(itemName + " are now in your inventory");
         } else {
             System.out.println("you are over encumbered");
         }
@@ -118,4 +105,8 @@ public class Player {
         }
         return null;
     }
- }
+
+    public boolean checkPlayerWeight(int itemWeight) {
+        return (currentPlayerWeight + itemWeight) <= maxPlayerWeight;
+    }
+}

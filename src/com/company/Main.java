@@ -26,9 +26,6 @@ public class Main {
 
             String firstWord = parser.getFirstWord(input);
             String itemName = parser.getSecoundWord(input);
-            System.out.println(firstWord);
-            System.out.println(itemName);
-
             String validation = parser.validation(input);
             // checks if the direction input is available
             if (player.direction(validation)) {
@@ -37,6 +34,7 @@ public class Main {
                 System.out.println(currentRoom.getDescription());
             } else if (firstWord.equals("off")) {
                 parser.exit();
+                con = false;
             } else if (firstWord.equals("help")) {
                 System.out.println(parser.help(player));
             } else if (firstWord.equals("cheat")){
