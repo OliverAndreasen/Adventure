@@ -70,7 +70,7 @@ public class Parser {
         return result;
     }
 
-    public String checkInput(String input) {
+    public String getFirstWord(String input) {
         String firstWord = "";
         String itemName = "";
         int space = input.indexOf(" ");
@@ -83,7 +83,7 @@ public class Parser {
         }
     }
 
-    public String itemInput(String input){
+    public String getSecoundWord(String input){
         int space = input.indexOf(" ");
         return input.substring(space + 1);
     }
