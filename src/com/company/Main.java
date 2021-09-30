@@ -58,14 +58,6 @@ public class Main {
             } else {
                 System.out.println(letter);
                 System.out.println("You cant go that way, try again!");
-                System.out.println("LOL");
-                System.out.println("LOL");
-                System.out.println("LOL");
-                System.out.println("LOL");
-                System.out.println("LOL");
-                System.out.println("LOL");
-                System.out.println("LOL");
-                System.out.println("LOL");
             }
         }
     }
