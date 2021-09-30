@@ -3,9 +3,6 @@ package com.company;
 import java.util.ArrayList;
 
 public class Item {
-
-
-
     private String itemName;
     private String description;
     private ArrayList <Item> allItems = new ArrayList<>();
@@ -13,8 +10,6 @@ public class Item {
     public Item(String itemName, String description){
         this.itemName = itemName;
         this.description = description;
-
-
     }
 
     /*public void itemToList(Item itemName){
@@ -22,7 +17,7 @@ public class Item {
         System.out.println(itemName + " added to the list");
     }*/
 
-    /*public String getAllItems(){
+    /* public String getAllItems(){
         String result = "";
         for (int i = 0; i < allItems.size(); i++) {
             result += allItems.get(i);
@@ -35,6 +30,11 @@ public class Item {
     }
 
     public String getName() {
+        return itemName;
+    }
+
+    @Override
+    public String toString() {
         return itemName;
     }
 
@@ -54,11 +54,6 @@ public class Item {
         }
         return null;
     }*/
-
-    @Override
-    public String toString() {
-        return itemName;
-    }
 }
 
 

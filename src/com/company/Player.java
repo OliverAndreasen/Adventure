@@ -58,6 +58,7 @@ public class Player {
         return null;
     }
 
+    /*
     public boolean checkItemInventory(String itemName){
         boolean result;
         Item item = playerLocation.findItem(itemName, playerLocation);
@@ -69,21 +70,20 @@ public class Player {
         return result;
     }
 
+     */
+
     public void takeItem(String itemName){
-        if (!checkItemInventory(itemName)) {
-            playerLocation.findItem(itemName, playerLocation);
-            Item item = playerLocation.findItem(itemName, playerLocation);
+            playerLocation.findItemRoom(itemName, playerLocation);
+            Item item = playerLocation.findItemRoom(itemName, playerLocation);
             playerItems.add(item);
             System.out.println("Du har taget " + itemName);
             playerLocation.removeRoomItem(item);
-        }else {
             System.out.println(itemName + " are in your inventory");
         }
-    }
+
 
     public String getAllPlayerItems(){
         String result = "In your inventory you have:\n";
-
         int length = playerItems.size();
         for (int i = 0; i < length; i++) {
             if (i != length-1) {
@@ -96,9 +96,24 @@ public class Player {
         return result;
     }
 
-    public void removeItem(String itemName)
+    public void dropItem(String itemName)
     {
-        Item item = playerLocation.findItem(itemName, this.playerLocation);
+        Item item = findItemPlayerInventory(itemName);
+        playerLocation.setRoomItem(item);
         playerItems.remove(item);
     }
+
+    public void test(Item item) {
+        playerItems.remove(item);
+    }
+
+    public Item findItemPlayerInventory(String itemName) {
+        for (int i = 0; i < playerItems.size(); i++) {
+            if (playerItems.get(i).getName().equals(itemName)) {
+                return playerItems.get(i);
+            }
+        }
+        return null;
+    }
+
  }

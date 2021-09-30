@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -79,22 +78,30 @@ public class Main {
 
         //ITEMS
         // init items
-        //Item key = new Item("key", "this is a tiny key");
+       // Item key = new Item("key", "this is a tiny key");
+
         Item sword = new Item("sword", "this is a large sword");
         // put itemn into room 1
-        //room1.setRoomItem(key);
+        //  room1.setRoomItem(key);
         room1.setRoomItem(sword);
         // takes items from room 1
         player.takeItem("sword");
-        //player.takeItem("key");
+       // player.takeItem("key");
         System.out.println(room1.getAllItems());
         System.out.println(player.getAllPlayerItems());
         // removes from inventory
-        player.removeItem("sword");
+        //player.removeItem("sword");
+        //player.test(sword);
+        player.dropItem("sword");
 
         System.out.println(player.getAllPlayerItems());
         System.out.println(parser.welcome());
         Scanner sc = new Scanner(System.in);
+
+
+        //currentRoom.findItem("sword", currentRoom);
+
+
 
         boolean con = true;
         int count = 0;

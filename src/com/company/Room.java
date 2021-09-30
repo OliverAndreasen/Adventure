@@ -108,7 +108,7 @@ public class Room {
         return result;
     }
 
-    public Item findItem(String itemName, Room playerLocation) {
+    public Item findItemRoom(String itemName, Room playerLocation) {
         for (int i = 0; i < playerLocation.roomItems.size(); i++) {
             if (playerLocation.roomItems.get(i).getName().equals(itemName)) {
                 return playerLocation.roomItems.get(i);
@@ -116,6 +116,7 @@ public class Room {
         }
         return null;
     }
+
 
 
 }
