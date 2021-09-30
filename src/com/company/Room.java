@@ -1,19 +1,18 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Room {
 
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
     private Room north;
     private Room east;
     private Room south;
     private Room west;
 
-    private ArrayList<Item> roomItems = new ArrayList<>();
-    
+    private final ArrayList<Item> roomItems = new ArrayList<>();
+
     // Constructor
     public Room(String name, String description) {
         this.name = name;
@@ -70,32 +69,32 @@ public class Room {
         roomItems.add(itemName);
     }
 
-    public void roomItemStatus(){
+    public void roomItemStatus() {
         for (int i = 0; i < roomItems.size(); i++) {
             System.out.println(roomItems.get(i));
         }
-        
+
     }
 
-    public void removeRoomItem (Item itemName) {
+    public void removeRoomItem(Item itemName) {
         roomItems.remove(itemName);
-        }
+    }
 
-        public ArrayList getRoomItems() {
+    public ArrayList getRoomItems() {
         return roomItems;
     }
 
 
-    public String getAllItems(){
+    public String getAllItems() {
         int count = 0;
         String result = "";
         for (int i = 0; i < roomItems.size(); i++) {
             if (roomItems.get(i) != null) {
                 if (count == 0) {
                     result = "Items in this room: ";
-                    count ++;
+                    count++;
                 }
-                if (i != (roomItems.size()-1)){
+                if (i != (roomItems.size() - 1)) {
                     result += roomItems.get(i).getDescription() + ", ";
                 } else {
                     result += roomItems.get(i).getDescription();
@@ -116,7 +115,6 @@ public class Room {
         }
         return null;
     }
-
 
 
 }

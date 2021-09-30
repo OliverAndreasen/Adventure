@@ -27,9 +27,9 @@ public class Main {
             currentRoom = player.playerLocation(currentRoom);
             String input = sc.nextLine();
             input = input.toLowerCase(Locale.ROOT);
-            String letter = input.substring(0,1);
+            String letter = input.substring(0, 1);
             int space = input.indexOf(" ");
-            itemName = input.substring(space+1);
+            itemName = input.substring(space + 1);
             String validation = parser.validation(input);
             // checks if the direction input is available
             if (player.direction(validation)) {
@@ -42,21 +42,21 @@ public class Main {
                 System.out.println(parser.help(player));
             } else if (letter.equals("l")) {
                 System.out.println(parser.look(currentRoom));
-            } else if (letter.equals("t")){
-                if (currentRoom.findItemRoom(itemName, currentRoom) != null){
+            } else if (letter.equals("t")) {
+                if (currentRoom.findItemRoom(itemName, currentRoom) != null) {
                     player.takeItem(itemName);
                 } else {
                     System.out.println("there is no such item");
                 }
             } else if (letter.equals("d")) {
-                if (player.findItemPlayerInventory(itemName) != null){
+                if (player.findItemPlayerInventory(itemName) != null) {
                     player.dropItem(itemName);
                 } else {
                     System.out.println("you dont have such item");
                 }
-            } else if (letter.equals("i")){
+            } else if (letter.equals("i")) {
                 System.out.println(player.getAllPlayerItems());
-            } else if(letter.equals("u")) {
+            } else if (letter.equals("u")) {
                 System.out.println(currentRoom.getAllItems());
                 System.out.println(player.getAllPlayerItems());
             } else {

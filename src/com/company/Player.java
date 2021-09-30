@@ -3,12 +3,12 @@ package com.company;
 import java.util.ArrayList;
 
 public class Player {
+    private final int maxPlayerWeight;
+    String[] letters;
+    Room[] locations;
     private Room playerLocation;
-
-    String letters[];
-    Room locations[];
-    private ArrayList<Item> playerItems = new ArrayList<>();
-
+    private int currentPlayerWeight;
+    private final ArrayList<Item> playerItems = new ArrayList<>();
 
 
     public Player() {
@@ -31,7 +31,7 @@ public class Player {
         locations[1] = playerLocation.getEast();
         locations[2] = playerLocation.getSouth();
         locations[3] = playerLocation.getWest();
-        
+
         boolean blDirection = false;
 
         for (int i = 0; i < letters.length; i++) {
@@ -72,37 +72,40 @@ public class Player {
 
      */
 
-    public void takeItem(String itemName){
-            playerLocation.findItemRoom(itemName, playerLocation);
-            Item item = playerLocation.findItemRoom(itemName, playerLocation);
+    public void takeItem(String itemName) {
+        playerLocation.findItemRoom(itemName, playerLocation);
+        Item item = playerLocation.findItemRoom(itemName, playerLocation);
+        if (checkPlayerWeight(item.getItemWeight())) {
             playerItems.add(item);
-            System.out.println("Du har taget " + itemName);
+            currentPlayerWeight += item.getItemWeight();
+            System.out.println("You picked up " + itemName);
             playerLocation.removeRoomItem(item);
             System.out.println(itemName + " are in your inventory");
+        } else {
+            System.out.println("you are over encumbered");
         }
+    }
 
 
-    public String getAllPlayerItems(){
+    public String getAllPlayerItems() {
         String result = "";
         result += "Your current inventory weight is: " + currentPlayerWeight + " out of " + maxPlayerWeight + "\n";
         result += "In your inventory you have:\n";
         int length = playerItems.size();
         for (int i = 0; i < length; i++) {
-            if (i != length-1) {
+            if (i != length - 1) {
                 result += playerItems.get(i) + "\n";
-            }
-            else {
+            } else {
                 result += playerItems.get(i);
             }
         }
         return result;
     }
 
-    public void dropItem(String itemName)
-    {
+    public void dropItem(String itemName) {
         Item item = findItemPlayerInventory(itemName);
         System.out.println("you dropped " + item);
-        currentPlayerWeight = currentPlayerWeight -item.getItemWeight();
+        currentPlayerWeight = currentPlayerWeight - item.getItemWeight();
         playerLocation.setRoomItem(item);
         playerItems.remove(item);
     }
