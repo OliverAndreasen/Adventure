@@ -85,7 +85,7 @@ public class Parser {
         }
     }
 
-    public String getSecoundWord(String input){
+    public String getSecondWord(String input){
         int space = input.indexOf(" ");
         return input.substring(space + 1);
     }
