@@ -41,13 +41,31 @@ public class Main {
                 System.out.println(parser.look(currentRoom));
             } else if (command.equals("take")) {
                 if (currentRoom.findItem(itemName, currentRoom) != null) {
-                    player.takeItem(itemName);
+                    Item item = currentRoom.findItem(itemName, currentRoom);
+                    if (item.checkIfBackpack(itemName)){
+                        player.takeItem(itemName);
+                        player.changeMaxInventoryWeight(5);
+                        System.out.println("Your max capacity increased to " + player.getMaxInventoryWeight());
+                    }else{
+                        player.takeItem(itemName);
+                    }
                 } else {
                     System.out.println("there is no such item");
                 }
             } else if (command.equals("drop")) {
                 if (player.findItemInventory(itemName) != null) {
-                    player.dropItem(itemName);
+                    Item item = player.findItemInventory(itemName);
+                    if (item.checkIfBackpack(itemName)) {
+                        if (player.getCurrentInventoryWeight() > 5) {
+                            System.out.println("You cannot drop the backpack! Drop one or more items before you can remove the backpack");
+                        }else {
+                            player.changeMaxInventoryWeight(-5);
+                            player.dropItem(itemName);
+                            System.out.println("Your max capacity decreased to " + player.getMaxInventoryWeight());
+                        }
+                    }else {
+                        player.dropItem(itemName);
+                    }
                 } else {
                     System.out.println("you dont have such item");
                 }

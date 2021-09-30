@@ -3,11 +3,11 @@ package com.company;
 import java.util.ArrayList;
 
 public class Player {
-    private int maxPlayerWeight;
+    private int maxInventoryWeight;
     String[] letters;
     Room[] locations;
     private Room currentRoom;
-    private int currentPlayerWeight;
+    private int currentInventoryWeight;
     private final ArrayList<Item> playerItems = new ArrayList<>();
 
 
@@ -18,12 +18,23 @@ public class Player {
         letters[1] = "e";
         letters[2] = "s";
         letters[3] = "w";
-        this.maxPlayerWeight = 5;
-        this.currentPlayerWeight = 0;
+        this.maxInventoryWeight = 5;
+        this.currentInventoryWeight = 0;
     }
 
     public Room currentRoom(Room currentRoom) {
         return this.currentRoom = currentRoom;
+    }
+
+    public int getMaxInventoryWeight() {
+        return maxInventoryWeight;
+    }
+    public int changeMaxInventoryWeight(int amount) {
+       return maxInventoryWeight = maxInventoryWeight + amount;
+    }
+
+    public int getCurrentInventoryWeight() {
+        return this.currentInventoryWeight;
     }
 
     // Checks if you can go in a specific direction from the room you are in
@@ -64,46 +75,27 @@ public class Player {
 
         if (canCarryMore(itemWeight)) {
             playerItems.add(item);
-            currentPlayerWeight += itemWeight;
+            currentInventoryWeight += itemWeight;
             System.out.println("You picked up " + itemName);
             currentRoom.removeRoomItem(item);
             System.out.println(itemName + " are now in your inventory");
-            if (checkIfBackpack(itemName)) {
-                this.maxPlayerWeight = maxPlayerWeight + 5;
-                System.out.println("Your max capacity increased to " + maxPlayerWeight);
-
-            }
         } else {
             System.out.println("You are over encumbered.\nYou have to drop something, before you can pick up the " + itemName + "!");
         }
     }
 
-    public void drop(String itemName) {
+    public void dropItem(String itemName) {
         Item item = findItemInventory(itemName);
         System.out.println("You dropped " + item);
         currentRoom.setRoomItem(item);
         // Adds weight after picking up the item
-        currentPlayerWeight = currentPlayerWeight - item.getItemWeight();
+        currentInventoryWeight = currentInventoryWeight - item.getItemWeight();
         playerItems.remove(item);
-    }
-
-    public void dropItem(String itemName) {
-        if (checkIfBackpack(itemName)) {
-            if (currentPlayerWeight > 5) {
-                System.out.println("You cannot drop the backpack! Remove other items first");
-            } else {
-                drop(itemName);
-                this.maxPlayerWeight = maxPlayerWeight - 5;
-                System.out.println("Your max capacity decreased to " + maxPlayerWeight);
-            }
-        }else {
-            drop(itemName);
-        }
     }
 
     public String getInventory() {
         String result = "";
-        result += "Your current inventory weight is: " + currentPlayerWeight + " out of " + maxPlayerWeight + "\n";
+        result += "Your current inventory weight is: " + currentInventoryWeight + " out of " + maxInventoryWeight + "\n";
         result += "In your inventory you have:\n";
 
         int length = playerItems.size();
@@ -129,15 +121,6 @@ public class Player {
     }
 
     public boolean canCarryMore(int itemWeight) {
-            return (currentPlayerWeight + itemWeight) <= maxPlayerWeight;
-    }
-
-    public boolean checkIfBackpack(String itemName) {
-        if (itemName.equals("backpack")) {
-            return true;
-        }
-        else {
-            return false;
-        }
+            return (currentInventoryWeight + itemWeight) <= maxInventoryWeight;
     }
 }

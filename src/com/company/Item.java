@@ -29,6 +29,15 @@ public class Item {
     public int getItemWeight() {
         return itemWeight;
     }
+
+    public boolean checkIfBackpack(String itemName) {
+        if (itemName.equals("backpack")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 
