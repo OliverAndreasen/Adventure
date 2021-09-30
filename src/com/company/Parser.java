@@ -69,4 +69,22 @@ public class Parser {
         result += "\n";
         return result;
     }
+
+    public String checkInput(String input) {
+        String firstWord = "";
+        String itemName = "";
+        int space = input.indexOf(" ");
+        if (space == -1){
+            int length = input.length();
+            return firstWord = input.substring(0,length);
+        }
+        else {
+           return firstWord = input.substring(0,space);
+        }
+    }
+
+    public String itemInput(String input){
+        int space = input.indexOf(" ");
+        return input.substring(space + 1);
+    }
 }

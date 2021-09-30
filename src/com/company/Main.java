@@ -1,24 +1,20 @@
 package com.company;
-
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-
         Map map = new Map();
         Player player = new Player();
         Parser parser = new Parser();
         Room currentRoom = map.getStartRoom();
         currentRoom = player.playerLocation(currentRoom);
-        String itemName = "";
 
         System.out.println(parser.welcome());
         Scanner sc = new Scanner(System.in);
         boolean con = true;
         int count = 0;
-
         while (con) {
             if (count == 0) {
                 System.out.println(currentRoom.getDescription());
