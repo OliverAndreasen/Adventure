@@ -46,7 +46,8 @@ public class Parser {
         }
         help += "if you want to exit the program type 'exit'\n";
         help += "to get a room description you can type 'look'\n";
-
+        help += "to pick up an item type 'take' item name\n";
+        help += "to drop an item type 'drop' item name\n";
         return help;
     }
 
@@ -63,6 +64,7 @@ public class Parser {
         result += "Welcome to the Adventure game!\n";
         result += "You have to choose a direction, you want to walk in\n";
         result += "You can type 'north', 'east', 'south' or 'west'\n";
+        result += "you can also 'take' and 'drop' items for more instructions type 'help'\n";
         result += "Other functions: 'exit', 'look', 'help'";
         result += "\n";
         return result;

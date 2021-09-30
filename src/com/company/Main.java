@@ -124,12 +124,12 @@ public class Main {
                 } else {
                     System.out.println("you dont have such item");
                 }
-            }
-            else if(letter.equals("u")) {
+            } else if (letter.equals("i")){
+                System.out.println(player.getAllPlayerItems());
+            } else if(letter.equals("u")) {
                 System.out.println(currentRoom.getAllItems());
                 System.out.println(player.getAllPlayerItems());
-            }
-            else {
+            } else {
                 System.out.println(letter);
                 System.out.println("You cant go that way, try again!");
             }
