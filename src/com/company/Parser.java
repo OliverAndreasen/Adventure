@@ -73,15 +73,13 @@ public class Parser {
     }
 
     public String getFirstWord(String input) {
-        String firstWord = "";
-        String itemName = "";
         int space = input.indexOf(" ");
         if (space == -1){
             int length = input.length();
-            return firstWord = input.substring(0,length);
+            return input.substring(0,length);
         }
         else {
-           return firstWord = input.substring(0,space);
+           return input.substring(0,space);
         }
     }
 
