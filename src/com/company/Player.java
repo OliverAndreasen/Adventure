@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Player {
     private Room playerLocation;
@@ -78,5 +79,15 @@ public class Player {
             result += plyerItems.get(i);
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerLocation=" + playerLocation +
+                ", letters=" + Arrays.toString(letters) +
+                ", locations=" + Arrays.toString(locations) +
+                ", plyerItems=" + plyerItems +
+                '}';
     }
 }
