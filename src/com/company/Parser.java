@@ -1,6 +1,14 @@
 package com.company;
 
+import java.util.Scanner;
+
 public class Parser {
+
+
+    private String itemName;
+    private Player player;
+    private String input;
+    private Room currentRoom;
 
     public String validateDirection(String direction) {
         String result = direction;
@@ -19,13 +27,19 @@ public class Parser {
         }
         return result;
     }
+    
+    public boolean checkRoomDirection(String direction) {
+        if (player.checkDirection(direction)) {
+            return true;
+        }
+        return false;
+    }
 
     public void exit() {
         System.exit(0);
     }
 
     public String help() {
-
         String help = "";
         help += "if you want to turn the program off type 'off'\n";
         help += "to get a room description you can type 'look'\n";
@@ -58,6 +72,72 @@ public class Parser {
         result += currentRoom.getDescription() + "\n";
         result += currentRoom.getAllItems();
         return result;
+    }
+
+    public Player passPlayer(Player player){
+        return this.player = player;
+    }
+    public String passItemNameInput(String input)
+    {
+        return this.input = getSecondWord(input);
+    }
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public Room passCurrentRoom(Room currentRoom) {
+        return this.currentRoom = currentRoom;
+    }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public String take(){
+        String result = "";
+        String itemName = passItemNameInput(input);
+        currentRoom = getCurrentRoom();
+
+        if (currentRoom.findItem(itemName, currentRoom) != null) {
+            Item item = currentRoom.findItem(itemName, currentRoom);
+            if (item.checkIfBackpack()){
+                result += player.takeItem(itemName);
+                player.changeMaxInventoryWeight(5);
+                result += "Your max inventory capacity increased to " + player.getMaxInventoryWeight();
+            }else{
+                System.out.println(player.takeItem(itemName));
+            }
+        } else {
+            result = "there is no such item";
+        }
+        return result;
+    }
+
+    public String drop(){
+        player = getPlayer();
+        String result = "";
+        itemName = passItemNameInput(input);
+        if (player.findItemInventory(itemName) != null) {
+            Item item = player.findItemInventory(itemName);
+            if (item.checkIfBackpack()) {
+                if (player.getCurrentInventoryWeight() <= 5) {
+                    player.changeMaxInventoryWeight(-5);
+                    result += player.dropItem(itemName);
+                    result += "Your max inventory capacity decreased to " + player.getMaxInventoryWeight();
+                }else {
+                    result += "You cannot drop the backpack! Drop one or more items before you can remove the backpack";
+                }
+            }else {
+                result = player.dropItem(itemName);
+            }
+        } else {
+            result = "you dont have such item";
+        }
+        return result;
+    }
+
+    public String getPlayerInventory() {
+        return player.getInventory();
     }
 
     public String welcome() {
