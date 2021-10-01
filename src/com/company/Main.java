@@ -1,134 +1,78 @@
 package com.company;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
-        //Room (String name, String description)
-        Room room1 = new Room("room 1", "You are very tired and cold in a big dark forest, you need to find a place to rest for the night.\n" +
-                "Even though it is very dark and horrible weather, you catch a glimpse of what looks like a cave.\n" +
-                "which way do you choose?");
-        Room room2 = new Room("room 2", "You are in the entrance of a dark cave, the floor of the entrance is full of jagged rocks, you can not sleep here. \n" +
-                "You need to move on to find a place to rest.\n" +
-                "which way do you choose?");
-        Room room3 = new Room("room 3", "You arrive in a curved corridor, as you move through the corridor \n" +
-                "you step into knee-deep puddles of water. \n" +
-                "which way do you choose?");
-        Room room4 = new Room("room 4", "You found an entrance to a cave, dare to go deeper?\n" +
-                "Which way do you choose?");
-        Room room5 = new Room("room 5", "You found a nice place to sleep with a bed, firewood and a ladder to exit the cave.\n" +
-                "Sleep tight.");
-        Room room6 = new Room("room 6", "You are at a mossy rockformation, it is very slippery, be careful.\n" +
-                "which way do you choose?");
-        Room room7 = new Room("room 7", "You are in a curved corridor.\n" +
-                "Which way do you choose?");
-        Room room8 = new Room("room 8", "You can sense the comfort of a safe place nearby.\n" +
-                "Which way do you choose?");
-        Room room9 = new Room("room 9", "You are in a curved corridor.\n" +
-                "Which way do you choose?. ");
-
-
-
-        // Room1
-        room1.setEast(room2);
-        room1.setSouth(room4);
-
-        // Room 2
-        room2.setEast(room3);
-        room2.setWest(room1);
-
-        // Room 3
-        room3.setWest(room2);
-        room3.setSouth(room6);
-
-        // Room 4
-        room4.setNorth(room1);
-        room4.setSouth(room7);
-
-        // Room 5
-        room5.setSouth(room8);
-
-        // Room 6
-        room6.setNorth(room3);
-        room6.setSouth(room9);
-
-        // Room 7
-        room7.setNorth(room4);
-        room7.setEast(room8);
-
-        // Room 8
-        room8.setNorth(room5);
-        room8.setEast(room9);
-        room8.setWest(room7);
-
-        // Room 9
-        room9.setNorth(room6);
-        room9.setWest(room8);
-
-
+        Map map = new Map();
         Player player = new Player();
         Parser parser = new Parser();
-
-        //ITEMS
-        ArrayList<String> roomItems = new ArrayList<>();
-
-        Item key = new Item("key", "this is a tiny key");
-        room1.setRoomItems(key);
-
-        System.out.println(room1.getAllItems());
-
-        Item sword = new Item("sword", "this is a large sword");
-
-        room1.setRoomItems(sword);
-        System.out.println(room1.getAllItems());
-
-        Item lamp = new Item("lamp", "this is a shiny lamp");
-
-
-
-
-
-
-        Room currentRoom = room1;
-        //test
-        currentRoom = player.playerLocation(currentRoom);
-        //test
+        Room currentRoom = player.currentRoom(map.getStartRoom());
         System.out.println(parser.welcome());
         Scanner sc = new Scanner(System.in);
-
-        player.takeItems("sword");
-        System.out.println(player.getAllPlayerItems() + " ligger i inventory");
-        player.takeItems("sword");
-        System.out.println(player.getAllPlayerItems() + " ligger i inventory");
-
         boolean con = true;
         int count = 0;
-
         while (con) {
-
             if (count == 0) {
                 System.out.println(currentRoom.getDescription());
                 count = count + 1;
             }
-            currentRoom = player.playerLocation(currentRoom);
+            currentRoom = player.currentRoom(currentRoom);
             String input = sc.nextLine();
             input = input.toLowerCase(Locale.ROOT);
-            String validation = parser.validation(input);
+
+            String command = parser.getFirstWord(input);
+            String itemName = parser.getSecondWord(input);
+            String direction = parser.validateDirection(input);
             // checks if the direction input is available
-            if (player.direction(validation)) {
+            if (player.checkDirection(direction)) {
                 // changes current room to the new room
-                currentRoom = player.movePlayer(validation);
+                currentRoom = player.move(direction);
                 System.out.println(currentRoom.getDescription());
-            } else if (input.equals("exit")) {
+            } else if (command.equals("off")) {
                 parser.exit();
-            } else if (input.equals("help")) {
-                System.out.println(parser.help(player));
-            } else if (input.equals("look")) {
+                con = false;
+            } else if (command.equals("help")) {
+                System.out.println(parser.help());
+            } else if (command.equals("cheat")){
+                System.out.println(parser.cheat(player));
+            } else if (command.equals("look")) {
                 System.out.println(parser.look(currentRoom));
+            } else if (command.equals("take")) {
+                if (currentRoom.findItem(itemName, currentRoom) != null) {
+                    Item item = currentRoom.findItem(itemName, currentRoom);
+                    if (item.checkIfBackpack()){
+                        System.out.println(player.takeItem(itemName));
+                        player.changeMaxInventoryWeight(5);
+                        System.out.println("Your max inventory capacity increased to " + player.getMaxInventoryWeight());
+                    }else{
+                        System.out.println(player.takeItem(itemName));
+                    }
+                } else {
+                    System.out.println("there is no such item");
+                }
+            } else if (command.equals("drop")) {
+                if (player.findItemInventory(itemName) != null) {
+                    Item item = player.findItemInventory(itemName);
+                    if (item.checkIfBackpack()) {
+                        if (player.getCurrentInventoryWeight() <= 5) {
+                            player.changeMaxInventoryWeight(-5);
+                            System.out.println(player.dropItem(itemName));
+                            System.out.println("Your max inventory capacity decreased to " + player.getMaxInventoryWeight());
+                        }else {
+                            System.out.println("You cannot drop the backpack! Drop one or more items before you can remove the backpack");
+                        }
+                    }else {
+                        System.out.println(player.dropItem(itemName));
+                    }
+                } else {
+                    System.out.println("you dont have such item");
+                }
+            } else if (command.equals("inv")) {
+                System.out.println(player.getInventory());
+            } else if (command.equals("u")) {
+                System.out.println(currentRoom.getAllItems());
+                System.out.println(player.getInventory());
             } else {
                 System.out.println("You cant go that way, try again!");
             }

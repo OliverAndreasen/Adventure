@@ -1,20 +1,18 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Room {
 
-    private String name;
-    private String description;
-
+    private final String name;
+    private final String description;
     private Room north;
     private Room east;
     private Room south;
     private Room west;
 
-    private ArrayList<Item> roomItems = new ArrayList<>();
-    
+    private final ArrayList<Item> roomItems = new ArrayList<>();
+
     // Constructor
     public Room(String name, String description) {
         this.name = name;
@@ -24,7 +22,6 @@ public class Room {
         this.south = null;
         this.west = null;
     }
-    
 
     public Room getNorth() {
         return north;
@@ -64,35 +61,58 @@ public class Room {
     }
 
     public String getDescription() {
-        String result = "You are in " + getName() + " \nDescription: " + description;
+        String result = "You are in " + getName() + " \nDescription: " + description + "\n";
         return result;
     }
 
-    public void setRoomItems(Item itemName) {
+    public void setRoomItem(Item itemName) {
         roomItems.add(itemName);
-        System.out.println(itemName + " has been added");
     }
-    public void roomItemStatus(){
+
+    public void roomItemStatus() {
         for (int i = 0; i < roomItems.size(); i++) {
             System.out.println(roomItems.get(i));
         }
-        
+
     }
-    public String getAllItems(){
-        String result = "Items in this room: ";
+
+    public void removeRoomItem(Item itemName) {
+        roomItems.remove(itemName);
+    }
+
+    public ArrayList getRoomItems() {
+        return roomItems;
+    }
+
+
+    public String getAllItems() {
+        int count = 0;
+        String result = "";
         for (int i = 0; i < roomItems.size(); i++) {
-            if (roomItems.size() != (roomItems.size()-1)){
-                result += roomItems.get(i) + ", ";
-            } else {
-                result += roomItems.get(i);
+            String itemDescription = roomItems.get(i).getDescription();
+
+            if (roomItems.get(i) != null) {
+                if (count == 0) {
+                    result = "Items in this room: ";
+                    count++;
+                }
+                if (i != (roomItems.size() - 1)) {
+                    result += itemDescription + ", ";
+                } else {
+                    result += itemDescription;
+                }
             }
+        }
+        if (roomItems.size() == 0) {
+            result = "The room has no items";
         }
         return result;
     }
-    public Item findItem(String itemName, Room playerLocation) {
-        for (int i = 0; i < playerLocation.roomItems.size(); i++) {
-            if (playerLocation.roomItems.get(i).getName().equals(itemName)) {
-                return playerLocation.roomItems.get(i);
+
+    public Item findItem(String itemName, Room currentRoom) {
+        for (int i = 0; i < currentRoom.roomItems.size(); i++) {
+            if (currentRoom.roomItems.get(i).getName().equals(itemName)) {
+                return currentRoom.roomItems.get(i);
             }
         }
         return null;

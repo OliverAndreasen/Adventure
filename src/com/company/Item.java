@@ -3,32 +3,16 @@ package com.company;
 import java.util.ArrayList;
 
 public class Item {
+    private final String itemName;
+    private final String description;
+    private final int itemWeight;
+    private final ArrayList<Item> allItems = new ArrayList<>();
 
-
-
-    private String itemName;
-    private String description;
-    private ArrayList <Item> allItems = new ArrayList<>();
-
-    public Item(String itemName, String description){
-        this.itemName = itemName;
+    public Item(String description, int itemWeight) {
+        this.itemName = description.substring(description.lastIndexOf(' ') + 1);
         this.description = description;
-
-
+        this.itemWeight = itemWeight;
     }
-
-    /*public void itemToList(Item itemName){
-        allItems.add(itemName);
-        System.out.println(itemName + " added to the list");
-    }*/
-
-    /*public String getAllItems(){
-        String result = "";
-        for (int i = 0; i < allItems.size(); i++) {
-            result += allItems.get(i);
-        }
-        return result;
-    }*/
 
     public String getDescription() {
         return description;
@@ -38,26 +22,21 @@ public class Item {
         return itemName;
     }
 
-   /* public void deleteItem(String description) {
-        String currentItem;
-        for (int i = 0; i < roomItems.size(); i++) {
-            currentItem = roomItems.get(i);
-            if (currentItem.equals(description)) {
-                roomItems.remove(i);
-            }*/
-
-    /*public Item findItem(String itemName) {
-        for (int i = 0; i < allItems.size(); i++) {
-            if (allItems.get(i).getName().equals(itemName)) {
-                return allItems.get(i);
-            }
-        }
-        return null;
-    }*/
-
-    @Override
     public String toString() {
         return itemName;
+    }
+
+    public int getItemWeight() {
+        return itemWeight;
+    }
+
+    public boolean checkIfBackpack() {
+        if (this.itemName.equals("backpack")) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 

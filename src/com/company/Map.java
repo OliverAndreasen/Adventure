@@ -2,8 +2,9 @@ package com.company;
 
 public class Map {
 
-    public void createMap() {
+    private Room startRoom = null;
 
+    public Map() {
         //Room (String name, String description)
         Room room1 = new Room("room 1", "You are very tired and cold in a big dark forest, you need to find a place to rest for the night.\n" +
                 "Even though it is very dark and horrible weather, you catch a glimpse of what looks like a cave.\n" +
@@ -26,8 +27,6 @@ public class Map {
                 "Which way do you choose?");
         Room room9 = new Room("room 9", "You are in a curved corridor.\n" +
                 "Which way do you choose?. ");
-
-
         // Room1
         room1.setEast(room2);
         room1.setSouth(room4);
@@ -64,8 +63,31 @@ public class Map {
         room9.setNorth(room6);
         room9.setWest(room8);
 
+        //Room 1
+        Item key = new Item("there is a tiny key", 1);
+        Item sword = new Item("there is a large sword", 3);
+        Item shovel = new Item("there is a broken shovel", 2);
+        room1.setRoomItem(key);
+        room1.setRoomItem(sword);
+        room1.setRoomItem(shovel);
 
-        Player player = new Player();
-        Parser parser = new Parser();
+        // Room 4
+        Item cape = new Item("a yellow cape",1);
+        Item shoe = new Item("an old shoe", 2);
+        room4.setRoomItem(cape);
+        room4.setRoomItem(shoe);
+
+        // Room 5
+        Item goldbar = new Item("a huge goldbar", 5);
+        room5.setRoomItem(goldbar);
+
+        //Room 9
+        Item backpack = new Item("dusty backpack", 0);
+        room9.setRoomItem(backpack);
+        startRoom = room1;
+    }
+
+    public Room getStartRoom() {
+        return startRoom;
     }
 }
