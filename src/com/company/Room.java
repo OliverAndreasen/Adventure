@@ -23,57 +23,27 @@ public class Room {
         this.west = null;
     }
 
-    public Room getNorth() {
-        return north;
-    }
-
-    public void setNorth(Room north) {
-        this.north = north;
-    }
-
-    public Room getEast() {
-        return east;
-    }
-
-    public void setEast(Room east) {
-        this.east = east;
-    }
-
-    public Room getSouth() {
-        return south;
-    }
-
-    public void setSouth(Room south) {
-        this.south = south;
-
-    }
-
-    public Room getWest() {
-        return west;
-    }
-
-    public void setWest(Room west) {
-        this.west = west;
-    }
-
-    public String getName() {
-        return name;
-    }
+    public Room getNorth() {return north;}
+    public void setNorth(Room north) {this.north = north;}
+    public Room getEast() {return east;}
+    public void setEast(Room east) {this.east = east;}
+    public Room getSouth() {return south;}
+    public void setSouth(Room south) {this.south = south;}
+    public Room getWest() {return west;}
+    public void setWest(Room west) {this.west = west;}
+    public String getName() {return name;}
 
     public String getDescription() {
         String result = "You are in " + getName() + " \nDescription: " + description + "\n";
         return result;
     }
 
-    public void setRoomItem(Item itemName) {
-        roomItems.add(itemName);
-    }
+    public void setRoomItem(Item itemName) {roomItems.add(itemName);}
 
     public void roomItemStatus() {
         for (int i = 0; i < roomItems.size(); i++) {
             System.out.println(roomItems.get(i));
         }
-
     }
 
     public void removeRoomItem(Item itemName) {
@@ -83,7 +53,6 @@ public class Room {
     public ArrayList getRoomItems() {
         return roomItems;
     }
-
 
     public String getAllItems() {
         int count = 0;
@@ -117,6 +86,4 @@ public class Room {
         }
         return null;
     }
-
-
 }

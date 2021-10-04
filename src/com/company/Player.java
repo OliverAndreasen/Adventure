@@ -10,7 +10,6 @@ public class Player {
     private int currentInventoryWeight;
     private final ArrayList<Item> playerItems = new ArrayList<>();
 
-
     public Player() {
         letters = new String[4];
         locations = new Room[4];
@@ -21,6 +20,8 @@ public class Player {
         this.maxInventoryWeight = 5;
         this.currentInventoryWeight = 0;
     }
+
+    public void setPlayerItem(Item itemName) {playerItems.add(itemName);}
 
     public Room currentRoom(Room currentRoom) {
         return this.currentRoom = currentRoom;

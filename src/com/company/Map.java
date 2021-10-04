@@ -80,6 +80,8 @@ public class Map {
         // Room 5
         Item goldbar = new Item("a huge goldbar", 5);
         room5.setRoomItem(goldbar);
+        Item chest = new Item("a locked chest", 6);
+        room1.setRoomItem(chest);
 
         //Room 9
         Item backpack = new Item("dusty backpack", 0);
