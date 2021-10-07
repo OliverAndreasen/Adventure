@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Parser {
 
-
     private String itemName;
     private Player player;
     private String input;
@@ -123,15 +122,42 @@ public class Parser {
                 if (player.getCurrentInventoryWeight() <= 5) {
                     player.changeMaxInventoryWeight(-5);
                     result += player.dropItem(itemName);
-                    result += "Your max inventory capacity decreased to " + player.getMaxInventoryWeight();
+                    result += "Your max inventory capacity decreased to "
+                            + player.getMaxInventoryWeight();
                 }else {
-                    result += "You cannot drop the backpack! Drop one or more items before you can remove the backpack";
+                    result += "You cannot drop the backpack! Drop one or more " +
+                            "items before you can remove the backpack";
                 }
             }else {
                 result = player.dropItem(itemName);
             }
         } else {
             result = "you dont have such item";
+        }
+        return result;
+    }
+
+    public String use(){
+        player = getPlayer();
+        Item goldbar = new Item("goldbar", 5);
+        String result = "";
+        itemName = passItemNameInput(input);
+
+        if (player.findItemInventory("key") == null && currentRoom.getAllItems().contains("chest")) {
+            result += "you are missing a key";
+        }
+        if (!currentRoom.getAllItems().contains("chest")) {
+            if (player.findItemInventory("key") != null){
+                result += "there is nothing to use the key on";
+            } else {
+                result += "use comand invalid";
+            }
+        }
+        if (currentRoom.getAllItems().contains("chest")) {
+            if (player.findItemInventory("key") != null){
+                    player.setPlayerItem(goldbar);
+                    result += "you opened the chest and found a goldbar";
+            }
         }
         return result;
     }
