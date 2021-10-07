@@ -34,13 +34,13 @@ public class Game {
             // checks if the direction input is available
             switch (command) {
 
-                case "go", "g":
+                case "go":
                     if(!direction.isEmpty()) {
                         if (parser.checkRoomDirection(direction)) {
                             //changes current room to the new room
                             currentRoom = player.move(direction);
                             System.out.println(currentRoom.getDescription());
-                        } else if (!parser.checkRoomDirection(direction)) {
+                        } else {
                             System.out.println("You cant go that way, try again!");
                         }
                     }
