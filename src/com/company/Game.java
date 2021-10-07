@@ -26,24 +26,31 @@ public class Game {
             String input = sc.nextLine();
             input = input.toLowerCase(Locale.ROOT);
             String command = parser.getFirstWord(input);
-            String direction = parser.validateDirection(input);
-
+            String direction = parser.validateDirection(parser.getSecondWord(input));
             String itemName = parser.passItemNameInput(input);
-            System.out.println(itemName);
             parser.passPlayer(player);
             parser.passCurrentRoom(currentRoom);
 
             // checks if the direction input is available
-
             switch (command) {
+
+                case "go", "g":
+                    if(!direction.isEmpty()) {
+                        if (parser.checkRoomDirection(direction)) {
+                            //changes current room to the new room
+                            currentRoom = player.move(direction);
+                            System.out.println(currentRoom.getDescription());
+                        } else if (!parser.checkRoomDirection(direction)) {
+                            System.out.println("You cant go that way, try again!");
+                        }
+                    }
+                    else {
+                        System.out.println("write a direction you want to go");
+                    }
+                    break;
 
                 case "open", "o":
                     System.out.println(parser.use());
-                    break;
-
-                case "exit", "x":
-                    parser.exit();
-                    con = false;
                     break;
 
                 case "help", "h":
@@ -70,14 +77,13 @@ public class Game {
                     System.out.println(parser.getPlayerInventory());
                     break;
 
+                case "exit", "x":
+                    parser.exit();
+                    con = false;
+                    break;
+
                 default:
-                    if (parser.checkRoomDirection(direction)) {
-                        //changes current room to the new room
-                        currentRoom = player.move(direction);
-                        System.out.println(currentRoom.getDescription());
-                    } else if (!parser.checkRoomDirection(direction)){
-                        System.out.println("You cant go that way, try again!");
-                    }
+                    System.out.println("invalid command");
             }
         }
     }

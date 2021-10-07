@@ -12,16 +12,16 @@ public class Parser {
     public String validateDirection(String direction) {
         String result = direction;
 
-        if (direction.equals("go north") || direction.equals("north")) {
+        if (direction.equals("n") || direction.equals("north")) {
             result = "n";
         }
-        if (direction.equals("go east") || direction.equals("east")) {
+        if (direction.equals("e") || direction.equals("east")) {
             result = "e";
         }
-        if (direction.equals("go south") || direction.equals("south")) {
+        if (direction.equals("s") || direction.equals("south")) {
             result = "s";
         }
-        if (direction.equals("go west") || direction.equals("west")) {
+        if (direction.equals("w") || direction.equals("west")) {
             result = "w";
         }
         return result;
@@ -150,7 +150,7 @@ public class Parser {
             if (player.findItemInventory("key") != null){
                 result += "there is nothing to use the key on";
             } else {
-                result += "use comand invalid";
+                result += "use command invalid";
             }
         }
         if (currentRoom.getAllItems().contains("chest")) {
