@@ -1,5 +1,4 @@
 package com.company;
-
 import java.util.ArrayList;
 
 public class Player {
@@ -9,6 +8,9 @@ public class Player {
     private Room currentRoom;
     private int currentInventoryWeight;
     private final ArrayList<Item> playerItems = new ArrayList<>();
+    private final int maxHealth;
+    private int currentHealth;
+
 
     public Player() {
         letters = new String[4];
@@ -21,7 +23,9 @@ public class Player {
         this.currentInventoryWeight = 0;
     }
 
-    public void setPlayerItem(Item itemName) {playerItems.add(itemName);}
+    public void setPlayerItem(Item itemName) {
+        playerItems.add(itemName);
+    }
 
     public Room currentRoom(Room currentRoom) {
         return this.currentRoom = currentRoom;

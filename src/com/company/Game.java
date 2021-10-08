@@ -48,7 +48,6 @@ public class Game {
                         System.out.println("write a direction you want to go");
                     }
                     break;
-
                 case "open", "o":
                     System.out.println(parser.use());
                     break;
@@ -80,6 +79,27 @@ public class Game {
                 case "exit", "x":
                     parser.exit();
                     con = false;
+                    break;
+
+                case "health":
+                    int playerHealth = player.getCurrentHealth();
+                    System.out.println("Your health is: " + playerHealth );
+                    break;
+                    
+                case "eat":
+
+                    int health = player.eat(itemName);
+                    System.out.println("you ate an " + itemName + " you gained " + health);
+                    break;
+
+                case "equip":
+                    // player.equip()
+                    //System.out.println("you have equipped" + weapon_name);
+                    break;
+
+                case "attack":
+                    // player.attack()
+                    //System.out.println("you have attacked" + monster_name);
                     break;
 
                 default:
