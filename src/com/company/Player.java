@@ -10,6 +10,7 @@ public class Player {
     private final ArrayList<Item> playerItems = new ArrayList<>();
     private final int maxHealth;
     private int currentHealth;
+    private String equippedWeapon;
 
 
     public Player() {
@@ -21,6 +22,10 @@ public class Player {
         letters[3] = "w";
         this.maxInventoryWeight = 5;
         this.currentInventoryWeight = 0;
+    }
+
+    public String getEquippedWeapon() {
+        return equippedWeapon;
     }
 
     public void setPlayerItem(Item itemName) {

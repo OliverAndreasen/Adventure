@@ -27,6 +27,11 @@ public class Map {
                 "Which way do you choose?");
         Room room9 = new Room("room 9", "You are in a curved corridor.\n" +
                 "Which way do you choose?. ");
+
+
+        // Enemy weapons
+        MeleeWeapon knife = new MeleeWeapon("small knife", 1, 5);
+
         // Room1
         room1.setEast(room2);
         room1.setSouth(room4);
@@ -64,26 +69,42 @@ public class Map {
         room9.setWest(room8);
 
         //Room 1
-        Item key = new Item("there is a tiny key", 1);
-        Item sword = new Item("there is a large sword", 3);
-        Item shovel = new Item("there is a broken shovel", 2);
-        room1.setRoomItem(key);
+        // Items
+        Food apple = new Food("Red apple", 1, 20);
+        room1.setRoomItem(apple);
+        // Weapons
+        MeleeWeapon sword = new MeleeWeapon("there is a large sword", 3, 10);
         room1.setRoomItem(sword);
-        room1.setRoomItem(shovel);
+        // Enemies
+        Enemy goblin = new Enemy("Peter the green goblin", knife);
+        room1.setEnemy(goblin);
+
+
+        //Room 2
+        // Items
+        Item shovel = new Item("there is a broken shovel", 2);
+        room2.setRoomItem(shovel);
+
 
         // Room 4
+        // Items
+        Food onion = new Food("Yellow onion", 1, 5);
         Item cape = new Item("a yellow cape",1);
         Item shoe = new Item("an old shoe", 2);
         room4.setRoomItem(cape);
         room4.setRoomItem(shoe);
+        room4.setRoomItem(onion);
+
 
         // Room 5
+        // Items
         Item goldbar = new Item("a huge goldbar", 5);
         room5.setRoomItem(goldbar);
         Item chest = new Item("a locked chest", 6);
         room1.setRoomItem(chest);
 
         //Room 9
+        // Items
         Item backpack = new Item("dusty backpack", 0);
         room9.setRoomItem(backpack);
         startRoom = room1;

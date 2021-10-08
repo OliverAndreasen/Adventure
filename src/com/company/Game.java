@@ -10,6 +10,7 @@ public class Game {
         Player player = new Player();
         Parser parser = new Parser();
         Room currentRoom = player.currentRoom(map.getStartRoom());
+
         System.out.println(parser.welcome());
         Scanner sc = new Scanner(System.in);
 
@@ -30,6 +31,7 @@ public class Game {
             String itemName = parser.passItemNameInput(input);
             parser.passPlayer(player);
             parser.passCurrentRoom(currentRoom);
+            int playerHealth = player.getCurrentHealth();
 
             // checks if the direction input is available
             switch (command) {
@@ -87,7 +89,6 @@ public class Game {
                     break;
                     
                 case "eat":
-
                     int health = player.eat(itemName);
                     System.out.println("you ate an " + itemName + " you gained " + health);
                     break;
@@ -101,6 +102,9 @@ public class Game {
                     // player.attack()
                     //System.out.println("you have attacked" + monster_name);
                     break;
+
+                case "enemies":
+                    System.out.println(currentRoom.getAllEnemies());
 
                 default:
                     System.out.println("invalid command");
