@@ -16,6 +16,7 @@ public class Enemy {
         this.maxHealth = 100;
         this.currentHealth = 100;
         this.name = description.substring(description.lastIndexOf(' ') + 1);
+        this.isAlive = true;
     }
 
 
@@ -62,5 +63,19 @@ public class Enemy {
 
     public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth;
+    }
+
+    public boolean getIsAlive() {
+        return isAlive;
+    }
+
+    public boolean died(){
+        if(this.currentHealth <= 0){
+            this.isAlive = false;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
