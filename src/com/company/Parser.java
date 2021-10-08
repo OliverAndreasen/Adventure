@@ -76,9 +76,18 @@ public class Parser {
     public Player passPlayer(Player player){
         return this.player = player;
     }
-    public String passItemNameInput(String input)
-    {
+    public String passItemNameInput(String input) {
         return this.input = getSecondWord(input);
+    }
+
+    public String passEnemyInput(String input) {
+        int space = input.indexOf(" ");
+        if(space == -1){
+            return null;
+        }
+        else {
+            return input.substring(space + 1);
+        }
     }
     public Player getPlayer() {
         return this.player;

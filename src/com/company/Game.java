@@ -20,23 +20,23 @@ public class Game {
         while (con) {
             if (count == 0) {
                 System.out.println(currentRoom.getDescription());
-                count = count + 1;
+                count++;
             }
-            currentRoom = player.currentRoom(currentRoom);
-
-            String input = sc.nextLine();
-            input = input.toLowerCase(Locale.ROOT);
-            String command = parser.getFirstWord(input);
-            String direction = parser.validateDirection(parser.getSecondWord(input));
-            String itemName = parser.passItemNameInput(input);
-            parser.passPlayer(player);
-            parser.passCurrentRoom(currentRoom);
-            int playerHealth = player.getCurrentHealth();
+                String input = sc.nextLine();
+                currentRoom = player.currentRoom(currentRoom);
+                input = input.toLowerCase(Locale.ROOT);
+                String command = parser.getFirstWord(input);
+                String itemName = parser.passItemNameInput(input);
+                String enemyName = parser.passEnemyInput(input);
+                parser.passPlayer(player);
+                parser.passCurrentRoom(currentRoom);
+                int playerHealth = player.getCurrentHealth();
+                count = count + 1;
 
             // checks if the direction input is available
             switch (command) {
-
                 case "go":
+                    String direction = parser.validateDirection(parser.getSecondWord(input));
                     if(!direction.isEmpty()) {
                         if (parser.checkRoomDirection(direction)) {
                             //changes current room to the new room
@@ -67,6 +67,7 @@ public class Game {
                     break;
 
                 case "take", "t":
+                    System.out.println(itemName);
                     System.out.println(parser.take());
                     break;
 
