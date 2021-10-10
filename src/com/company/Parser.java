@@ -235,12 +235,7 @@ public class Parser {
                         int playerHealth = player.getCurrentHealth() - enemyDamage;
                         player.setCurrentHealth(playerHealth);
                         str.append(enemyName).append(" attacked you with ").append(enemyWeapon.getName()).append(" and dealt ").append(enemyDamage).append(" damage").append("\n");
-                        str.append("Your current health is now ").append(player.getCurrentHealth()).append("\n");
-                        if (enemy.died()) {
-                            currentRoom.setRoomItem(enemyWeapon);
-                            str.append(enemyName).append(" died and dropped ").append(enemyWeapon.getName()).append("\n");
-                            currentRoom.removeEnemy(enemy);
-                        }
+                        str.append("Your current health is now ").append(player.getCurrentHealth()).append("\n");    
                     }
                 }
             } else {
