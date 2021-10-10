@@ -227,7 +227,7 @@ public class Parser {
                         str.append(enemyName).append(" died and dropped ").append(enemyWeapon.getName()).append("\n");
                         currentRoom.removeEnemy(enemy);
                     } else if (enemyWeapon.ammoLeft() == 0) {
-                        str.append("The enemy tried to attack but has no ammo left" + "\n");
+                        str.append("The enemy tried to attack but has no ammo left").append("\n");
                         str.append("Your current health is now ").append(player.getCurrentHealth()).append("\n");
                     } else {
                         enemy.attack();
