@@ -221,8 +221,9 @@ public class Parser {
                         str.append(enemyName).append(" current health is now ").append(enemy.getCurrentHealth()).append("\n");
                     } 
                     else {
-                    int damage = weapon.getDamage();
-                    player.attack();
+                    //int damage = weapon.getDamage();
+                    int damage = player.attack();
+                    //player.attack();
                     int enemyHealth = enemy.getCurrentHealth();
                     enemy.setCurrentHealth(enemyHealth - damage);
                     str.append("you attacked ").append(enemyName).append("\nYou dealt ").append(damage).append(" damage\n");
