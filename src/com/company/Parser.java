@@ -215,6 +215,10 @@ public class Parser {
                 if (enemy.getIsAlive()) {
                     Item item = player.findItemInventory(player.getEquippedWeapon());
                     Weapon weapon = player.isWeapon(item);
+                    if (weapon.ammoLeft() == 0) {
+                        str.append("You tried to attack but you dont have any ammo left").append("\n");
+                        str.append(enemyName).append(" current health is now ").append(enemy.getCurrentHealth()).append("\n");
+                    } else {
                     int damage = weapon.getDamage();
                     player.attack();
                     int enemyHealth = enemy.getCurrentHealth();
@@ -222,6 +226,7 @@ public class Parser {
                     str.append("you attacked ").append(enemyName).append("\nYou dealt ").append(damage).append(" damage\n");
                     str.append(enemyName).append(" current health is now ").append(enemy.getCurrentHealth()).append("\n");
                     Weapon enemyWeapon = enemy.getWeapon();
+                    }
                     if (enemy.died()) {
                         currentRoom.setRoomItem(enemyWeapon);
                         str.append(enemyName).append(" died and dropped ").append(enemyWeapon.getName()).append("\n");
