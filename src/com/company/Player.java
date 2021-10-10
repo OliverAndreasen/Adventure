@@ -192,11 +192,11 @@ public class Player {
             Item weapon = findItemInventory(itemName);
             if (weapon instanceof Weapon) {
                 this.equippedWeapon = weapon.getName();
-                return "ItemEquip";
+                return "you have equipped: " + itemName;
             } else
-                return "NotAWeapon";
+                return "You cant equip an " + itemName;
         } else {
-            return "WeaponAlreadyEquipped";
+            return "You already have " + getEquippedWeapon() + " equipped";
         }
     }
 
@@ -207,7 +207,6 @@ public class Player {
 
     public String checkWeaponType(String equippedWeapon) {
         Item weapon = findItemInventory(equippedWeapon);
-
         String result = null;
         if (weapon instanceof MeleeWeapon) {
             result = "MeleeWeapon";

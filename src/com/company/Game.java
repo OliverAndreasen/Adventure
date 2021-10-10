@@ -93,12 +93,7 @@ public class Game {
                     break;
 
                 case "equip":
-                    String equip = player.equip(itemName);
-                    switch (equip) {
-                        case "ItemEquip" -> System.out.println("you have equipped: " + itemName);
-                        case "NotAWeapon" -> System.out.println("You cant equip an " + itemName);
-                        case "WeaponAlreadyEquipped" -> System.out.println("You already have " + player.getEquippedWeapon() + " equipped");
-                    }
+                    System.out.println(player.equip(itemName));
                     break;
 
                 case "attack":
@@ -153,7 +148,6 @@ public class Game {
 
                      */
                     break;
-
                 case "unequip":
                     player.unEquipWeapon();
                     break;
