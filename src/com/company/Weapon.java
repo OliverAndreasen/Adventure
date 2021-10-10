@@ -1,6 +1,6 @@
 package com.company;
 
-public class Weapon extends Item {
+public abstract class Weapon extends Item {
     private int damage;
 
     public Weapon(String description, int itemWeight, int damage) {
@@ -8,9 +8,13 @@ public class Weapon extends Item {
         this.damage = damage;
     }
 
+    abstract int ammoLeft();
+
     public int getDamage() {
         return damage;
     }
+
+
 }
 
 

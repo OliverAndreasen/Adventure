@@ -9,7 +9,7 @@ public class RangedWeapon extends Weapon{
         this.ammo = ammo;
     }
 
-    public int getAmmo() {
+    public int ammoLeft() {
         return ammo;
     }
 

@@ -31,6 +31,7 @@ public class Map {
 
         // Enemy weapons
         MeleeWeapon knife = new MeleeWeapon("small knife", 1, 5);
+        RangedWeapon bow = new RangedWeapon("long bow",3,10,3);
 
         // Room1
         room1.setEast(room2);
@@ -85,7 +86,7 @@ public class Map {
         // Enemies
         Enemy goblin = new Enemy("Peter the green goblin",knife, 1);
         room1.setEnemy(goblin);
-        Enemy jesus = new Enemy("Holy jesus", knife, 10);
+        Enemy jesus = new Enemy("Holy jesus", bow, 10);
         room1.setEnemy(jesus);
 
 

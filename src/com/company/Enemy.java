@@ -20,7 +20,7 @@ public class Enemy {
         this.isAlive = true;
         this.distance = distance;
     }
-
+/*
     public String checkWeaponType(Weapon weapon) {
         String result = null;
         if (weapon instanceof MeleeWeapon) {
@@ -30,20 +30,18 @@ public class Enemy {
         }
         return result;
     }
+ */
 
     public int attack() {
-        String weaponType = checkWeaponType(weapon);
         int damage = 0;
-
-        if (weaponType.equals("MeleeWeapon")) {
+        if (weapon.ammoLeft() == -1) {
             damage = weapon.getDamage();
-        } else if (weaponType.equals("RangedWeapon")) {
-            int ammo = 0;
-            RangedWeapon rangedWeapon = ((RangedWeapon) weapon);
-            ammo = rangedWeapon.getAmmo();
+        } else if (weapon.ammoLeft() > 0) {
+            int ammo = weapon.ammoLeft();
+            ammo = weapon.ammoLeft();
             ammo = ammo - 1;
-            rangedWeapon.setAmmo(ammo);
-            damage = rangedWeapon.getDamage();
+            ((RangedWeapon)weapon).setAmmo(ammo);
+            damage = weapon.getDamage();
         }
         return damage;
     }

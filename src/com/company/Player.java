@@ -98,7 +98,7 @@ public class Player {
         if (canCarryMore(itemWeight)) {
             playerItems.add(item);
             currentInventoryWeight += itemWeight;
-            currentRoom.removeRoomItem(item);
+            currentRoom.removeItem(item);
             result += ("You picked up " + itemName + "\n");
             result += (itemName + " are now in your inventory");
         } else {
@@ -156,7 +156,7 @@ public class Player {
         Item food;
         if (findItemInventory(itemName) == null) {
              food = currentRoom.findItem(itemName, currentRoom);
-             this.currentRoom.removeRoomItem(food);
+             this.currentRoom.removeItem(food);
         }
         else {
              food = findItemInventory(itemName);
@@ -224,22 +224,19 @@ public class Player {
     }
 
     public int attack(Enemy enemy){
-        Item weapon = findItemInventory(this.equippedWeapon);
-
+        Item item = findItemInventory(this.equippedWeapon);
+        Weapon weapon = ((Weapon)item);
         int damage = 0;
-
-        if (weapon instanceof MeleeWeapon)
+        if (weapon.ammoLeft() == -1)
         {
-            MeleeWeapon meleeWeapon = ((MeleeWeapon)weapon);
-            damage = meleeWeapon.getDamage();
+            damage = weapon.getDamage();
         }
-        else if(weapon instanceof RangedWeapon){
+        else if(weapon.ammoLeft() > 0){
             int ammo = 0;
-            RangedWeapon rangedWeapon = ((RangedWeapon) weapon);
-            ammo = rangedWeapon.getAmmo();
+            ammo = weapon.ammoLeft();
             ammo = ammo -1;
-            rangedWeapon.setAmmo(ammo);
-            damage = rangedWeapon.getDamage();
+            ((RangedWeapon)weapon).setAmmo(ammo);
+            damage = weapon.getDamage();
         }
         return damage;
     }

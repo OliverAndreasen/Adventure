@@ -80,11 +80,11 @@ public class Room {
         }
     }
 
-    public void removeRoomItem(Item itemName) {
+    public void removeItem(Item itemName) {
         roomItems.remove(itemName);
     }
 
-    public void removeRoomEnemy(Enemy name) {
+    public void removeEnemy(Enemy name) {
         enemyList.remove(name);
     }
 
@@ -135,7 +135,7 @@ public class Room {
             }
         }
         if (enemyList.size() == 0) {
-            result = "The room has no Enemies";
+            result = "The room has no enemies";
         }
         return result;
     }
@@ -160,15 +160,18 @@ public class Room {
 
     public String closestEnemy(Room currentRoom) {
         ArrayList<Integer> enemyDistance = new ArrayList<>();
-
-        for (int i = 0; i < currentRoom.enemyList.size(); i++) {
-             enemyDistance.add(currentRoom.enemyList.get(i).getDistance());
+        if(currentRoom.enemyList.size() != 0) {
+            for (int i = 0; i < currentRoom.enemyList.size(); i++) {
+                enemyDistance.add(currentRoom.enemyList.get(i).getDistance());
+            }
+            Integer min = Collections.min(enemyDistance);
+            int result = min.intValue();
+            int index = enemyDistance.indexOf(result);
+            String enemyName = currentRoom.enemyList.get(index).getName();
+            return enemyName;
         }
-
-        Integer min = Collections.min(enemyDistance);
-        int result = min.intValue();
-        int index = enemyDistance.indexOf(result);
-        String enemyName = currentRoom.enemyList.get(index).getName();
-        return enemyName;
+        else {
+            return null;
+        }
     }
 }

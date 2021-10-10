@@ -1,13 +1,17 @@
 package com.company;
 
-import java.util.Scanner;
-
 public class Parser {
 
     private String itemName;
     private Player player;
     private String input;
     private Room currentRoom;
+    private Enemy enemy;
+    private String enemyName = null;
+
+    public void setEnemyName(String enemyName) {
+        this.enemyName = enemyName;
+    }
 
     public String validateDirection(String direction) {
         String result = direction;
@@ -26,7 +30,7 @@ public class Parser {
         }
         return result;
     }
-    
+
     public boolean checkRoomDirection(String direction) {
         if (player.checkDirection(direction)) {
             return true;
@@ -48,7 +52,7 @@ public class Parser {
         return help;
     }
 
-    public String cheat(Player player){
+    public String cheat(Player player) {
         String result = "";
 
         if (player.checkDirection("n")) {
@@ -73,22 +77,25 @@ public class Parser {
         return result;
     }
 
-    public Player passPlayer(Player player){
+    public Player passPlayer(Player player) {
         return this.player = player;
     }
+
     public String passItemNameInput(String input) {
         return this.input = getSecondWord(input);
     }
 
     public String passEnemyInput(String input) {
         int space = input.indexOf(" ");
-        if(space == -1){
+        if (space == -1) {
             return null;
-        }
-        else {
-            return input.substring(space + 1);
+        } else {
+            enemyName = input.substring(space + 1);
+            setEnemyName(enemyName);
+            return enemyName;
         }
     }
+
     public Player getPlayer() {
         return this.player;
     }
@@ -101,18 +108,18 @@ public class Parser {
         return currentRoom;
     }
 
-    public String take(){
+    public String take() {
         String result = "";
         String itemName = passItemNameInput(input);
         currentRoom = getCurrentRoom();
 
         if (currentRoom.findItem(itemName, currentRoom) != null) {
             Item item = currentRoom.findItem(itemName, currentRoom);
-            if (item.checkIfBackpack()){
+            if (item.checkIfBackpack()) {
                 result += player.takeItem(itemName);
                 player.changeMaxInventoryWeight(5);
                 result += "Your max inventory capacity increased to " + player.getMaxInventoryWeight();
-            }else{
+            } else {
                 System.out.println(player.takeItem(itemName));
             }
         } else {
@@ -121,7 +128,7 @@ public class Parser {
         return result;
     }
 
-    public String drop(){
+    public String drop() {
         player = getPlayer();
         String result = "";
         itemName = passItemNameInput(input);
@@ -133,11 +140,11 @@ public class Parser {
                     result += player.dropItem(itemName);
                     result += "Your max inventory capacity decreased to "
                             + player.getMaxInventoryWeight();
-                }else {
+                } else {
                     result += "You cannot drop the backpack! Drop one or more " +
                             "items before you can remove the backpack";
                 }
-            }else {
+            } else {
                 result = player.dropItem(itemName);
             }
         } else {
@@ -146,7 +153,7 @@ public class Parser {
         return result;
     }
 
-    public String use(){
+    public String use() {
         player = getPlayer();
         Item goldbar = new Item("goldbar", 5);
         String result = "";
@@ -156,16 +163,16 @@ public class Parser {
             result += "you are missing a key";
         }
         if (!currentRoom.getAllItems().contains("chest")) {
-            if (player.findItemInventory("key") != null){
+            if (player.findItemInventory("key") != null) {
                 result += "there is nothing to use the key on";
             } else {
                 result += "use command invalid";
             }
         }
         if (currentRoom.getAllItems().contains("chest")) {
-            if (player.findItemInventory("key") != null){
-                    player.setPlayerItem(goldbar);
-                    result += "you opened the chest and found a goldbar";
+            if (player.findItemInventory("key") != null) {
+                player.setPlayerItem(goldbar);
+                result += "you opened the chest and found a goldbar";
             }
         }
         return result;
@@ -176,29 +183,82 @@ public class Parser {
     }
 
     public String welcome() {
-        String result = "";
-        result += "Welcome to the Adventure game!\n";
-        result += "You have to choose a direction, you want to walk in\n";
-        result += "You can type 'north', 'east', 'south' or 'west'\n";
-        result += "you can also 'take' and 'drop' items for more instructions type 'help'\n";
-        result += "Other functions: 'off', 'look', 'help', 'inv' 'cheat'";
-        result += "\n";
+        StringBuilder str = new StringBuilder();
+        str.append("Welcome to the Adventure game!\n");
+        str.append("You have to choose a direction, you want to walk in\n");
+        str.append("You can type 'north', 'east', 'south' or 'west'\n");
+        str.append("you can also 'take' and 'drop' items for more instructions type 'help'\n");
+        str.append("Other functions: 'off', 'look', 'help', 'inv' 'cheat'");
+        str.append("\n");
+
+        String result = str.toString();
         return result;
     }
 
     public String getFirstWord(String input) {
         int space = input.indexOf(" ");
-        if (space == -1){
+        if (space == -1) {
             int length = input.length();
-            return input.substring(0,length);
-        }
-        else {
-           return input.substring(0,space);
+            return input.substring(0, length);
+        } else {
+            return input.substring(0, space);
         }
     }
 
-    public String getSecondWord(String input){
+    public String getSecondWord(String input) {
         int space = input.indexOf(" ");
         return input.substring(space + 1);
+    }
+
+
+    public String attack() {
+        StringBuilder str = new StringBuilder();
+        if (player.checkIfEquipped()) {
+            if (enemyName == null) {
+                enemyName = currentRoom.closestEnemy(currentRoom);
+            }
+            enemy = currentRoom.findEnemy(enemyName, currentRoom);
+            if (enemy != null) {
+                if (enemy.getIsAlive()) {
+                    Item item = player.findItemInventory(player.getEquippedWeapon());
+                    Weapon weapon = player.isWeapon(item);
+                    int damage = weapon.getDamage();
+                    player.attack(enemy);
+                    int enemyHealth = enemy.getCurrentHealth();
+                    enemy.setCurrentHealth(enemyHealth - damage);
+                    str.append("you attacked " + enemyName + "\nYou dealt " + damage + " damage\n");
+                    str.append(enemyName + " current health is now " + enemy.getCurrentHealth() + "\n");
+                    Weapon enemyWeapon = enemy.getWeapon();
+                    if (enemy.died()) {
+                        currentRoom.setRoomItem(enemyWeapon);
+                        str.append(enemyName + " died and dropped " + enemyWeapon.getName() + "\n");
+                        currentRoom.removeEnemy(enemy);
+                    } else if (enemyWeapon.ammoLeft() == 0) {
+                        str.append("The enemy tried to attack but has no ammo left" + "\n");
+                        str.append("Your current health is now " + player.getCurrentHealth() + "\n");
+                    } else {
+                        enemy.attack();
+                        int enemyDamage = enemyWeapon.getDamage();
+                        int playerHealth = player.getCurrentHealth() - enemyDamage;
+                        player.setCurrentHealth(playerHealth);
+                        str.append(enemyName + " attacked you with " + enemyWeapon.getName() + " and dealt " + enemyDamage + " damage" + "\n");
+                        str.append("Your current health is now " + player.getCurrentHealth() + "\n");
+                        if (enemy.died()) {
+                            currentRoom.setRoomItem(enemyWeapon);
+                            str.append(enemyName + " died and dropped " + enemyWeapon.getName() + "\n");
+                            currentRoom.removeEnemy(enemy);
+                        }
+                    }
+                }
+            } else {
+                str.append("you swung " + player.getEquippedWeapon() + " but hit nothing" + "\n");
+            }
+        } else {
+            str.append("You have to equip a weapon to attack" + "\n");
+        }
+
+        setEnemyName(null);
+        String result = str.toString();
+        return result;
     }
 }
