@@ -6,7 +6,6 @@ public class Parser {
     private Player player;
     private String input;
     private Room currentRoom;
-    private Enemy enemy;
     private String enemyName = null;
 
     public void setEnemyName(String enemyName) {
@@ -32,10 +31,7 @@ public class Parser {
     }
 
     public boolean checkRoomDirection(String direction) {
-        if (player.checkDirection(direction)) {
-            return true;
-        }
-        return false;
+        return player.checkDirection(direction);
     }
 
     public void exit() {
@@ -183,16 +179,12 @@ public class Parser {
     }
 
     public String welcome() {
-        StringBuilder str = new StringBuilder();
-        str.append("Welcome to the Adventure game!\n");
-        str.append("You have to choose a direction, you want to walk in\n");
-        str.append("You can type 'north', 'east', 'south' or 'west'\n");
-        str.append("you can also 'take' and 'drop' items for more instructions type 'help'\n");
-        str.append("Other functions: 'off', 'look', 'help', 'inv' 'cheat'");
-        str.append("\n");
-
-        String result = str.toString();
-        return result;
+        return "Welcome to the Adventure game!\n" +
+                "You have to choose a direction, you want to walk in\n" +
+                "You can type 'north', 'east', 'south' or 'west'\n" +
+                "you can also 'take' and 'drop' items for more instructions type 'help'\n" +
+                "Other functions: 'off', 'look', 'help', 'inv' 'cheat'" +
+                "\n";
     }
 
     public String getFirstWord(String input) {
@@ -217,7 +209,7 @@ public class Parser {
             if (enemyName == null) {
                 enemyName = currentRoom.closestEnemy(currentRoom);
             }
-            enemy = currentRoom.findEnemy(enemyName, currentRoom);
+            Enemy enemy = currentRoom.findEnemy(enemyName, currentRoom);
             if (enemy != null) {
                 if (enemy.getIsAlive()) {
                     Item item = player.findItemInventory(player.getEquippedWeapon());
@@ -226,39 +218,38 @@ public class Parser {
                     player.attack(enemy);
                     int enemyHealth = enemy.getCurrentHealth();
                     enemy.setCurrentHealth(enemyHealth - damage);
-                    str.append("you attacked " + enemyName + "\nYou dealt " + damage + " damage\n");
-                    str.append(enemyName + " current health is now " + enemy.getCurrentHealth() + "\n");
+                    str.append("you attacked ").append(enemyName).append("\nYou dealt ").append(damage).append(" damage\n");
+                    str.append(enemyName).append(" current health is now ").append(enemy.getCurrentHealth()).append("\n");
                     Weapon enemyWeapon = enemy.getWeapon();
                     if (enemy.died()) {
                         currentRoom.setRoomItem(enemyWeapon);
-                        str.append(enemyName + " died and dropped " + enemyWeapon.getName() + "\n");
+                        str.append(enemyName).append(" died and dropped ").append(enemyWeapon.getName()).append("\n");
                         currentRoom.removeEnemy(enemy);
                     } else if (enemyWeapon.ammoLeft() == 0) {
                         str.append("The enemy tried to attack but has no ammo left" + "\n");
-                        str.append("Your current health is now " + player.getCurrentHealth() + "\n");
+                        str.append("Your current health is now ").append(player.getCurrentHealth()).append("\n");
                     } else {
                         enemy.attack();
                         int enemyDamage = enemyWeapon.getDamage();
                         int playerHealth = player.getCurrentHealth() - enemyDamage;
                         player.setCurrentHealth(playerHealth);
-                        str.append(enemyName + " attacked you with " + enemyWeapon.getName() + " and dealt " + enemyDamage + " damage" + "\n");
-                        str.append("Your current health is now " + player.getCurrentHealth() + "\n");
+                        str.append(enemyName).append(" attacked you with ").append(enemyWeapon.getName()).append(" and dealt ").append(enemyDamage).append(" damage").append("\n");
+                        str.append("Your current health is now ").append(player.getCurrentHealth()).append("\n");
                         if (enemy.died()) {
                             currentRoom.setRoomItem(enemyWeapon);
-                            str.append(enemyName + " died and dropped " + enemyWeapon.getName() + "\n");
+                            str.append(enemyName).append(" died and dropped ").append(enemyWeapon.getName()).append("\n");
                             currentRoom.removeEnemy(enemy);
                         }
                     }
                 }
             } else {
-                str.append("you swung " + player.getEquippedWeapon() + " but hit nothing" + "\n");
+                str.append("you swung ").append(player.getEquippedWeapon()).append(" but hit nothing").append("\n");
             }
         } else {
             str.append("You have to equip a weapon to attack" + "\n");
         }
 
         setEnemyName(null);
-        String result = str.toString();
-        return result;
+        return str.toString();
     }
 }

@@ -94,12 +94,10 @@ public class Game {
 
                 case "equip":
                     String equip = player.equip(itemName);
-                    if (equip.equals("ItemEquip")) {
-                        System.out.println("you have equipped: " + itemName);
-                    } else if (equip.equals("NotAWeapon")) {
-                        System.out.println("You cant equip an " + itemName);
-                    } else if (equip.equals("WeaponAlreadyEquipped")) {
-                        System.out.println("You already have " + player.getEquippedWeapon() + " equipped");
+                    switch (equip) {
+                        case "ItemEquip" -> System.out.println("you have equipped: " + itemName);
+                        case "NotAWeapon" -> System.out.println("You cant equip an " + itemName);
+                        case "WeaponAlreadyEquipped" -> System.out.println("You already have " + player.getEquippedWeapon() + " equipped");
                     }
                     break;
 

@@ -62,8 +62,7 @@ public class Room {
     }
 
     public String getDescription() {
-        String result = "You are in " + getName() + " \nDescription: " + description + "\n";
-        return result;
+        return "You are in " + getName() + " \nDescription: " + description + "\n";
     }
 
     public void setRoomItem(Item itemName) {
@@ -118,26 +117,26 @@ public class Room {
 
     public String getAllEnemies() {
         int count = 0;
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < enemyList.size(); i++) {
             String enemyName = enemyList.get(i).getName();
 
             if (enemyList.get(i) != null) {
                 if (count == 0) {
-                    result = "Enemies in this room: ";
+                    result = new StringBuilder("Enemies in this room: ");
                     count++;
                 }
                 if (i != (enemyList.size() - 1)) {
-                    result += enemyName + ", ";
+                    result.append(enemyName).append(", ");
                 } else {
-                    result += enemyName;
+                    result.append(enemyName);
                 }
             }
         }
         if (enemyList.size() == 0) {
-            result = "The room has no enemies";
+            result = new StringBuilder("The room has no enemies");
         }
-        return result;
+        return result.toString();
     }
 
     public Item findItem(String itemName, Room currentRoom) {
@@ -165,7 +164,7 @@ public class Room {
                 enemyDistance.add(currentRoom.enemyList.get(i).getDistance());
             }
             Integer min = Collections.min(enemyDistance);
-            int result = min.intValue();
+            int result = min;
             int index = enemyDistance.indexOf(result);
             String enemyName = currentRoom.enemyList.get(index).getName();
             return enemyName;

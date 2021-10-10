@@ -1,20 +1,15 @@
 package com.company;
 
 public class Enemy {
-    private final String description;
     private final String name;
     private final Weapon weapon;
     private int distance;
-
     private boolean isAlive;
-    private final int maxHealth;
     private int currentHealth;
 
 
     public Enemy(String description, Weapon weapon, int distance) {
-        this.description = description;
         this.weapon = weapon;
-        this.maxHealth = 100;
         this.currentHealth = 100;
         this.name = description.substring(description.lastIndexOf(' ') + 1);
         this.isAlive = true;
@@ -37,10 +32,10 @@ public class Enemy {
         if (weapon.ammoLeft() == -1) {
             damage = weapon.getDamage();
         } else if (weapon.ammoLeft() > 0) {
-            int ammo = weapon.ammoLeft();
+            int ammo;
             ammo = weapon.ammoLeft();
             ammo = ammo - 1;
-            ((RangedWeapon)weapon).setAmmo(ammo);
+            ((RangedWeapon) weapon).setAmmo(ammo);
             damage = weapon.getDamage();
         }
         return damage;
@@ -66,12 +61,11 @@ public class Enemy {
         return isAlive;
     }
 
-    public boolean died(){
-        if(this.currentHealth <= 0){
+    public boolean died() {
+        if (this.currentHealth <= 0) {
             this.isAlive = false;
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

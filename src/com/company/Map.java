@@ -2,7 +2,7 @@ package com.company;
 
 public class Map {
 
-    private Room startRoom = null;
+    private final Room startRoom;
 
     public Map() {
         //Room (String name, String description)
