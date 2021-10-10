@@ -4,21 +4,22 @@ public class Enemy {
     private final String description;
     private final String name;
     private final Weapon weapon;
+    private int distance;
 
     private boolean isAlive;
     private final int maxHealth;
     private int currentHealth;
 
 
-    public Enemy(String description, Weapon weapon) {
+    public Enemy(String description, Weapon weapon, int distance) {
         this.description = description;
         this.weapon = weapon;
         this.maxHealth = 100;
         this.currentHealth = 100;
         this.name = description.substring(description.lastIndexOf(' ') + 1);
         this.isAlive = true;
+        this.distance = distance;
     }
-
 
     public String checkWeaponType(Weapon weapon) {
         String result = null;
@@ -45,8 +46,6 @@ public class Enemy {
             damage = rangedWeapon.getDamage();
         }
         return damage;
-
-
     }
 
     public Weapon getWeapon() {
@@ -77,5 +76,9 @@ public class Enemy {
         else {
             return false;
         }
+    }
+
+    public int getDistance() {
+        return distance;
     }
 }

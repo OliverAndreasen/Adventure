@@ -22,10 +22,17 @@ public class Player {
         letters[3] = "w";
         this.maxInventoryWeight = 5;
         this.currentInventoryWeight = 0;
+        this.maxHealth = 100;
+        this.currentHealth = 100;
+        this.equippedWeapon = null;
     }
 
     public String getEquippedWeapon() {
         return equippedWeapon;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     public void setPlayerItem(Item itemName) {
@@ -34,6 +41,10 @@ public class Player {
 
     public Room currentRoom(Room currentRoom) {
         return this.currentRoom = currentRoom;
+    }
+
+    public int getCurrentHealth() {
+        return currentHealth;
     }
 
     public int getMaxInventoryWeight() {
@@ -107,6 +118,8 @@ public class Player {
         return result;
     }
 
+
+
     public String getInventory() {
         String result = "";
         result += "Your current inventory weight is: " + currentInventoryWeight + " out of " + maxInventoryWeight + "\n";
@@ -136,5 +149,112 @@ public class Player {
 
     public boolean canCarryMore(int itemWeight) {
             return (currentInventoryWeight + itemWeight) <= maxInventoryWeight;
+    }
+
+    public int eat(String itemName) {
+        int foodHealth = 0;
+        Item food;
+        if (findItemInventory(itemName) == null) {
+             food = currentRoom.findItem(itemName, currentRoom);
+             this.currentRoom.removeRoomItem(food);
+        }
+        else {
+             food = findItemInventory(itemName);
+             playerItems.remove(food);
+        }
+        if (food instanceof Food) {
+            int healed = 0;
+            foodHealth = ((Food) food).getHealth();
+            currentHealth = this.currentHealth + foodHealth;
+
+            if(currentHealth >= maxHealth) {
+                healed = maxHealth - currentHealth;
+                healed = healed + foodHealth;
+                currentHealth = maxHealth;
+            }
+            else {
+                healed = foodHealth;
+            }
+            return healed;
+        }
+        else {
+            System.out.println("You can not eat this");
+        }
+        return -1;
+    }
+
+    public boolean checkIfEquipped() {
+        if (this.equippedWeapon == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public String equip (String itemName) {
+        if (!checkIfEquipped()) {
+            Item weapon = findItemInventory(itemName);
+            if (weapon instanceof Weapon) {
+                this.equippedWeapon = weapon.getName();
+                return "ItemEquip";
+            } else
+            return "NotAWeapon";
+        }
+        else{
+            return "WeaponAlreadyEquipped";
+        }
+    }
+
+    public void unEquipWeapon(){
+        System.out.println("you unequipped " + this.equippedWeapon);
+        this.equippedWeapon = null;
+    }
+
+    public String checkWeaponType(String equippedWeapon) {
+        Item weapon = findItemInventory(equippedWeapon);
+
+        String result = null;
+        if (weapon instanceof MeleeWeapon) {
+            result = "MeleeWeapon";
+        } else if (weapon instanceof RangedWeapon) {
+            result = "RangedWeapon";
+        }
+        return result;
+    }
+
+    public int attack(Enemy enemy){
+        Item weapon = findItemInventory(this.equippedWeapon);
+
+        int damage = 0;
+
+        if (weapon instanceof MeleeWeapon)
+        {
+            MeleeWeapon meleeWeapon = ((MeleeWeapon)weapon);
+            damage = meleeWeapon.getDamage();
+        }
+        else if(weapon instanceof RangedWeapon){
+            int ammo = 0;
+            RangedWeapon rangedWeapon = ((RangedWeapon) weapon);
+            ammo = rangedWeapon.getAmmo();
+            ammo = ammo -1;
+            rangedWeapon.setAmmo(ammo);
+            damage = rangedWeapon.getDamage();
+        }
+        return damage;
+    }
+
+    public Weapon isWeapon (Item item){
+        Weapon weapon = null;
+
+        if(item instanceof Weapon){
+            weapon =  ((Weapon)item);
+
+        }
+        return weapon;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
     }
 }

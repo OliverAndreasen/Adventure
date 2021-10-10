@@ -36,13 +36,20 @@ public class Map {
         room1.setEast(room2);
         room1.setSouth(room4);
 
+
+
         // Room 2
         room2.setEast(room3);
         room2.setWest(room1);
+        // Items
+        Item key = new Item("there is a tiny key", 1);
+        room2.setRoomItem(key);
+
 
         // Room 3
         room3.setWest(room2);
         room3.setSouth(room6);
+
 
         // Room 4
         room4.setNorth(room1);
@@ -73,11 +80,13 @@ public class Map {
         Food apple = new Food("Red apple", 1, 20);
         room1.setRoomItem(apple);
         // Weapons
-        MeleeWeapon sword = new MeleeWeapon("there is a large sword", 3, 10);
+        MeleeWeapon sword = new MeleeWeapon("there is a large sword", 3, 25);
         room1.setRoomItem(sword);
         // Enemies
-        Enemy goblin = new Enemy("Peter the green goblin", knife);
+        Enemy goblin = new Enemy("Peter the green goblin",knife, 1);
         room1.setEnemy(goblin);
+        Enemy jesus = new Enemy("Holy jesus", knife, 10);
+        room1.setEnemy(jesus);
 
 
         //Room 2
@@ -101,7 +110,13 @@ public class Map {
         Item goldbar = new Item("a huge goldbar", 5);
         room5.setRoomItem(goldbar);
         Item chest = new Item("a locked chest", 6);
-        room1.setRoomItem(chest);
+        room5.setRoomItem(chest);
+
+        // Room 6
+        // Items
+        Food oreos = new Food("Roll of oreos", 1, 30);
+        room6.setRoomItem(oreos);
+
 
         //Room 9
         // Items
