@@ -6,15 +6,18 @@ public class Map {
 
     public Map() {
         //Room (String name, String description)
-        Room room1 = new Room("room 1", "You are very tired and cold in a big dark forest, you need to find a place to rest for the night.\n" +
-                "Even though it is very dark and horrible weather, you catch a glimpse of what looks like a cave.\n" +
-                "which way do you choose?");
-        Room room2 = new Room("room 2", "You are in the entrance of a dark cave, the floor of the entrance is full of jagged rocks, you can not sleep here. \n" +
-                "You need to move on to find a place to rest.\n" +
-                "which way do you choose?");
-        Room room3 = new Room("room 3", "You arrive in a curved corridor, as you move through the corridor \n" +
-                "you step into knee-deep puddles of water. \n" +
-                "which way do you choose?");
+        Room room1 = new Room("room 1", """
+                You are very tired and cold in a big dark forest, you need to find a place to rest for the night.
+                Even though it is very dark and horrible weather, you catch a glimpse of what looks like a cave.
+                which way do you choose?""");
+        Room room2 = new Room("room 2", """
+                You are in the entrance of a dark cave, the floor of the entrance is full of jagged rocks, you can not sleep here.\s
+                You need to move on to find a place to rest.
+                which way do you choose?""");
+        Room room3 = new Room("room 3", """
+                You arrive in a curved corridor, as you move through the corridor\s
+                you step into knee-deep puddles of water.\s
+                which way do you choose?""");
         Room room4 = new Room("room 4", "You found an entrance to a cave, dare to go deeper?\n" +
                 "Which way do you choose?");
         Room room5 = new Room("room 5", "You found a nice place to sleep with a bed, firewood and a ladder to exit the cave.\n" +

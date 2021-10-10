@@ -216,7 +216,7 @@ public class Player {
         return result;
     }
 
-    public int attack(Enemy enemy) {
+    public int attack() {
         Item item = findItemInventory(this.equippedWeapon);
         Weapon weapon = ((Weapon) item);
         int damage = 0;

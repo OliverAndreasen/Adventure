@@ -1,12 +1,10 @@
 package com.company;
 
-import java.util.ArrayList;
-
 public class Item {
     private final String itemName;
     private final String description;
     private final int itemWeight;
-    private final ArrayList<Item> allItems = new ArrayList<>();
+    //private final ArrayList<Item> allItems = new ArrayList<>();
 
     public Item(String description, int itemWeight) {
         this.itemName = description.substring(description.lastIndexOf(' ') + 1);
@@ -31,12 +29,7 @@ public class Item {
     }
 
     public boolean checkIfBackpack() {
-        if (this.itemName.equals("backpack")) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.itemName.equals("backpack");
     }
 }
 

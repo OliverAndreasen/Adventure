@@ -93,26 +93,26 @@ public class Room {
 
     public String getAllItems() {
         int count = 0;
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < roomItems.size(); i++) {
             String itemDescription = roomItems.get(i).getDescription();
 
             if (roomItems.get(i) != null) {
                 if (count == 0) {
-                    result = "Items in this room: ";
+                    result = new StringBuilder("Items in this room: ");
                     count++;
                 }
                 if (i != (roomItems.size() - 1)) {
-                    result += itemDescription + ", ";
+                    result.append(itemDescription).append(", ");
                 } else {
-                    result += itemDescription;
+                    result.append(itemDescription);
                 }
             }
         }
         if (roomItems.size() == 0) {
-            result = "The room has no items";
+            result = new StringBuilder("The room has no items");
         }
-        return result;
+        return result.toString();
     }
 
     public String getAllEnemies() {
@@ -163,11 +163,9 @@ public class Room {
             for (int i = 0; i < currentRoom.enemyList.size(); i++) {
                 enemyDistance.add(currentRoom.enemyList.get(i).getDistance());
             }
-            Integer min = Collections.min(enemyDistance);
-            int result = min;
+            int result = Collections.min(enemyDistance);
             int index = enemyDistance.indexOf(result);
-            String enemyName = currentRoom.enemyList.get(index).getName();
-            return enemyName;
+            return currentRoom.enemyList.get(index).getName();
         }
         else {
             return null;

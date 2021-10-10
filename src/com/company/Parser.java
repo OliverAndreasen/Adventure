@@ -179,12 +179,13 @@ public class Parser {
     }
 
     public String welcome() {
-        return "Welcome to the Adventure game!\n" +
-                "You have to choose a direction, you want to walk in\n" +
-                "You can type 'north', 'east', 'south' or 'west'\n" +
-                "you can also 'take' and 'drop' items for more instructions type 'help'\n" +
-                "Other functions: 'off', 'look', 'help', 'inv' 'cheat'" +
-                "\n";
+        return """
+                Welcome to the Adventure game!
+                You have to choose a direction, you want to walk in
+                You can type 'north', 'east', 'south' or 'west'
+                you can also 'take' and 'drop' items for more instructions type 'help'
+                Other functions: 'off', 'look', 'help', 'inv' 'cheat'
+                """;
     }
 
     public String getFirstWord(String input) {
@@ -215,7 +216,7 @@ public class Parser {
                     Item item = player.findItemInventory(player.getEquippedWeapon());
                     Weapon weapon = player.isWeapon(item);
                     int damage = weapon.getDamage();
-                    player.attack(enemy);
+                    player.attack();
                     int enemyHealth = enemy.getCurrentHealth();
                     enemy.setCurrentHealth(enemyHealth - damage);
                     str.append("you attacked ").append(enemyName).append("\nYou dealt ").append(damage).append(" damage\n");
