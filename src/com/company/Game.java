@@ -20,6 +20,7 @@ public class Game {
         while (con) {
             if (count == 0) {
                 System.out.println(currentRoom.getDescription());
+                System.out.println(currentRoom.getAllEnemies());
                 count++;
             }
             String input = sc.nextLine();
@@ -41,6 +42,7 @@ public class Game {
                             //changes current room to the new room
                             currentRoom = player.move(direction);
                             System.out.println(currentRoom.getDescription());
+                            System.out.println(currentRoom.getAllEnemies());
                         } else {
                             System.out.println("You cant go that way, try again!");
                         }

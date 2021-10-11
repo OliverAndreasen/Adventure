@@ -41,16 +41,20 @@ public class Parser {
     }
 
     public String help() {
-        String help = "";
-        help += "if you want to turn the program off type 'off'\n";
-        help += "to get a room description you can type 'look'\n";
-        help += "to get help with directions you can type 'cheat'\n";
-        help += "to pick up an item type 'take' followed by the name of the item\n";
-        help += "to drop an item type 'drop' followed by the name of the item\n";
-        return help;
+        StringBuilder help = new StringBuilder();
+        help.append("if you want to turn the program off type 'off'\n");
+        help.append("to get a room description you can type 'look'\n");
+        help.append("to get help with directions you can type 'cheat'\n");
+        help.append("to pick up an item type 'take' followed by the name of the item. likewise do the same with drop, eat, equip and unequip\n");
+        help.append("to attack type 'attack' and then specify witch enemy to hit. If you dont specify you will just hit the closest enemy\n");
+        help.append("type 'enemies' to see who is in the room with you\n");
+        help.append("type 'health' to see your current status\n");
+        help.append("type 'inventory', 'inv' or 'i' to see the items that you are currently carrying\n");
+
+        return help.toString();
     }
 
-    public String cheat(Player player) {
+    String cheat(Player player) {
         String result = "";
 
         if (player.checkDirection("n")) {
@@ -177,8 +181,20 @@ public class Parser {
     }
 
     public String getPlayerInventory() {
-        return player.getInventory();
-    }
+        String result = "";
+        result += player.getInventory();
+        result += "\n";
+        result += "Equipped weapon: ";
+        String equippedWeapon = null;
+        equippedWeapon = player.getEquippedWeapon();
+        if(equippedWeapon != null) {
+            result += equippedWeapon;
+        } else
+        {
+            result += "no weapon equipped";
+        }
+        return result;
+     }
 
     public String welcome() {
         return """
