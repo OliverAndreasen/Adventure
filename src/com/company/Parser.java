@@ -201,12 +201,12 @@ public class Parser {
                 Welcome to the Adventure game!
                 You have to choose a direction, you want to walk in
                 You can type 'north', 'east', 'south' or 'west'
-                You can also 'take' and 'drop' items. You can also 'equip', 'unequip' and eat items
+                You can 'take' and 'drop' items. You can also 'equip', 'unequip' and eat items
                 When you encounter an enemy you can type 'attack' to hit it
                 You can type 'look' to get a description of the room you are in
                 And type 'enemies' to find out who is in the room with you
                 For more instructions type 'help'
-                Other functions: 'exit', 'help', 'inv' 'cheat'
+                Other functions: 'exit', 'health', 'inv' 'cheat'
                 """;
     }
 
