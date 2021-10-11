@@ -7,13 +7,12 @@ public class Room {
 
     private final String name;
     private final String description;
+    private final ArrayList<Item> roomItems = new ArrayList<>();
+    private final ArrayList<Enemy> enemyList = new ArrayList<>();
     private Room north;
     private Room east;
     private Room south;
     private Room west;
-
-    private final ArrayList<Item> roomItems = new ArrayList<>();
-    private final ArrayList<Enemy> enemyList = new ArrayList<>();
 
     // Constructor
     public Room(String name, String description) {
@@ -159,15 +158,14 @@ public class Room {
 
     public String closestEnemy(Room currentRoom) {
         ArrayList<Integer> enemyDistance = new ArrayList<>();
-        if(currentRoom.enemyList.size() != 0) {
+        if (currentRoom.enemyList.size() != 0) {
             for (int i = 0; i < currentRoom.enemyList.size(); i++) {
                 enemyDistance.add(currentRoom.enemyList.get(i).getDistance());
             }
             int result = Collections.min(enemyDistance);
             int index = enemyDistance.indexOf(result);
             return currentRoom.enemyList.get(index).getName();
-        }
-        else {
+        } else {
             return null;
         }
     }

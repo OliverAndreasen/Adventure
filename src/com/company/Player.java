@@ -12,6 +12,7 @@ public class Player {
     private int currentInventoryWeight;
     private int currentHealth;
     private String equippedWeapon;
+    private boolean isAlive;
 
 
     public Player() {
@@ -27,6 +28,11 @@ public class Player {
         this.maxHealth = 100;
         this.currentHealth = 100;
         this.equippedWeapon = null;
+        this.isAlive = true;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
     }
 
     public String getEquippedWeapon() {
@@ -177,8 +183,6 @@ public class Player {
                 healed = foodHealth;
             }
             return healed;
-        } else {
-            System.out.println("You can not eat this");
         }
         return -1;
     }
@@ -205,17 +209,6 @@ public class Player {
         this.equippedWeapon = null;
     }
 
-    public String checkWeaponType(String equippedWeapon) {
-        Item weapon = findItemInventory(equippedWeapon);
-        String result = null;
-        if (weapon instanceof MeleeWeapon) {
-            result = "MeleeWeapon";
-        } else if (weapon instanceof RangedWeapon) {
-            result = "RangedWeapon";
-        }
-        return result;
-    }
-
     public int attack() {
         Item item = findItemInventory(this.equippedWeapon);
         Weapon weapon = ((Weapon) item);
@@ -239,4 +232,25 @@ public class Player {
         }
         return weapon;
     }
+
+    public boolean died() {
+        if (this.currentHealth <= 0) {
+            this.isAlive = false;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public ArrayList dropAllItems() {
+        ArrayList<String> items = new ArrayList<String>();
+        int length = playerItems.size();
+        for (int i = 0; i < length; i++) {
+            String itemName = playerItems.get(i).getName();
+            items.add(itemName);
+        }
+
+        return items;
+    }
 }
+

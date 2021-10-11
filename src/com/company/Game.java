@@ -101,6 +101,15 @@ public class Game {
                     System.out.println(parser.attack());
                     break;
 
+                case "equip":
+                    System.out.println(player.equip(itemName));
+                    break;
+
+                case "attack":
+                    parser.passEnemyInput(input);
+                    System.out.println(parser.attack());
+                    break;
+
                 case "unequip":
                     player.unEquipWeapon();
                     break;

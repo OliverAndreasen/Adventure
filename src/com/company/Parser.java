@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.List;
+
 public class Parser {
 
     private String itemName;
@@ -219,15 +221,12 @@ public class Parser {
                     if (weapon.ammoLeft() == 0) {
                         str.append("You tried to attack but you dont have any ammo left").append("\n");
                         str.append(enemyName).append(" current health is now ").append(enemy.getCurrentHealth()).append("\n");
-                    } 
-                    else {
-                    //int damage = weapon.getDamage();
-                    int damage = player.attack();
-                    //player.attack();
-                    int enemyHealth = enemy.getCurrentHealth();
-                    enemy.setCurrentHealth(enemyHealth - damage);
-                    str.append("you attacked ").append(enemyName).append("\nYou dealt ").append(damage).append(" damage\n");
-                    str.append(enemyName).append(" current health is now ").append(enemy.getCurrentHealth()).append("\n");
+                    } else {
+                        int damage = player.attack();
+                        int enemyHealth = enemy.getCurrentHealth();
+                        enemy.setCurrentHealth(enemyHealth - damage);
+                        str.append("you attacked ").append(enemyName).append("\nYou dealt ").append(damage).append(" damage\n");
+                        str.append(enemyName).append(" current health is now ").append(enemy.getCurrentHealth()).append("\n");
                     }
                     if (enemy.died()) {
                         currentRoom.setRoomItem(enemyWeapon);
@@ -237,12 +236,26 @@ public class Parser {
                         str.append("The enemy tried to attack but has no ammo left").append("\n");
                         str.append("Your current health is now ").append(player.getCurrentHealth()).append("\n");
                     } else {
-                        enemy.attack();
-                        int enemyDamage = enemyWeapon.getDamage();
-                        int playerHealth = player.getCurrentHealth() - enemyDamage;
-                        player.setCurrentHealth(playerHealth);
-                        str.append(enemyName).append(" attacked you with ").append(enemyWeapon.getName()).append(" and dealt ").append(enemyDamage).append(" damage").append("\n");
-                        str.append("Your current health is now ").append(player.getCurrentHealth()).append("\n");    
+                        if (player.isAlive()) {
+                            enemy.attack();
+                            int enemyDamage = enemyWeapon.getDamage();
+                            int playerHealth = player.getCurrentHealth() - enemyDamage;
+                            player.setCurrentHealth(playerHealth);
+                            str.append(enemyName).append(" attacked you with ").append(enemyWeapon.getName()).append(" and dealt ").append(enemyDamage).append(" damage").append("\n");
+                            str.append("Your current health is now ").append(player.getCurrentHealth()).append("\n");
+                        }
+                        if (player.died()) {
+                            str.append("\n");
+                            List items = player.dropAllItems();
+                            for (int i = 0; i < items.size(); i++) {
+                                player.dropItem((String) items.get(i));
+                                str.append("you have dropped " + items.get(i)).append("\n");
+                            }
+                            str.append("\n").append("you have died and lost all your items ").append("\n");
+                            Map map = new Map();
+                            currentRoom = map.getStartRoom();
+                            str.append(currentRoom.getDescription());
+                        }
                     }
                 }
             } else {
@@ -251,8 +264,21 @@ public class Parser {
         } else {
             str.append("You have to equip a weapon to attack" + "\n");
         }
-
         setEnemyName(null);
         return str.toString();
     }
+
+    public String eat() {
+        String result = "";
+        itemName = passItemNameInput(input);
+        int health = player.eat(itemName);
+        if (health == -1) {
+            result += "you cannot eat that";
+        } else {
+            result += "you ate an " + itemName + " you gained " + health + " hp\n";
+            result += "your current hp is now " + player.getCurrentHealth() + " out of " + player.getMaxHealth();
+        }
+        return result;
+    }
+
 }

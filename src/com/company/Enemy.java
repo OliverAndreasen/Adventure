@@ -3,29 +3,18 @@ package com.company;
 public class Enemy {
     private final String name;
     private final Weapon weapon;
-    private int distance;
+    private final int distance;
     private boolean isAlive;
     private int currentHealth;
 
 
     public Enemy(String description, Weapon weapon, int distance) {
         this.weapon = weapon;
-        this.currentHealth = 100;
+        this.currentHealth = currentHealth;
         this.name = description.substring(description.lastIndexOf(' ') + 1);
         this.isAlive = true;
         this.distance = distance;
     }
-/*
-    public String checkWeaponType(Weapon weapon) {
-        String result = null;
-        if (weapon instanceof MeleeWeapon) {
-            result = "MeleeWeapon";
-        } else if (weapon instanceof RangedWeapon) {
-            result = "RangedWeapon";
-        }
-        return result;
-    }
- */
 
     public int attack() {
         int damage = 0;

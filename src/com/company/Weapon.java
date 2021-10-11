@@ -1,7 +1,7 @@
 package com.company;
 
 public abstract class Weapon extends Item {
-    private int damage;
+    private final int damage;
 
     public Weapon(String description, int itemWeight, int damage) {
         super(description, itemWeight);
