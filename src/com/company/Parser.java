@@ -204,7 +204,7 @@ public class Parser {
                 You can also 'take' and 'drop' items. You can also 'equip', 'unequip' and eat items
                 When you encounter an enemy you can type 'attack' to hit it
                 You can type 'look' to get a description of the room you are in
-                And type 'enemies' to finde out who is in the room with you
+                And type 'enemies' to find out who is in the room with you
                 For more instructions type 'help'
                 Other functions: 'exit', 'help', 'inv' 'cheat'
                 """;
