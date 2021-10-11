@@ -72,22 +72,12 @@ public class Room {
         enemyList.add(name);
     }
 
-    public void roomItemStatus() {
-        for (int i = 0; i < roomItems.size(); i++) {
-            System.out.println(roomItems.get(i));
-        }
-    }
-
     public void removeItem(Item itemName) {
         roomItems.remove(itemName);
     }
 
     public void removeEnemy(Enemy name) {
         enemyList.remove(name);
-    }
-
-    public ArrayList getRoomItems() {
-        return roomItems;
     }
 
     public String getAllItems() {
