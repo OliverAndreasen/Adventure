@@ -87,18 +87,7 @@ public class Game {
                     break;
 
                 case "eat":
-                    int health = player.eat(itemName);
-                    System.out.println("you ate an " + itemName + " you gained " + health + " hp");
-                    System.out.println("your current hp is now " + player.getCurrentHealth() + " out of " + player.getMaxHealth());
-                    break;
-
-                case "equip":
-                    System.out.println(player.equip(itemName));
-                    break;
-
-                case "attack":
-                    parser.passEnemyInput(input);
-                    System.out.println(parser.attack());
+                    System.out.println(parser.eat());
                     break;
 
                 case "equip":

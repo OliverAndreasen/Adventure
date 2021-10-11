@@ -8,7 +8,7 @@ public class Enemy {
     private int currentHealth;
 
 
-    public Enemy(String description, Weapon weapon, int distance) {
+    public Enemy(String description, Weapon weapon, int distance, int currentHealth) {
         this.weapon = weapon;
         this.currentHealth = currentHealth;
         this.name = description.substring(description.lastIndexOf(' ') + 1);
